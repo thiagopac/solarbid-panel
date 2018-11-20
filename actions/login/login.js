@@ -127,7 +127,7 @@ var SnippetLogin = function() {
 
             form.validate({
                 rules: {
-                    fullname: {
+                    username: {
                         required: true
                     },
                     email: {
@@ -143,8 +143,15 @@ var SnippetLogin = function() {
                     agree: {
                         required: true
                     }
+                },
+                messages: {
+                    username: "Informe o nome de usuário",
+                    email: "Informe o e-mail",
+                    password: "Escolha uma uma senha",
+                    rpassword: "Confirme a senha escolhida",
+                    agree: "É necessário aceitar os Termos de Uso para efetuar o cadastro no site"
                 }
-            });
+        });
 
             if (!form.valid()) {
                 return;
