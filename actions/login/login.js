@@ -95,7 +95,7 @@ var SnippetLogin = function() {
                 url: './actions/login/login.php',
                 type: 'POST',
                 contentType: "application/x-www-form-urlencoded",
-                data: $('#formLogin').serialize(),
+                data: $('#form-signin').serialize(),
                 success: function(response, status, xhr, $form) {
 
                     if (response.status == 1) {
@@ -104,7 +104,12 @@ var SnippetLogin = function() {
                       showMsg(form, 'success', response.description);
 
                         setTimeout(function() {
-                          location.href = "./main?page=dashboard"
+
+                            //reset button to original state
+                            btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+
+                            location.href = "./main?page=dashboard";
+
                         }, 2000);
 
                     } else {
@@ -140,6 +145,9 @@ var SnippetLogin = function() {
                     rpassword: {
                         required: true
                     },
+                    role: {
+                        required: true
+                    },
                     agree: {
                         required: true
                     }
@@ -149,6 +157,7 @@ var SnippetLogin = function() {
                     email: "Informe o e-mail",
                     password: "Escolha uma uma senha",
                     rpassword: "Confirme a senha escolhida",
+                    role: "Selecione o tipo de usuário",
                     agree: "É necessário aceitar os Termos de Uso para efetuar o cadastro no site"
                 }
         });
@@ -160,22 +169,40 @@ var SnippetLogin = function() {
             btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
-                url: '',
+                url: './actions/login/login.php',
+                type: 'POST',
+                contentType: "application/x-www-form-urlencoded",
+                data: $('#form-signup').serialize(),
                 success: function(response, status, xhr, $form) {
-                    // similate 2s delay
-                    setTimeout(function() {
-                        btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+
+                    if (response.status == 1) {
+
+                        btn.attr('disabled', true);
+                        showMsg(form, 'success', response.description);
                         form.clearForm();
                         form.validate().resetForm();
 
-                        // display signup form
-                        displaySignInForm();
-                        var signInForm = login.find('.m-login__signin form');
-                        signInForm.clearForm();
-                        signInForm.validate().resetForm();
 
-                        showMsg(signInForm, 'success', 'Thank you. To complete your registration please check your email.');
-                    }, 2000);
+                        setTimeout(function() {
+
+                            //reset button to original state
+                            btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+
+                            // display signup form
+                            displaySignInForm();
+                            var signInForm = login.find('.m-login__signin form');
+                            signInForm.clearForm();
+                            signInForm.validate().resetForm();
+
+                        }, 2000);
+
+                    } else {
+                        setTimeout(function() {
+                            btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                            showMsg(form, 'danger', response.description);
+                        }, 2000);
+                    }
+
                 }
             });
         });
@@ -204,22 +231,40 @@ var SnippetLogin = function() {
             btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
-                url: '',
+                url: './actions/login/login.php',
+                type: 'POST',
+                contentType: "application/x-www-form-urlencoded",
+                data: $('#form-forgotpassword').serialize(),
                 success: function(response, status, xhr, $form) {
-                    // similate 2s delay
-                    setTimeout(function() {
-                        btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false); // remove
-                        form.clearForm(); // clear form
-                        form.validate().resetForm(); // reset validation states
 
-                        // display signup form
-                        displaySignInForm();
-                        var signInForm = login.find('.m-login__signin form');
-                        signInForm.clearForm();
-                        signInForm.validate().resetForm();
+                    if (response.status == 1) {
 
-                        showMsg(signInForm, 'success', 'Cool! Password recovery instruction has been sent to your email.');
-                    }, 2000);
+                        btn.attr('disabled', true);
+                        showMsg(form, 'success', response.description);
+                        form.clearForm();
+                        form.validate().resetForm();
+
+
+                        setTimeout(function() {
+
+                            //reset button to original state
+                            btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+
+                            // display signup form
+                            displaySignInForm();
+                            var signInForm = login.find('.m-login__signin form');
+                            signInForm.clearForm();
+                            signInForm.validate().resetForm();
+
+                        }, 2000);
+
+                    } else {
+                        setTimeout(function() {
+                            btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                            showMsg(form, 'danger', response.description);
+                        }, 2000);
+                    }
+
                 }
             });
         });

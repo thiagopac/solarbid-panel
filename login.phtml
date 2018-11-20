@@ -109,7 +109,8 @@ $t = new Translate();
 							<div class="m-login__head">
 								<h3 class="m-login__title" style="text-transform: uppercase"><?= $t->{'Entre com suas credenciais'}; ?></h3>
 							</div>
-							<form class="m-login__form m-form" id="formLogin">
+							<form class="m-login__form m-form" id="form-signin">
+                                <input type="hidden" name="type" value="sign-in">
 								<div class="form-group m-form__group">
 									<input class="form-control m-input" type="text" placeholder="<?= $t->{'Nome de usuário'}; ?>" name="username" id="username" autocomplete="off">
 								</div>
@@ -137,7 +138,8 @@ $t = new Translate();
 								<h3 class="m-login__title"><?= $t->{'Cadastrar'}; ?></h3>
 								<div class="m-login__desc"><?= $t->{'Preencha os dados abaixo para iniciar o processo de criação de nova conta'}; ?></div>
 							</div>
-							<form class="m-login__form m-form" action="">
+							<form class="m-login__form m-form" id="form-signup">
+                                <input type="hidden" name="type" value="sign-up">
 								<div class="form-group m-form__group">
 									<input class="form-control m-input" type="text" placeholder="<?= $t->{'Nome de usuário'}; ?>" name="username">
 								</div>
@@ -151,24 +153,6 @@ $t = new Translate();
 									<input class="form-control m-input m-login__form-input--last" type="password" placeholder="<?= $t->{'Confirmação de senha'}; ?>" name="rpassword">
 								</div>
                                 <div class="m-separator m-separator--dashed"></div>
-<!--                                <div class="m-demo">-->
-<!--                                    <div style="background: white;border: 4px solid #f7f7fa; padding: 10px; padding-bottom: 20px" id="m_dropdown_api_output">-->
-<!--                                        <label class="col-3 col-form-label">Você é:</label>-->
-<!--                                        <div class="col-12">-->
-<!--                                            <div class="m-radio-inline">-->
-<!--                                                <label class="m-radio m-radio m-radio--bold m-radio--state-success">-->
-<!--                                                    <input type="radio" name="example_8" value="1"> --><?//= $t->{'Cliente'}; ?>
-<!--                                                    <span></span>-->
-<!--                                                </label>-->
-<!--                                                <label class="m-radio m-radio m-radio--bold m-radio--state-danger">-->
-<!--                                                    <input type="radio" name="example_8" value="2"> --><?//= $t->{'Prestador de serviço'}; ?>
-<!--                                                    <span></span>-->
-<!--                                                </label>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!---->
-<!--                                    </div>-->
-<!--                                </div>-->
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
                                         <h3 class="m-form__heading-title">Você é</h3>
@@ -179,7 +163,7 @@ $t = new Translate();
                                                 <label class="m-option">
 																<span class="m-option__control">
 																	<span class="m-radio m-radio--state-success">
-																		<input type="radio" name="billing_delivery" value="">
+																		<input type="radio" name="role" value="customer">
 																		<span></span>
 																	</span>
 																</span>
@@ -199,7 +183,7 @@ $t = new Translate();
                                                 <label class="m-option">
 																<span class="m-option__control">
 																	<span class="m-radio m-radio--state-danger">
-																		<input type="radio" name="billing_delivery" value="">
+																		<input type="radio" name="user-type" value="provider">
 																		<span></span>
 																	</span>
 																</span>
@@ -218,7 +202,6 @@ $t = new Translate();
                                         </div>
                                         <div class="m-form__help">
 
-                                            <!--must use this helper element to display error message for the options-->
                                         </div>
                                     </div>
                                 </div>
@@ -241,7 +224,8 @@ $t = new Translate();
 								<h3 class="m-login__title"><?= $t->{'Esqueceu a senha?'}; ?></h3>
 								<div class="m-login__desc"><?= $t->{'Coloque seu e-mail para receber as instruções sobre a troca de senha'}; ?></div>
 							</div>
-							<form class="m-login__form m-form" action="">
+							<form class="m-login__form m-form" id="form-forgotpassword">
+                                <input type="hidden" name="type" value="forgot-password">
 								<div class="form-group m-form__group">
 									<input class="form-control m-input" type="text" placeholder="E-mail" name="email" id="m_email" autocomplete="off">
 								</div>

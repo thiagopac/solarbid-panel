@@ -9,47 +9,69 @@
 
 	$t = new Translate();
 
-	### INPUTS
-	$strUsername = strtolower(addslashes($_POST['username']));
-	$strPassword = addslashes($_POST['password']);
+	$type = "sign-in"; //forced value
 
-	if(isset($_POST['action']) && !empty($_POST['action'])) {
-		// echo json_encode(array($_POST));
-		exit;
+	if(isset($_POST['type']) && !empty($_POST['type'])) {
+        $type = $_POST['type'];
 	}
 
-	//Programacao
-	$DB = fnDBConn();
-	$user = fnDB_USER_INFO($DB,$strUsername,$strPassword);
+	if ($type == "sign-in"){
 
-	$response = new stdClass();
+        ### INPUTS
+        $strUsername = strtolower(addslashes($_POST['username']));
+        $strPassword = addslashes($_POST['password']);
 
-	if ($user == null) {
+        //Programacao
+        $DB = fnDBConn();
+        $user = fnDB_USER_INFO($DB,$strUsername,$strPassword);
 
-		$response->status = 2;
-		$response->statusMessage = "Não foi possível recuperar os dados.";
+        $response = new stdClass();
 
-		$response->type = "error";
-		$response->title = "Erro";
-		$response->description = $t->{"Nome de usuário ou senha incorretos"};
+        if ($user == null) {
 
-	}else{
+            $response->status = 2;
+            $response->statusMessage = "Não foi possível recuperar os dados.";
 
-		//Inicia a sessao
-		session_start();
-		$_SESSION['USER'] = $user;
+            $response->type = "error";
+            $response->title = "Erro";
+            $response->description = $t->{"Nome de usuário ou senha incorretos"};
 
-		//Adiciona registro na tabela de auditoria
-		fnDB_LOG_AUDIT_ADD($DB,'Entrou no sistema.',false);
+        }else{
 
-		$response->status = 1;
-		$response->statusMessage = "Dados recuperados com sucesso.";
+            //Inicia a sessao
+            session_start();
+            $_SESSION['USER'] = $user;
 
-		$response->type = "success";
-		$response->title = "Sucesso";
-		$response->description = $t->{"Login efetuado com sucesso"};
+            //Adiciona registro na tabela de auditoria
+            fnDB_LOG_AUDIT_ADD($DB,'Entrou no sistema.',false);
 
-		$response->user = $user;
+            $response->status = 1;
+            $response->statusMessage = "Dados recuperados com sucesso.";
+
+            $response->type = "success";
+            $response->title = "Sucesso";
+            $response->description = $t->{"Login efetuado com sucesso"};
+
+            $response->user = $user;
+        }
+	}else if($type == "sign-up"){
+
+        $response->status = 1;
+        $response->statusMessage = "Dados inseridos com sucesso.";
+
+        $response->type = "success";
+        $response->title = "Sucesso";
+        $response->description = $t->{"Cadastro efetuado com sucesso"};
+
+	}else if($type == "forgot-password"){
+
+        $response->status = 1;
+        $response->statusMessage = "E-mail enviado com sucesso.";
+
+        $response->type = "success";
+        $response->title = "Sucesso";
+        $response->description = $t->{"E-mail para redefinição de senha enviado com sucesso"};
+
 	}
 
 	echo json_encode($response, JSON_NUMERIC_CHECK);

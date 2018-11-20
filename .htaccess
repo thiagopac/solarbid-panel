@@ -1,0 +1,10 @@
+Options +FollowSymLinks -MultiViews
+# Turn mod_rewrite on
+RewriteEngine On
+
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^ %{REQUEST_URI}.php [L]
+
+RewriteCond %{REQUEST_FILENAME}.phtml -f
+RewriteRule ^ %{REQUEST_URI}.phtml [L]
