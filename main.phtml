@@ -1,0 +1,17 @@
+<?php
+
+  include("./body/header.phtml");
+
+  $fileExists = file_exists($_GET["page"].".phtml");
+
+  if ($fileExists == true) {
+    //carrega página que veio no get
+    include($_GET["page"].".phtml"); //views são sempre PHTML
+  }else{
+    //exige erro 404
+    print("<meta http-equiv='refresh' content='0;url=404'>");
+  }
+
+  include("./body/footer.phtml");
+
+?>
