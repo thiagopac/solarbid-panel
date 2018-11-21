@@ -143,7 +143,8 @@ var SnippetLogin = function() {
                         required: true
                     },
                     rpassword: {
-                        required: true
+                        required: true,
+                        equalTo : '#password-signup'
                     },
                     role: {
                         required: true
@@ -156,7 +157,7 @@ var SnippetLogin = function() {
                     username: "Informe o nome de usuário",
                     email: "Informe o e-mail",
                     password: "Escolha uma uma senha",
-                    rpassword: "Confirme a senha escolhida",
+                    rpassword: "A confirmação de senha deve ser igual ao campo senha",
                     role: "Selecione o tipo de usuário",
                     agree: "É necessário aceitar os Termos de Uso para efetuar o cadastro no site"
                 }

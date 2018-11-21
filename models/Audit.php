@@ -3,25 +3,21 @@
 class Audit {
 
 	public $id;
+    public $userId;
 	public $ip;
 	public $actionDesc;
-	public $request;
-	public $dateCreated;
-	public $userType;
-	public $userId;
+	public $din;
 
 	//construtor da classe
 	public function __construct($array){
 
 		//se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
 		if (!empty($array)) {
-			$this->id = $array['AUDIT_ID'];
-			$this->ip = $array['AUDIT_IP'];
-			$this->actionDesc = $array['AUDIT_ACTION_DESC'];
-			$this->request = $array['AUDIT_REQUEST'];
-			$this->dateCreated = $array['AUDIT_CREATED'];
-			$this->userType = $array['USER_TYPE'];
-			$this->userID = $array['USER_ID'];
+			$this->id = $array['ID'];
+            $this->userId = $array['USER_ID'];
+			$this->ip = $array['IP'];
+			$this->actionDesc = $array['ACTION_DESC'];
+			$this->din = $array['DIN'];
 		}
   }
 
@@ -29,30 +25,28 @@ class Audit {
 
 	}
 
-	public function getAuditWithID($paramAudit){
+	public function getAuditWithID($param){
 
 		$DB = fnDBConn();
 
 		$SQL = "SELECT
-							AUD.ID AS AUDIT_ID,
-							AUD.IP AS AUDIT_IP,
-							AUD.ACTION_DESC AS AUDIT_ACTION_DESC,
-							AUD.REQUEST AS AUDIT_REQUEST,
-							AUD.DIN AS AUDIT_CREATED,
-							AUD.USER_TYPE AS USER_TYPE
-							AUD.ID_USER AS USER_ID
-						FROM
-							AUDIT AS AUD
-						WHERE
-							AUD.ID = $paramAudit
-						ORDEY BY
-							AUD.DIN DESC";
+					AUD.ID,
+					AUD.ID_USER AS USER_ID,
+					AUD.IP,
+					AUD.ACTION_DESC,
+					AUD.DIN
+				FROM
+					AUDIT AS AUD
+				WHERE
+					AUD.ID = $param
+				ORDEY BY
+					AUD.DIN DESC";
 
 		$RESULT = fnDB_DO_SELECT($DB,$SQL);
 
-		$audit = new Audit($RESULT);
+		$obj = new Audit($RESULT);
 
-		return $audit;
+		return $obj;
 	}
 
 	public function getAllAudits(){
@@ -60,28 +54,49 @@ class Audit {
 		$DB = fnDBConn();
 
 		$SQL = "SELECT
-							AUD.ID AS AUDIT_ID,
-							AUD.IP AS AUDIT_IP,
-							AUD.ACTION_DESC AS AUDIT_ACTION_DESC,
-							AUD.REQUEST AS AUDIT_REQUEST,
-							AUD.DIN AS AUDIT_CREATED,
-							AUD.ID_USER AS USER_ID
-						FROM
-							AUDIT AS AUD
-						WHERE
-							1";
+					AUD.ID,
+					AUD.ID_USER AS USER_ID,
+					AUD.IP,
+					AUD.ACTION_DESC,
+					AUD.DIN
+				FROM
+					AUDIT AS AUD
+				WHERE
+					1";
 
 		$RESULT = fnDB_DO_SELECT_WHILE($DB,$SQL);
 
-		$arrAudits = [];
+		$arr = [];
 
 		foreach ($RESULT as $KEY => $ROW) {
-			$audit = new Audit($ROW);
-			array_push($arrAudits, $audit);
+			$obj = new Audit($ROW);
+			array_push($arr, $obj);
 		}
 
-		return $arrAudits;
+		return $arr;
 	}
+
+    public function insertAudit($param){
+        $DB = fnDBConn();
+
+        $ip = addslashes($_SERVER['REMOTE_ADDR']);
+        $actionDesc = addslashes($param->actionDesc);
+
+        $SQL = "INSERT INTO AUDIT
+					(USER_ID,
+					IP,
+					ACTION_DESC)
+				VALUES
+					('$param->userId',
+					'$ip',
+					'$actionDesc')";
+
+        $RET = fnDB_DO_EXEC($DB,$SQL);
+
+        // $paramUser->id = $RET[1]; //esse array retorna na posição 0 o número de linhas afetadas pelo update e na posição 1 o id do regitro inserido
+
+        return $RET;
+    }
 
 }
 ?>

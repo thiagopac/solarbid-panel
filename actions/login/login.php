@@ -6,6 +6,8 @@
 	### INCLUDE
 	require_once('../../lib/config.php');
 	require_once('../../internationalization/Translate.php');
+	require_once('../../models/User.php');
+    require_once('../../models/Audit.php');
 
 	$t = new Translate();
 
@@ -15,6 +17,11 @@
         $type = $_POST['type'];
 	}
 
+//    echo json_encode($_POST, JSON_NUMERIC_CHECK);
+//	exit;
+
+    $response = new stdClass();
+
 	if ($type == "sign-in"){
 
         ### INPUTS
@@ -23,11 +30,19 @@
 
         //Programacao
         $DB = fnDBConn();
-        $user = fnDB_USER_INFO($DB,$strUsername,$strPassword);
 
-        $response = new stdClass();
+        $password_enc = password_hash($strPassword, PASSWORD_DEFAULT);
 
-        if ($user == null) {
+        $user = new User();
+        $param->username = $strUsername;
+
+        $user = $user->getUserWithCredentials($param);
+
+        $access = password_verify($strPassword, $user->password); //password é um hash possível do que foi recebido
+
+        unset($user->password);
+
+        if ($access == false) {
 
             $response->status = 2;
             $response->statusMessage = "Não foi possível recuperar os dados.";
@@ -43,7 +58,11 @@
             $_SESSION['USER'] = $user;
 
             //Adiciona registro na tabela de auditoria
-            fnDB_LOG_AUDIT_ADD($DB,'Entrou no sistema.',false);
+            $audit = new Audit();
+
+            $params->userId = $user->id;
+            $params->actionDesc = "Efetuou login no Painel";
+            $audit->insertAudit($params);
 
             $response->status = 1;
             $response->statusMessage = "Dados recuperados com sucesso.";
@@ -54,14 +73,44 @@
 
             $response->user = $user;
         }
+
 	}else if($type == "sign-up"){
 
-        $response->status = 1;
-        $response->statusMessage = "Dados inseridos com sucesso.";
+        ### INPUTS
+        $strUsername = strtolower(addslashes($_POST['username']));
+        $strPassword = addslashes($_POST['password']);
 
-        $response->type = "success";
-        $response->title = "Sucesso";
-        $response->description = $t->{"Cadastro efetuado com sucesso"};
+        //Programacao
+        $DB = fnDBConn();
+
+        $password_enc = password_hash($strPassword, PASSWORD_DEFAULT);
+
+        $user = new User();
+        $param->username = $strUsername;
+
+        $user = $user->insertUser($param);
+
+        var_dump($user);
+        exit;
+
+        if ($user->id != null){
+
+            $response->status = 2;
+            $response->statusMessage = "Não foi possível inserir os dados.";
+
+            $response->type = "error";
+            $response->title = "Erro";
+            $response->description = $t->{"Ocorreu um erro ao criar a sua conta. Tente novamente mais tarde."};
+
+        }else{
+
+            $response->status = 1;
+            $response->statusMessage = "Dados inseridos com sucesso.";
+
+            $response->type = "success";
+            $response->title = "Sucesso";
+            $response->description = $t->{"Cadastro efetuado com sucesso"};
+        }
 
 	}else if($type == "forgot-password"){
 

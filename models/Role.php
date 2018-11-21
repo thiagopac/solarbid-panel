@@ -1,10 +1,9 @@
 <?php
 
-class Country {
+class Role {
 
 	public $id;
-    public $description;
-	public $code;
+	public $description;
 
 	//construtor da classe
 	public function __construct($array){
@@ -12,7 +11,6 @@ class Country {
 		//se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
 		if (!empty($array)) {
 			$this->id = $array['ID'];
-			$this->code = $array['CODE'];
 			$this->description = $array['DESCRIPTION'];
 		}
   }
@@ -21,45 +19,43 @@ class Country {
 
 	}
 
-	public function getCountryWithID($param){
+	public function getRoleWithID($param){
 
 		$DB = fnDBConn();
 
 		$SQL = "SELECT
-							CNT.ID,
-							CNT.DESCRIPTION,
-							CNT.CODE
-						FROM
-							COUNTRY AS CNT
-						WHERE
-							CNT.ID = $param";
+					RO.ID,
+					RO.DESCRIPTION
+				FROM
+					ROLE AS RO
+				WHERE
+					RO.ID = $param";
 
 		$RESULT = fnDB_DO_SELECT($DB,$SQL);
 
-		$obj = new Country($RESULT);
+		$obj = new Role($RESULT);
 
 		return $obj;
 	}
 
-	public function getAllCountries($paramCountry){
+	public function getAllRoles(){
 
 		$DB = fnDBConn();
 
 		$SQL = "SELECT
-							CNT.ID,
-							CNT.DESCRIPTION,
-							CNT.CODE
-						FROM
-							COUNTRY AS CNT
-						WHERE
-							1";
+					RO.ID,
+					RO.DESCRIPTION
+				FROM
+					ROLE AS RO
+				WHERE
+					1";
 
 		$RESULT = fnDB_DO_SELECT_WHILE($DB,$SQL);
 
 		$arr = [];
 
 		foreach ($RESULT as $KEY => $ROW) {
-			$obj = new Country($ROW);
+			$obj = new Role($ROW);
 			array_push($arr, $obj);
 		}
 

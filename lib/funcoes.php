@@ -239,31 +239,31 @@ function pwStrongCheck($pwd){
 	return $error;
 }
 
-// GERA LOG DE AUDITORIA DE AÃ‡Ã•ES DO SISTEMA
-function fnDB_LOG_AUDIT_ADD($DB, $descricao, $loga_request = true){
-	global $DATABASE_NAME;
-	$error = false;
-	$ip = addslashes($_SERVER['REMOTE_ADDR']);
-	$descricao = addslashes($descricao);
-	// Pra nao logar as senhas
-	if ($loga_request) $request = addslashes(print_r($_REQUEST, true));
-	// SQL 1
-	$strSQL = "INSERT INTO AUDIT
-							(IP, USER_ID, ACTION_DESC)
-						 VALUES
-						 	('$ip', {$_SESSION['USER']->ID}, '$descricao')";
-	$qy = mysqli_query($DB, $strSQL) or $error = true;
-
-	if ($error) fnLogText('(fnDB_LOG_AUDIT_ADD) MySQL Error: ' . mysqli_error($DB) . ' (SQL: ' . $strSQL . ')', true);
-	if ($DB->affected_rows == 0) {
-		return (false);
-	}
-
-	$Id = (int)mysqli_insert_id($DB);
-	if ($Id == 0) return (false);
-
-	return (true);
-}
+//// GERA LOG DE AUDITORIA DE AÃ‡Ã•ES DO SISTEMA
+//function fnDB_LOG_AUDIT_ADD($DB, $descricao, $loga_request = true){
+//	global $DATABASE_NAME;
+//	$error = false;
+//	$ip = addslashes($_SERVER['REMOTE_ADDR']);
+//	$descricao = addslashes($descricao);
+//	// Pra nao logar as senhas
+//	if ($loga_request) $request = addslashes(print_r($_REQUEST, true));
+//	// SQL 1
+//	$strSQL = "INSERT INTO AUDIT
+//							(IP, USER_ID, ACTION_DESC)
+//						 VALUES
+//						 	('$ip', {$_SESSION['USER']->ID}, '$descricao')";
+//	$qy = mysqli_query($DB, $strSQL) or $error = true;
+//
+//	if ($error) fnLogText('(fnDB_LOG_AUDIT_ADD) MySQL Error: ' . mysqli_error($DB) . ' (SQL: ' . $strSQL . ')', true);
+//	if ($DB->affected_rows == 0) {
+//		return (false);
+//	}
+//
+//	$Id = (int)mysqli_insert_id($DB);
+//	if ($Id == 0) return (false);
+//
+//	return (true);
+//}
 
 function fnRemoveAcentos($str, $enc = "UTF-8"){
 	$str = str_replace('"', ' ', $str);
@@ -295,28 +295,28 @@ function fnRemoveAcentos($str, $enc = "UTF-8"){
 	return preg_replace($acentos, array_keys($acentos) , htmlentities($str, ENT_NOQUOTES, $enc));
 }
 
-# RETORNO DADOS DO USUARIO NO LOGIN
-function fnDB_USER_INFO($DB,$strUsername,$strPassword) {
-
-	$error = false;
-
-	$strSQL = "SELECT
-							ID, USERNAME, EMAIL, ROLE_ID, LANGUAGE_ID, COUNTRY_ID
-						FROM
-							USER
-						WHERE
-							USERNAME = '$strUsername'
-							AND PASSWORD = sha1(CONCAT('$strPassword', SALT))";
-
-	$qy = mysqli_query($DB, $strSQL) or $error = true;
-
-	if ($error)
-		fnLogText('(fnDB_USER_INFO) MySQL Error: '.mysqli_error($DB).' (SQL: '.$strSQL.')',true);
-
-	$linha = mysqli_fetch_object($qy);
-
-	return($linha);
-}
+//# RETORNO DADOS DO USUARIO NO LOGIN
+//function fnDB_USER_INFO($DB,$strUsername,$strPassword) {
+//
+//	$error = false;
+//
+//	$strSQL = "SELECT
+//					ID, USERNAME, EMAIL, ROLE_ID, LANGUAGE_ID, COUNTRY_ID
+//				FROM
+//					USER
+//				WHERE
+//					USERNAME = '$strUsername'
+//					AND PASSWORD = sha1(CONCAT('$strPassword', SALT))";
+//
+//	$qy = mysqli_query($DB, $strSQL) or $error = true;
+//
+//	if ($error)
+//		fnLogText('(fnDB_USER_INFO) MySQL Error: '.mysqli_error($DB).' (SQL: '.$strSQL.')',true);
+//
+//	$linha = mysqli_fetch_object($qy);
+//
+//	return($linha);
+//}
 
 function consoleLog( $data ) {
     $output = $data;

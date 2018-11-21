@@ -147,7 +147,7 @@ $t = new Translate();
 									<input class="form-control m-input" type="text" placeholder="<?= $t->{'E-mail'}; ?>" name="email" autocomplete="off">
 								</div>
 								<div class="form-group m-form__group">
-									<input class="form-control m-input" type="password" placeholder="<?= $t->{'Senha'}; ?>" name="password">
+									<input class="form-control m-input" type="password" placeholder="<?= $t->{'Senha'}; ?>" id="password-signup" name="password">
 								</div>
 								<div class="form-group m-form__group">
 									<input class="form-control m-input m-login__form-input--last" type="password" placeholder="<?= $t->{'Confirmação de senha'}; ?>" name="rpassword">
@@ -183,7 +183,7 @@ $t = new Translate();
                                                 <label class="m-option">
 																<span class="m-option__control">
 																	<span class="m-radio m-radio--state-danger">
-																		<input type="radio" name="user-type" value="provider">
+																		<input type="radio" name="role" value="provider">
 																		<span></span>
 																	</span>
 																</span>
