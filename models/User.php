@@ -3,7 +3,9 @@
 require_once('Role.php');
 require_once('Language.php');
 require_once('Country.php');
-
+require_once('Response.php');
+require_once('../../internationalization/Translate.php');
+require_once('../../lib/class.simple_mail.php');
 class User {
 
 	public $id;
@@ -15,6 +17,7 @@ class User {
     public $roleId;
 	public $languageId;
 	public $countryId;
+    public $verified;
 
 	//propriedades entidades
     public $role;
@@ -35,6 +38,7 @@ class User {
             $this->roleId = $array['ROLE_ID'];
 			$this->languageId = $array['LANGUAGE_ID'];
 			$this->countryId = $array['COUNTRY_ID'];
+            $this->verified = $array['VERIFIED'];
 		}
   }
 
@@ -54,7 +58,8 @@ class User {
 					U.LAST_LOGIN,
 					U.COUNTRY_ID,
 					U.LANGUAGE_ID,
-					U.ROLE_ID
+					U.ROLE_ID,
+					U.VERIFIED
 				FROM
 					USER AS U
 				WHERE
@@ -72,7 +77,7 @@ class User {
 		return $arrUsers;
 	}
 
-    function getUserWithUsername($param) {
+    function getUserWithCredentials($param) {
 
         $DB = fnDBConn();
 
@@ -85,7 +90,8 @@ class User {
 					U.LAST_LOGIN,
 					U.ROLE_ID,
 					U.LANGUAGE_ID,
-					U.COUNTRY_ID
+					U.COUNTRY_ID,
+					U.VERIFIED
 				FROM
 					USER AS U
 				WHERE
@@ -95,7 +101,51 @@ class User {
 
         $user = new User($RESULT);
 
-        return $user;
+        $access = password_verify($param->password, $user->password); //password é um hash possível do que foi recebido
+
+        unset($user->password);
+
+        $response = new Response();
+        $t = new Translate();
+
+        if ($access == false) {
+
+            $response->status = 2;
+            $response->type = "error";
+            $response->title = $t->{"Erro"};
+            $response->description = $t->{"Nome de usuário ou senha incorretos"};
+
+        }else{
+
+            if ($user->verified == false){
+
+                $response->status = 2;
+                $response->type = "error";
+                $response->title = $t->{"Erro"};
+                $response->description = $t->{"Verifique seu e-mail para efetuar a ativação da sua conta."};
+
+            }else{
+
+                //Inicia a sessao
+                session_start();
+                $_SESSION['USER'] = $user;
+
+                //Adiciona registro na tabela de auditoria
+                Audit::insertAudit(['userId' => $user->id, 'actionDesc' => 'Efetuou login']);
+
+                $response->status = 1;
+                $response->type = "success";
+                $response->title = $t->{"Sucesso"};
+                $response->description = $t->{"Login efetuado com sucesso"};
+
+                $response->user = $user;
+
+                $this->sendMail();
+            }
+
+        }
+
+        return $response;
     }
 
 	public function getUserWithId($param){
@@ -110,7 +160,8 @@ class User {
 					U.LAST_LOGIN,
 					U.ROLE_ID,
 					U.LANGUAGE_ID,
-					U.COUNTRY_ID
+					U.COUNTRY_ID,
+					U.VERIFIED
 				FROM
 					USER AS U
 				WHERE
@@ -139,9 +190,6 @@ class User {
 
 		$RET = fnDB_DO_EXEC($DB,$SQL);
 
-		//Adiciona registro na tabela de auditoria
-	  	fnDB_LOG_AUDIT_ADD($DB,"O usuário atualizou os Dados de Usuário.");
-
 		return $RET;
 	}
 
@@ -156,9 +204,6 @@ class User {
 					U.ID = '$paramUser->id'";
 
 		$RET = fnDB_DO_EXEC($DB,$SQL);
-
-		//Adiciona registro na tabela de auditoria
-		fnDB_LOG_AUDIT_ADD($DB,"Apagou um usuário.");
 
 		return $RET;
 	}
@@ -179,9 +224,6 @@ class User {
 
 		$RET = fnDB_DO_EXEC($DB,$SQL);
 
-		//Adiciona registro na tabela de auditoria
-		fnDB_LOG_AUDIT_ADD($DB,"O usuário atualizou seu perfil.");
-
 		return $RET;
 	}
 
@@ -194,34 +236,79 @@ class User {
         $password = password_hash($param->password, PASSWORD_DEFAULT);
 
         //checar se username já não está em uso
-		$existingUsername = $this->getUserWithUsername($param);
+		$existingUsername = $this->getUserWithCredentials($param);
+
+      	$response = new Response();
+        $t = new Translate();
 
 		if ($existingUsername->id != null){
 
-		    $user = new User();
-		    return $user;
+            $response->status = 2;
+            $response->type = "warning";
+            $response->title = $t->{"Aviso"};
+            $response->description = $t->{"Este nome de usuário já está sendo utilizado. Por favor, escolha outro."};
+
+            return $response;
+
+		}else{
+            $SQL = "INSERT INTO USER
+						(USERNAME,
+						PASSWORD,
+						EMAIL,
+						ROLE_ID,
+						LANGUAGE_ID,
+						COUNTRY_ID)
+					VALUES
+						('$param->username',
+						'$password',
+						'$param->email',
+						'$param->roleId',
+						'$param->languageId',
+						'$param->countryId')";
+
+            $RESULT = fnDB_DO_EXEC($DB,$SQL);
 		}
 
-		$SQL = "INSERT INTO USER
-					(USERNAME,
-					PASSWORD,
-					EMAIL,
-					ROLE_ID,
-					LANGUAGE_ID,
-					COUNTRY_ID)
-				VALUES
-					('$param->username',
-					'$password',
-					'$param->email',
-					'$param->roleId',
-					'$param->languageId',
-					'$param->countryId')";
 
-        $RESULT = fnDB_DO_EXEC($DB,$SQL);
+        if ($RESULT[1] != null){ //$RESULT[1] tem o ID do registro inserido
 
-        $user = new User($RESULT);
+            //Adiciona registro na tabela de auditoria
+            Audit::insertAudit(["userId" => $RESULT[1], "actionDesc" => "Se cadastrou"]);
 
-        return $user;
+        	$response->status = 1;
+            $response->type = "success";
+            $response->title = $t->{"Sucesso"};
+            $response->description = $t->{"Cadastro efetuado com sucesso. Verifique seu e-mail para efetuar a ativação da sua conta."};
+
+		}else{
+
+            $response->status = 2;
+            $response->type = "danger";
+            $response->title = $t->{"Erro"};
+            $response->description = $t->{"Ocorreu um erro ao criar a sua conta. Tente novamente mais tarde."};
+		}
+
+        return $response;
+	}
+
+	public function sendMail(){
+		$mail = SimpleMail::make()
+			->setTo('thiagopac@gmail.com', 'Thiago')
+			->setSubject("Login efetuado")
+			->setFrom('contato@ownergy.com.br', 'Ownergy')
+			->setReplyTo('contato@ownergy.com.br', 'Ownergy')
+			->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
+			->setHtml()
+			->setMessage('<strong>Mensagem de login efetuado.</strong>')
+			->setWrap(78);
+		$send = $mail->send();
+//		echo $mail->debug();
+		if ($send) {
+//			echo 'Email was sent successfully!';
+		} else {
+//            echo 'An error occurred. We could not send email';
+        }
+
 	}
 
 }

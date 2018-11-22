@@ -179,10 +179,7 @@ var SnippetLogin = function() {
                     if (response.status == 1) {
 
                         btn.attr('disabled', true);
-                        showMsg(form, 'success', response.description);
-                        form.clearForm();
-                        form.validate().resetForm();
-
+                        showMsg(form, response.type, response.description);
 
                         setTimeout(function() {
 
@@ -195,12 +192,12 @@ var SnippetLogin = function() {
                             signInForm.clearForm();
                             signInForm.validate().resetForm();
 
-                        }, 2000);
+                        }, 3000);
 
                     } else {
                         setTimeout(function() {
                             btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
-                            showMsg(form, 'danger', response.description);
+                            showMsg(form, response.type, response.description);
                         }, 2000);
                     }
 

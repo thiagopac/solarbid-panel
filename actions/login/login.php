@@ -35,44 +35,9 @@
 
         $user = new User();
         $param->username = $strUsername;
+        $param->password = $strPassword;
 
-        $user = $user->getUserWithUsername($param);
-
-        $access = password_verify($strPassword, $user->password); //password é um hash possível do que foi recebido
-
-        unset($user->password);
-
-        if ($access == false) {
-
-            $response->status = 2;
-            $response->statusMessage = "Não foi possível recuperar os dados.";
-
-            $response->type = "error";
-            $response->title = "Erro";
-            $response->description = $t->{"Nome de usuário ou senha incorretos"};
-
-        }else{
-
-            //Inicia a sessao
-            session_start();
-            $_SESSION['USER'] = $user;
-
-            //Adiciona registro na tabela de auditoria
-            $audit = new Audit();
-
-            $params->userId = $user->id;
-            $params->actionDesc = "Efetuou login no Painel";
-            $audit->insertAudit($params);
-
-            $response->status = 1;
-            $response->statusMessage = "Dados recuperados com sucesso.";
-
-            $response->type = "success";
-            $response->title = "Sucesso";
-            $response->description = $t->{"Login efetuado com sucesso"};
-
-            $response->user = $user;
-        }
+        $response = $user->getUserWithCredentials($param);
 
 	}else if($type == "sign-up"){
 
@@ -111,32 +76,7 @@
         $param->languageId = $languageId;
         $param->countryId = $countryId;
 
-        $insertedUser = $user->insertUser($param);
-
-//        var_dump($insertedUser);
-
-//        CRIAR UMA CLASSE DE RESPONSE E USAR ELA PRA CRIAR A RESPOSTA A SER ENVIADA PARA OS CONTROLLERS,
-//        FAZENDO OS PROBLEMAS DE SQL OU OUTROS CONTROLES, SEREM EXPOSTOS NAS MENSAGENS DE RETORNO PARA O USUÁRIO,
-//        NÃO PRECISANDO FAZER CONTROLE PELOS TIPOS DE RETONO NOS CONTROLLERS.
-
-        if ($insertedUser->id == null){
-
-            $response->status = 2;
-            $response->statusMessage = "Não foi possível inserir os dados.";
-
-            $response->type = "error";
-            $response->title = "Erro";
-            $response->description = $t->{"Ocorreu um erro ao criar a sua conta. Tente novamente mais tarde."};
-
-        }else{
-
-            $response->status = 1;
-            $response->statusMessage = "Dados inseridos com sucesso.";
-
-            $response->type = "success";
-            $response->title = "Sucesso";
-            $response->description = $t->{"Cadastro efetuado com sucesso"};
-        }
+        $response = $user->insertUser($param);
 
 	}else if($type == "forgot-password"){
 

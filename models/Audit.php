@@ -76,18 +76,35 @@ class Audit {
 		return $arr;
 	}
 
-    public function insertAudit($param){
+    public static function insertAudit($param){
         $DB = fnDBConn();
 
+        $userId = "";
+        $ip = "";
+        $actionDesc = "";
+
+        //tratamento para aceitar objetos ou arrays como parâmetro
+        if ($param->userId != null){
+            $userId = $param->userId;
+        }else{
+            $userId = $param["userId"];
+        }
+
+        if ($param->actionDesc != null){
+            $actionDesc = addslashes($param->actionDesc);
+        }else{
+            $actionDesc = $param["actionDesc"];
+        }
+
         $ip = addslashes($_SERVER['REMOTE_ADDR']);
-        $actionDesc = addslashes($param->actionDesc);
+
 
         $SQL = "INSERT INTO AUDIT
 					(USER_ID,
 					IP,
 					ACTION_DESC)
 				VALUES
-					('$param->userId',
+                        ('$userId',
 					'$ip',
 					'$actionDesc')";
 
