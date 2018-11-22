@@ -1,7 +1,7 @@
 <?php
 	//response only in json_encode
 	header('Content-type:application/json;charset=utf-8');
-	// header('Content-type:text/html;charset=utf-8');
+//	 header('Content-type:text/html;charset=utf-8');
 
 	### INCLUDE
 	require_once('../../lib/config.php');
@@ -36,7 +36,7 @@
         $user = new User();
         $param->username = $strUsername;
 
-        $user = $user->getUserWithCredentials($param);
+        $user = $user->getUserWithUsername($param);
 
         $access = password_verify($strPassword, $user->password); //password é um hash possível do que foi recebido
 
@@ -79,21 +79,47 @@
         ### INPUTS
         $strUsername = strtolower(addslashes($_POST['username']));
         $strPassword = addslashes($_POST['password']);
+        $strEmail = strtolower(addslashes($_POST['email']));
+        $role = ($_POST['role']);
+
+        //TODO: alterar para combos com países e idiomas possíveis
+        $languageId = 1;
+        $countryId = 1;
+
+        $roleId = null;
+
+        switch ($role) {
+            case "customer":
+                $roleId = 2;
+                break;
+            case "provider":
+                $roleId = 3;
+                break;
+            default:
+                $roleId = 2; //usuário padrão é o cliente. Admin não é cadastrável
+                break;
+        }
 
         //Programacao
         $DB = fnDBConn();
 
-        $password_enc = password_hash($strPassword, PASSWORD_DEFAULT);
-
         $user = new User();
         $param->username = $strUsername;
+        $param->password = $strPassword;
+        $param->email = $strEmail;
+        $param->roleId = $roleId;
+        $param->languageId = $languageId;
+        $param->countryId = $countryId;
 
-        $user = $user->insertUser($param);
+        $insertedUser = $user->insertUser($param);
 
-        var_dump($user);
-        exit;
+//        var_dump($insertedUser);
 
-        if ($user->id != null){
+//        CRIAR UMA CLASSE DE RESPONSE E USAR ELA PRA CRIAR A RESPOSTA A SER ENVIADA PARA OS CONTROLLERS,
+//        FAZENDO OS PROBLEMAS DE SQL OU OUTROS CONTROLES, SEREM EXPOSTOS NAS MENSAGENS DE RETORNO PARA O USUÁRIO,
+//        NÃO PRECISANDO FAZER CONTROLE PELOS TIPOS DE RETONO NOS CONTROLLERS.
+
+        if ($insertedUser->id == null){
 
             $response->status = 2;
             $response->statusMessage = "Não foi possível inserir os dados.";

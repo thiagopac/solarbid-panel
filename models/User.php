@@ -72,7 +72,7 @@ class User {
 		return $arrUsers;
 	}
 
-    function getUserWithCredentials($param) {
+    function getUserWithUsername($param) {
 
         $DB = fnDBConn();
 
@@ -193,6 +193,15 @@ class User {
 
         $password = password_hash($param->password, PASSWORD_DEFAULT);
 
+        //checar se username já não está em uso
+		$existingUsername = $this->getUserWithUsername($param);
+
+		if ($existingUsername->id != null){
+
+		    $user = new User();
+		    return $user;
+		}
+
 		$SQL = "INSERT INTO USER
 					(USERNAME,
 					PASSWORD,
@@ -208,9 +217,11 @@ class User {
 					'$param->languageId',
 					'$param->countryId')";
 
-		$RET = fnDB_DO_EXEC($DB,$SQL);
+        $RESULT = fnDB_DO_EXEC($DB,$SQL);
 
-		return $RET;
+        $user = new User($RESULT);
+
+        return $user;
 	}
 
 }
