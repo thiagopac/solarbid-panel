@@ -6,8 +6,9 @@ require_once('Language.php');
 require_once('Country.php');
 require_once('Response.php');
 require_once('Audit.php');
+require_once('Mail.php');
 require_once('../../internationalization/Translate.php');
-require_once('../../lib/class.simple_mail.php');
+
 class User {
 
 	public $id;
@@ -20,6 +21,7 @@ class User {
 	public $languageId;
 	public $countryId;
     public $verified;
+    public $mailNotification;
 
 	//propriedades entidades
     public $role;
@@ -41,6 +43,7 @@ class User {
 			$this->languageId = $array['LANGUAGE_ID'];
 			$this->countryId = $array['COUNTRY_ID'];
             $this->verified = $array['VERIFIED'];
+            $this->mailNotification = json_decode($array['MAIL_NOTIFICATION']);
 		}
   }
 
@@ -110,7 +113,8 @@ class User {
 					U.ROLE_ID,
 					U.LANGUAGE_ID,
 					U.COUNTRY_ID,
-					U.VERIFIED
+					U.VERIFIED,
+					U.MAIL_NOTIFICATION
 				FROM
 					USER AS U
 				WHERE
@@ -152,6 +156,8 @@ class User {
                 //Adiciona registro na tabela de auditoria
                 Audit::insertAudit(['userId' => $user->id, 'actionDesc' => 'Efetuou login']);
 
+                Mail::sendMailUserLoggedIn($user->email, $user->username, $user);
+
                 $response->status = 1;
                 $response->type = "success";
                 $response->title = $t->{"Sucesso"};
@@ -178,7 +184,8 @@ class User {
 					U.ROLE_ID,
 					U.LANGUAGE_ID,
 					U.COUNTRY_ID,
-					U.VERIFIED
+					U.VERIFIED,
+					U.MAIL_NOTIFICATION
 				FROM
 					USER AS U
 				WHERE
@@ -198,7 +205,8 @@ class User {
         $SQL = "SELECT
 					U.ID,
 					U.USERNAME,
-					U.EMAIL
+					U.EMAIL,
+					U.MAIL_NOTIFICATION
 				FROM
 					USER AS U
 				WHERE
@@ -359,22 +367,7 @@ class User {
             return $response;
         }
 
-		$mail = SimpleMail::make()
-			->setTo($user->email, $user->username)
-			->setSubject($t->{"Redefinição de senha"})
-			->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
-			->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
-			->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
-			->setHtml()
-			->setMessage('<p>Voc&ecirc; est&aacute; recebendo este e-mail devido a sua solicita&ccedil;&atilde;o de redefini&ccedil;&atilde;o de senha.<br /><br />Para gerar uma nova senha, por favor acesse a seguinte URL:</p>
-<p><a href="http://localhost/solarbid/panel/reset-password?validate=bd71130278a8b9a4751ae6a262b74a8a844f1e0e">http://localhost/solarbid/panel/reset-password?validate=bd71130278a8b9a4751ae6a262b74a8a844f1e0e</a></p>
-<p>Caso voc&ecirc; n&atilde;o tenha requisitado a redefini&ccedil;&atilde;o de senha, apenas ignore este e-mail.</p>')
-			->setWrap(78);
-		$send = $mail->send();
-
-		//ecriptar o e-mail para md5 e o resultado encriptar em sha1
-
-		//echo $mail->debug();
+		$send = Mail::sendMailPasswordRedefinition($user->email, $user->username, sha1(md5($user->id)));
 
 		if ($send) {
             //enviado com sucesso
@@ -418,6 +411,8 @@ class User {
 
             //Adiciona registro na tabela de auditoria
             Audit::insertAudit(["userId" => $affectedUser->id, "actionDesc" => "Alterou a senha"]);
+
+            Mail::sendMailPasswordHasChanged($affectedUser->email, $affectedUser->username, $affectedUser);
 
             $response->status = 1;
             $response->type = "success";
