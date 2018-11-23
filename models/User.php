@@ -1,9 +1,11 @@
 <?php
 
+require_once('../../lib/config.php');
 require_once('Role.php');
 require_once('Language.php');
 require_once('Country.php');
 require_once('Response.php');
+require_once('Audit.php');
 require_once('../../internationalization/Translate.php');
 require_once('../../lib/class.simple_mail.php');
 class User {
@@ -77,6 +79,23 @@ class User {
 		return $arrUsers;
 	}
 
+    function checkExistingUsername($param) {
+
+        $DB = fnDBConn();
+
+        $SQL = "SELECT
+					U.ID
+				FROM
+					USER AS U
+				WHERE
+					U.USERNAME = '$param->username'";
+
+        $RESULT = fnDB_DO_SELECT($DB,$SQL);
+
+        $existing = $RESULT["ID"] == null ? false : true;
+        return $existing;
+    }
+
     function getUserWithCredentials($param) {
 
         $DB = fnDBConn();
@@ -139,8 +158,6 @@ class User {
                 $response->description = $t->{"Login efetuado com sucesso"};
 
                 $response->user = $user;
-
-                $this->sendMail();
             }
 
         }
@@ -173,6 +190,26 @@ class User {
 
 		return $user;
 	}
+
+    public function getUserWithHashedId($param){
+
+        $DB = fnDBConn();
+
+        $SQL = "SELECT
+					U.ID,
+					U.USERNAME,
+					U.EMAIL
+				FROM
+					USER AS U
+				WHERE
+					SHA1(MD5(U.ID)) = '$param->hashedId'";
+
+        $RESULT = fnDB_DO_SELECT($DB,$SQL);
+
+        $user = new User($RESULT);
+
+        return $user;
+    }
 
 	public function updateUserData($param){
 		$DB = fnDBConn();
@@ -236,12 +273,12 @@ class User {
         $password = password_hash($param->password, PASSWORD_DEFAULT);
 
         //checar se username já não está em uso
-		$existingUsername = $this->getUserWithCredentials($param);
+		$existingUsername = $this->checkExistingUsername($param);
 
       	$response = new Response();
         $t = new Translate();
 
-		if ($existingUsername->id != null){
+		if ($existingUsername == true){
 
             $response->status = 2;
             $response->type = "warning";
@@ -291,26 +328,118 @@ class User {
         return $response;
 	}
 
-	public function sendMail(){
+	public function sendRecoveryMail($param){
+
+        $DB = fnDBConn();
+
+        $t = new Translate();
+        $response = new Response();
+
+        $SQL = "SELECT
+					U.ID,
+					U.USERNAME,
+					U.EMAIL,
+					U.LANGUAGE_ID
+				FROM
+					USER AS U
+				WHERE
+					U.EMAIL = '$param->email'";
+
+        $RESULT = fnDB_DO_SELECT($DB,$SQL);
+
+        $user = new User($RESULT);
+
+        if ($user->email == null){
+
+            $response->status = 2;
+            $response->type = "error";
+            $response->title = $t->{"Aviso"};
+            $response->description = $t->{"Não existe nenhum usuário cadastrado com este e-mail. Por favor, verifique o campo de e-mail e tente novamente."};
+
+            return $response;
+        }
+
 		$mail = SimpleMail::make()
-			->setTo('thiagopac@gmail.com', 'Thiago')
-			->setSubject("Login efetuado")
-			->setFrom('contato@ownergy.com.br', 'Ownergy')
-			->setReplyTo('contato@ownergy.com.br', 'Ownergy')
+			->setTo($user->email, $user->username)
+			->setSubject($t->{"Redefinição de senha"})
+			->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
+			->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
 			->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
 			->setHtml()
-			->setMessage('<strong>Mensagem de login efetuado.</strong>')
+			->setMessage('<p>Voc&ecirc; est&aacute; recebendo este e-mail devido a sua solicita&ccedil;&atilde;o de redefini&ccedil;&atilde;o de senha.<br /><br />Para gerar uma nova senha, por favor acesse a seguinte URL:</p>
+<p><a href="http://localhost/solarbid/panel/reset-password?validate=bd71130278a8b9a4751ae6a262b74a8a844f1e0e">http://localhost/solarbid/panel/reset-password?validate=bd71130278a8b9a4751ae6a262b74a8a844f1e0e</a></p>
+<p>Caso voc&ecirc; n&atilde;o tenha requisitado a redefini&ccedil;&atilde;o de senha, apenas ignore este e-mail.</p>')
 			->setWrap(78);
 		$send = $mail->send();
-//		echo $mail->debug();
+
+		//ecriptar o e-mail para md5 e o resultado encriptar em sha1
+
+		//echo $mail->debug();
+
 		if ($send) {
-//			echo 'Email was sent successfully!';
+            //enviado com sucesso
+
+            $response->status = 1;
+            $response->type = "success";
+            $response->title = $t->{"Sucesso"};
+            $response->description = $t->{"E-mail de redefinição de senha enviado com sucesso. Por favor, verifique sua caixa de e-mail e siga as instruções para redefinir sua senha."};
 		} else {
-//            echo 'An error occurred. We could not send email';
+            //erro ao enviar
+
+            $response->status = 2;
+            $response->type = "error";
+            $response->title = $t->{"Aviso"};
+            $response->description = $t->{"Ocorreu um erro ao tentar enviar o e-mail de redefinição. Tente novamente mais tarde."};
         }
+
+        return $response;
 
 	}
 
+    public function resetUserPassword($param){
+        $DB = fnDBConn();
+
+        $password = password_hash($param->password, PASSWORD_DEFAULT);
+
+        $SQL = "UPDATE
+					USER AS U
+				SET
+					U.PASSWORD = '$password'
+				WHERE SHA1(MD5(U.ID)) = '$param->hashedId'";
+
+        $RESULT = fnDB_DO_EXEC($DB,$SQL);
+
+        $t = new Translate();
+        $response = new Response();
+
+        $affectedUser = $this->getUserWithHashedId($param);
+
+        if ($RESULT != null){
+
+            //Adiciona registro na tabela de auditoria
+            Audit::insertAudit(["userId" => $affectedUser->id, "actionDesc" => "Alterou a senha"]);
+
+            $response->status = 1;
+            $response->type = "success";
+            $response->title = $t->{"Sucesso"};
+            $response->description = $t->{"Senha alterada com sucesso! Você está sendo redirecionado para a página de login."};
+
+        }else{
+
+            $response->status = 2;
+            $response->type = "danger";
+            $response->title = $t->{"Erro"};
+            $response->description = $t->{"Ocorreu um erro ao tentar alterar sua senha  . Tente novamente mais tarde."};
+        }
+
+        return $response;
+    }
+
 }
 
+/**
+<p>Voc&ecirc; est&aacute; recebendo este e-mail devido a sua solicita&ccedil;&atilde;o de redefini&ccedil;&atilde;o de senha.<br /><br />Para gerar uma nova senha, por favor acesse a seguinte URL:</p>
+<p><a href="http://localhost/solarbid/panel/reset-password?validate=bd71130278a8b9a4751ae6a262b74a8a844f1e0e">http://localhost/solarbid/panel/reset-password?validate=bd71130278a8b9a4751ae6a262b74a8a844f1e0e</a></p>
+<p>Caso voc&ecirc; n&atilde;o tenha requisitado a redefini&ccedil;&atilde;o de senha, apenas ignore este e-mail.</p>
+ **/
 ?>

@@ -1,24 +1,16 @@
 <?php
-	//response only in json_encode
-	header('Content-type:application/json;charset=utf-8');
-//	 header('Content-type:text/html;charset=utf-8');
+    //response only in json_encode
+    header('Content-type:application/json;charset=utf-8');
+    //header('Content-type:text/html;charset=utf-8');
 
 	### INCLUDE
-	require_once('../../lib/config.php');
-	require_once('../../internationalization/Translate.php');
 	require_once('../../models/User.php');
-    require_once('../../models/Audit.php');
-
-	$t = new Translate();
 
 	$type = "sign-in"; //forced value
 
 	if(isset($_POST['type']) && !empty($_POST['type'])) {
         $type = $_POST['type'];
 	}
-
-//    echo json_encode($_POST, JSON_NUMERIC_CHECK);
-//	exit;
 
     $response = new stdClass();
 
@@ -27,11 +19,6 @@
         ### INPUTS
         $strUsername = strtolower(addslashes($_POST['username']));
         $strPassword = addslashes($_POST['password']);
-
-        //Programacao
-        $DB = fnDBConn();
-
-        $password_enc = password_hash($strPassword, PASSWORD_DEFAULT);
 
         $user = new User();
         $param->username = $strUsername;
@@ -80,13 +67,13 @@
 
 	}else if($type == "forgot-password"){
 
-        $response->status = 1;
-        $response->statusMessage = "E-mail enviado com sucesso.";
+        ### INPUTS
+        $strEmail = strtolower(addslashes($_POST['email']));
 
-        $response->type = "success";
-        $response->title = "Sucesso";
-        $response->description = $t->{"E-mail para redefinição de senha enviado com sucesso"};
+        $user = new User();
+        $param->email = $strEmail;
 
+        $response = $user->sendRecoveryMail($param);
 	}
 
 	echo json_encode($response, JSON_NUMERIC_CHECK);
