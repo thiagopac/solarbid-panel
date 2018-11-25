@@ -20,13 +20,8 @@
         $strPassword = addslashes($_POST['password']);
         $validate = $_POST['validate'];
 
-        $user = new User();
-        $param->password = $strPassword;
-        $param->hashedId = $validate;
-
-        $response = $user->resetUserPassword($param);
+        $response = User::resetUserPassword($strPassword, $validate);
     }
 
     echo json_encode($response, JSON_NUMERIC_CHECK);
-
 ?>

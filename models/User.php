@@ -51,7 +51,7 @@ class User {
 
 	}
 
-	public function getAllUsers(){
+	public static function getAllUsers(){
 
 		$DB = fnDBConn();
 
@@ -82,7 +82,7 @@ class User {
 		return $arrUsers;
 	}
 
-    function checkExistingUsername($param) {
+    public static function checkExistingUsername($username) {
 
         $DB = fnDBConn();
 
@@ -91,7 +91,7 @@ class User {
 				FROM
 					USER AS U
 				WHERE
-					U.USERNAME = '$param->username'";
+					U.USERNAME = '$username'";
 
         $RESULT = fnDB_DO_SELECT($DB,$SQL);
 
@@ -99,7 +99,7 @@ class User {
         return $existing;
     }
 
-    function getUserWithCredentials($param) {
+    public static function getUserWithCredentials($username, $password) {
 
         $DB = fnDBConn();
 
@@ -118,13 +118,13 @@ class User {
 				FROM
 					USER AS U
 				WHERE
-					U.USERNAME = '$param->username'";
+					U.USERNAME = '$username'";
 
         $RESULT = fnDB_DO_SELECT($DB,$SQL);
 
         $user = new User($RESULT);
 
-        $access = password_verify($param->password, $user->password); //password é um hash possível do que foi recebido
+        $access = password_verify($password, $user->password); //password é um hash possível do que foi recebido
 
         unset($user->password);
 
@@ -153,7 +153,6 @@ class User {
                 session_start();
                 $_SESSION['USER'] = $user;
 
-                //Adiciona registro na tabela de auditoria
                 Audit::insertAudit(['userId' => $user->id, 'actionDesc' => 'Efetuou login']);
 
                 Mail::sendMailUserLoggedIn($user->email, $user->username, $user);
@@ -171,7 +170,7 @@ class User {
         return $response;
     }
 
-	public function getUserWithId($param){
+	public static function getUserWithId($id){
 
 		$DB = fnDBConn();
 
@@ -189,7 +188,7 @@ class User {
 				FROM
 					USER AS U
 				WHERE
-					U.ID = '$param->id'";
+					U.ID = '$id'";
 
 		$RESULT = fnDB_DO_SELECT($DB,$SQL);
 
@@ -198,7 +197,7 @@ class User {
 		return $user;
 	}
 
-    public function getUserWithHashedId($param){
+    public static function getUserWithHashedId($hashedId){
 
         $DB = fnDBConn();
 
@@ -210,7 +209,7 @@ class User {
 				FROM
 					USER AS U
 				WHERE
-					SHA1(MD5(U.ID)) = '$param->hashedId'";
+					SHA1(MD5(U.ID)) = '$hashedId'";
 
         $RESULT = fnDB_DO_SELECT($DB,$SQL);
 
@@ -219,26 +218,26 @@ class User {
         return $user;
     }
 
-	public function updateUserData($param){
+	public static function updateUserData($username, $email, $countryId, $languageId, $roleId, $id){
 		$DB = fnDBConn();
 
 		$SQL = "UPDATE
 					USER AS U
 				SET
-					U.USERNAME = '$param->username',
-					U.EMAIL = '$param->email',
-					U.COUNTRY_ID = '$param->countryId',
-					U.LANGUAGE_ID = '$param->languageId',
-                    U.ROLE_ID = '$param->roleId'
+					U.USERNAME = '$username',
+					U.EMAIL = '$email',
+					U.COUNTRY_ID = '$countryId',
+					U.LANGUAGE_ID = '$languageId',
+                    U.ROLE_ID = '$roleId'
 				WHERE
-					U.ID = '$param->id'";
+					U.ID = '$id'";
 
 		$RET = fnDB_DO_EXEC($DB,$SQL);
 
 		return $RET;
 	}
 
-	public function deleteUser($paramUser){
+	public function deleteUser($id){
 		$DB = fnDBConn();
 
 		$SQL = "UPDATE
@@ -246,42 +245,42 @@ class User {
 				SET
 					U.DELETED = 1
 				WHERE
-					U.ID = '$paramUser->id'";
+					U.ID = '$id'";
 
 		$RET = fnDB_DO_EXEC($DB,$SQL);
 
 		return $RET;
 	}
 
-	public function updateSelfProfile($param){
+	public function updateSelfProfile($password, $email, $countryId, $languageId, $id){
 		$DB = fnDBConn();
 
-        $password = password_hash($param->password, PASSWORD_DEFAULT);
+        $hpassword = password_hash($password, PASSWORD_DEFAULT);
 
 		$SQL = "UPDATE
 					USER AS U
 				SET
-					U.PASSWORD = '$password',
-					U.EMAIL = '$param->email',
-					U.LANGUAGE_ID = '$param->languageId',
-					U.COUNTRY_ID = '$param->countryId'
-				WHERE U.ID = '$param->id'";
+					U.PASSWORD = '$hpassword',
+					U.EMAIL = '$email',
+					U.LANGUAGE_ID = '$languageId',
+					U.COUNTRY_ID = '$countryId'
+				WHERE U.ID = '$id'";
 
 		$RET = fnDB_DO_EXEC($DB,$SQL);
 
 		return $RET;
 	}
 
-	public function insertUser($param){
+	public static function insertUser($username, $password, $email, $countryId, $languageId, $roleId){
 		$DB = fnDBConn();
 
 //        $baseSalt = $param->username.$param->email.$param->password;
 //        $salt = strtoupper(substr(strtolower(preg_replace('/[0-9_\/]+/', '', base64_encode(sha1($baseSalt)))) , 0, 6));
 
-        $password = password_hash($param->password, PASSWORD_DEFAULT);
+        $hpassword = password_hash($password, PASSWORD_DEFAULT);
 
         //checar se username já não está em uso
-		$existingUsername = $this->checkExistingUsername($param);
+		$existingUsername = User::checkExistingUsername($username);
 
       	$response = new Response();
         $t = new Translate();
@@ -304,12 +303,12 @@ class User {
 						LANGUAGE_ID,
 						COUNTRY_ID)
 					VALUES
-						('$param->username',
-						'$password',
-						'$param->email',
-						'$param->roleId',
-						'$param->languageId',
-						'$param->countryId')";
+						('$username',
+						'$hpassword',
+						'$email',
+						'$roleId',
+						'$languageId',
+						'$countryId')";
 
             $RESULT = fnDB_DO_EXEC($DB,$SQL);
 		}
@@ -317,8 +316,9 @@ class User {
 
         if ($RESULT[1] != null){ //$RESULT[1] tem o ID do registro inserido
 
-            //Adiciona registro na tabela de auditoria
             Audit::insertAudit(["userId" => $RESULT[1], "actionDesc" => "Se cadastrou"]);
+
+            Mail::sendMailVerifyAccountCreation($email, $username, sha1(md5($RESULT[1])));
 
         	$response->status = 1;
             $response->type = "success";
@@ -336,7 +336,7 @@ class User {
         return $response;
 	}
 
-	public function sendRecoveryMail($param){
+	public static function sendRecoveryMail($email){
 
         $DB = fnDBConn();
 
@@ -351,7 +351,7 @@ class User {
 				FROM
 					USER AS U
 				WHERE
-					U.EMAIL = '$param->email'";
+					U.EMAIL = '$email'";
 
         $RESULT = fnDB_DO_SELECT($DB,$SQL);
 
@@ -389,27 +389,26 @@ class User {
 
 	}
 
-    public function resetUserPassword($param){
+    public static function resetUserPassword($password, $hashedId){
         $DB = fnDBConn();
 
-        $password = password_hash($param->password, PASSWORD_DEFAULT);
+        $hpassword = password_hash($password, PASSWORD_DEFAULT);
 
         $SQL = "UPDATE
 					USER AS U
 				SET
-					U.PASSWORD = '$password'
-				WHERE SHA1(MD5(U.ID)) = '$param->hashedId'";
+					U.PASSWORD = '$hpassword'
+				WHERE SHA1(MD5(U.ID)) = '$hashedId'";
 
         $RESULT = fnDB_DO_EXEC($DB,$SQL);
 
         $t = new Translate();
         $response = new Response();
 
-        $affectedUser = $this->getUserWithHashedId($param);
+        $affectedUser = User::getUserWithHashedId($hashedId);
 
         if ($RESULT != null){
 
-            //Adiciona registro na tabela de auditoria
             Audit::insertAudit(["userId" => $affectedUser->id, "actionDesc" => "Alterou a senha"]);
 
             Mail::sendMailPasswordHasChanged($affectedUser->email, $affectedUser->username, $affectedUser);
@@ -424,17 +423,49 @@ class User {
             $response->status = 2;
             $response->type = "danger";
             $response->title = $t->{"Erro"};
-            $response->description = $t->{"Ocorreu um erro ao tentar alterar sua senha  . Tente novamente mais tarde."};
+            $response->description = $t->{"Ocorreu um erro ao tentar alterar sua senha. Tente novamente mais tarde."};
+        }
+
+        return $response;
+    }
+
+    public static function verifyUserAccount($hashedId){
+        $DB = fnDBConn();
+
+        $SQL = "UPDATE
+					USER AS U
+				SET
+					U.VERIFIED = 1
+				WHERE SHA1(MD5(U.ID)) = '$hashedId'";
+
+        $RESULT = fnDB_DO_EXEC($DB,$SQL);
+
+        $t = new Translate();
+        $response = new Response();
+
+        $affectedUser = User::getUserWithHashedId($hashedId);
+
+        if ($RESULT != null){
+
+            Audit::insertAudit(["userId" => $affectedUser->id, "actionDesc" => "Ativou a conta"]);
+
+            Mail::sendMailUserAccountVerified($affectedUser->email, $affectedUser->username);
+
+            $response->status = 1;
+            $response->type = "success";
+            $response->title = $t->{"Sucesso"};
+            $response->description = $t->{"Sua conta foi verificada com sucesso!"};
+
+        }else{
+
+            $response->status = 2;
+            $response->type = "danger";
+            $response->title = $t->{"Erro"};
+            $response->description = $t->{"Ocorreu um erro ao tentar verificar sua conta. Tente novamente mais tarde."};
         }
 
         return $response;
     }
 
 }
-
-/**
-<p>Voc&ecirc; est&aacute; recebendo este e-mail devido a sua solicita&ccedil;&atilde;o de redefini&ccedil;&atilde;o de senha.<br /><br />Para gerar uma nova senha, por favor acesse a seguinte URL:</p>
-<p><a href="http://localhost/solarbid/panel/reset-password?validate=bd71130278a8b9a4751ae6a262b74a8a844f1e0e">http://localhost/solarbid/panel/reset-password?validate=bd71130278a8b9a4751ae6a262b74a8a844f1e0e</a></p>
-<p>Caso voc&ecirc; n&atilde;o tenha requisitado a redefini&ccedil;&atilde;o de senha, apenas ignore este e-mail.</p>
- **/
 ?>

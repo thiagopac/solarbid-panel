@@ -6,27 +6,32 @@
 	### INCLUDE
 	require_once('../../models/User.php');
 
-	$type = "sign-in"; //forced value
-
 	if(isset($_POST['type']) && !empty($_POST['type'])) {
         $type = $_POST['type'];
 	}
 
-    $response = new stdClass();
+	//se estiver verificando a nova conta
+    if(isset($_POST['account-verify']) && !empty($_POST['account-verify'])) {
+
+        $response = new Response();
+
+        $accountVerify = $_POST['account-verify'];
+        $response = User::verifyUserAccount($accountVerify);
+    }
 
 	if ($type == "sign-in"){
+
+        $response = new Response();
 
         ### INPUTS
         $strUsername = strtolower(addslashes($_POST['username']));
         $strPassword = addslashes($_POST['password']);
 
-        $user = new User();
-        $param->username = $strUsername;
-        $param->password = $strPassword;
-
-        $response = $user->getUserWithCredentials($param);
+        $response = User::getUserWithCredentials($strUsername, $strPassword);
 
 	}else if($type == "sign-up"){
+
+        $response = new Response();
 
         ### INPUTS
         $strUsername = strtolower(addslashes($_POST['username']));
@@ -54,26 +59,16 @@
 
         //Programacao
         $DB = fnDBConn();
-
-        $user = new User();
-        $param->username = $strUsername;
-        $param->password = $strPassword;
-        $param->email = $strEmail;
-        $param->roleId = $roleId;
-        $param->languageId = $languageId;
-        $param->countryId = $countryId;
-
-        $response = $user->insertUser($param);
+        $response = User::insertUser($strUsername, $strPassword, $strEmail, $countryId, $languageId, $roleId);
 
 	}else if($type == "forgot-password"){
+
+        $response = new Response();
 
         ### INPUTS
         $strEmail = strtolower(addslashes($_POST['email']));
 
-        $user = new User();
-        $param->email = $strEmail;
-
-        $response = $user->sendRecoveryMail($param);
+        $response = User::sendRecoveryMail($strEmail);
 	}
 
 	echo json_encode($response, JSON_NUMERIC_CHECK);

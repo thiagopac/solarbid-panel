@@ -1,4 +1,5 @@
 <?php
+
 function fnLogText($strMessage, $booDie = false){
 	global $booDEV;
 
@@ -13,10 +14,6 @@ function fnLogText($strMessage, $booDie = false){
 		die('FALHA GERAL: ' . $strMessage);
 	}
 
-}
-
-function fnSenhaSHA1($string){
-		return sha1($string);
 }
 
 function fnDateVisualToDB($dateVisual){
@@ -318,7 +315,7 @@ function fnRemoveAcentos($str, $enc = "UTF-8"){
 //	return($linha);
 //}
 
-function consoleLog( $data ) {
+function consoleLog($data) {
     $output = $data;
     if ( is_array( $output ) )
         $output = implode( ',', $output);

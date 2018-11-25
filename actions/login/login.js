@@ -280,7 +280,52 @@ var SnippetLogin = function() {
     };
 }();
 
+var UserAccountValidation = function() {
+
+    var sendUserAccountVerifyParameter = function() {
+
+        let searchParams = new URLSearchParams(window.location.search);
+        var accountVerify;
+
+        if (searchParams.has('account-verify')){
+            accountVerify = searchParams.get('account-verify');
+        }
+
+        if (accountVerify == null){
+            return;
+        }
+
+        $.ajax({
+            url: './actions/login/login.php',
+            type: 'POST',
+            contentType: "application/x-www-form-urlencoded",
+            data: {"account-verify" : accountVerify},
+            success: function(response, status, xhr) {
+
+                if (response.status == 1) {
+                    //deu certo
+                    toastr[response.type](response.description);
+                } else {
+                    //deu errado
+                    toastr[response.type](response.description);
+                }
+
+            }
+        });
+
+    }
+
+    return {
+        // public functions
+        init: function() {
+            sendUserAccountVerifyParameter();
+        }
+    };
+
+}();
+
 //== Class Initialization
 jQuery(document).ready(function() {
+    UserAccountValidation.init();
     SnippetLogin.init();
 });
