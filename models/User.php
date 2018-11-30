@@ -1,12 +1,9 @@
 <?php
 
 require_once('../../lib/config.php');
-require_once('Role.php');
-require_once('Language.php');
-require_once('Country.php');
-require_once('Response.php');
 require_once('Audit.php');
 require_once('Mail.php');
+require_once('Response.php');
 require_once('../../internationalization/Translate.php');
 
 class User {
@@ -15,35 +12,30 @@ class User {
 	public $username;
 	public $password;
     public $email;
-	public $din;
-	public $lastLogin;
-    public $roleId;
-	public $languageId;
-	public $countryId;
-    public $verified;
-    public $mailNotification;
-
-	//propriedades entidades
-    public $role;
-	public $country;
-	public $language;
+	public $created_at;
+	public $updated_at;
+    public $role_id;
+	public $language_id;
+	public $country_id;
+    public $activated;
+    public $mail_notification;
 
 	//construtor da classe
-	public function __construct($array){
+	public function __construct(array $array = []){
 
 		//se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
 		if (!empty($array)) {
-			$this->id = $array['ID'];
-			$this->username = $array['USERNAME'];
-            $this->password = $array['PASSWORD'];
-            $this->email = $array['EMAIL'];
-			$this->din = $array['DIN'];
-			$this->lastLogin = $array['LAST_LOGIN'];
-            $this->roleId = $array['ROLE_ID'];
-			$this->languageId = $array['LANGUAGE_ID'];
-			$this->countryId = $array['COUNTRY_ID'];
-            $this->verified = $array['VERIFIED'];
-            $this->mailNotification = json_decode($array['MAIL_NOTIFICATION']);
+			$this->id = $array['id'];
+			$this->username = $array['username'];
+            $this->password = $array['password'];
+            $this->email = $array['email'];
+			$this->created_at = $array['created_at'];
+			$this->updated_at = $array['updated_at'];
+            $this->role_id = $array['role_id'];
+			$this->language_id = $array['language_id'];
+			$this->country_id = $array['country_id'];
+            $this->activated = $array['activated'];
+            $this->mail_notification = json_decode($array['mail_notification']);
 		}
   }
 
@@ -51,169 +43,83 @@ class User {
 
 	}
 
-	public static function getAllUsers(){
+    public static function all(string $filter = '', int $limit = 0, int $offset = 0) {
 
-		$DB = fnDBConn();
+        $db = fnDBConn();
 
-		$SQL = "SELECT
-					U.ID,
-					U.USERNAME,
-					U.EMAIL,
-					U.DIN,
-					U.LAST_LOGIN,
-					U.COUNTRY_ID,
-					U.LANGUAGE_ID,
-					U.ROLE_ID,
-					U.VERIFIED
-				FROM
-					USER AS U
-				WHERE
-					1";
+        $class = get_called_class();
+        $table = (new $class())->table;
+        $sql = 'SELECT * FROM ' . (is_null($table) ? strtolower($class) : $table);
+        $sql .= ($filter !== '') ? " WHERE {$filter}" : "";
+        $sql .= ($limit > 0) ? " LIMIT {$limit}" : "";
+        $sql .= ($offset > 0) ? " OFFSET {$offset}" : "";
+        $sql .= ';';
 
-		$RESULT = fnDB_DO_SELECT_WHILE($DB,$SQL);
+        $result = fnDB_DO_SELECT_WHILE($db, $sql);
 
-		$arrUsers = [];
+        $arrUsers = [];
 
-		foreach($RESULT as $KEY => $ROW){
-	    $user = new User($ROW);
-			array_push($arrUsers, $user);
-	  }
+        foreach($result as $key => $row){
+            $user = new User($row);
+            array_push($arrUsers, $user);
+        }
 
-		return $arrUsers;
-	}
+        return $arrUsers;
+    }
+
+    public static function find($parameter) {
+
+        $db = fnDBConn();
+
+        $class = get_called_class();
+        $table = (new $class())->table;
+        $sql = 'SELECT * FROM ' . (is_null($table) ? strtolower($class) : $table);
+        $sql .= " WHERE {$parameter} ;";
+
+        $result = fnDB_DO_SELECT($db,$sql);
+
+        $user = new User($result);
+
+        return $user;
+    }
+
+    public function save() {
+
+	    //VER SE O ID CHEGOU NO OBJETO, SE CHEGOU, É UM UPDATE, SE NÃO CHEGOU, É INSERT
+        //VER COMO ENVIAR OS NOMES DOS CAMPOS E OS VALORES PARA SEREM ATUALIZADOS OU INSERIDOS
+
+        if (isset($this->content[$this->idField])) {
+            $sql = "UPDATE {$this->table} SET " . implode(', ', $sets) . " WHERE {$this->idField} = {$this->content[$this->idField]};";
+        } else {
+
+            $sql = "INSERT INTO {$this->table} (" . implode(', ', array_keys($newContent)) . ') VALUES (' . implode(',', array_values($newContent)) . ');';
+        }
+    }
 
     public static function checkExistingUsername($username) {
 
-        $DB = fnDBConn();
-
-        $SQL = "SELECT
-					U.ID
-				FROM
-					USER AS U
-				WHERE
-					U.USERNAME = '$username'";
-
-        $RESULT = fnDB_DO_SELECT($DB,$SQL);
-
-        $existing = $RESULT["ID"] == null ? false : true;
-        return $existing;
+        $existing = self::all("username = '".$username."'");
+        return $existing == null ? false : true;
     }
 
     public static function getUserWithCredentials($username, $password) {
 
-        $DB = fnDBConn();
-
-        $SQL = "SELECT
-					U.ID,
-					U.USERNAME,
-					U.PASSWORD,
-					U.EMAIL,
-					U.DIN,
-					U.LAST_LOGIN,
-					U.ROLE_ID,
-					U.LANGUAGE_ID,
-					U.COUNTRY_ID,
-					U.VERIFIED,
-					U.MAIL_NOTIFICATION
-				FROM
-					USER AS U
-				WHERE
-					U.USERNAME = '$username'";
-
-        $RESULT = fnDB_DO_SELECT($DB,$SQL);
-
-        $user = new User($RESULT);
-
+        $user = self::find("username = '".$username."'");
         $access = password_verify($password, $user->password); //password é um hash possível do que foi recebido
 
         unset($user->password);
-
-        $response = new Response();
-        $t = new Translate();
-
-        if ($access == false) {
-
-            $response->status = 2;
-            $response->type = "error";
-            $response->title = $t->{"Erro"};
-            $response->description = $t->{"Nome de usuário ou senha incorretos"};
-
-        }else{
-
-            if ($user->verified == false){
-
-                $response->status = 2;
-                $response->type = "error";
-                $response->title = $t->{"Erro"};
-                $response->description = $t->{"Verifique seu e-mail para efetuar a ativação da sua conta."};
-
-            }else{
-
-                //Inicia a sessao
-                session_start();
-                $_SESSION['USER'] = $user;
-
-                Audit::insertAudit(['userId' => $user->id, 'actionDesc' => 'Efetuou login']);
-
-                Mail::sendMailUserLoggedIn($user->email, $user->username, $user);
-
-                $response->status = 1;
-                $response->type = "success";
-                $response->title = $t->{"Sucesso"};
-                $response->description = $t->{"Login efetuado com sucesso"};
-
-                $response->user = $user;
-            }
-
-        }
-
-        return $response;
+        return $access == true ? $user : null;
     }
 
 	public static function getUserWithId($id){
 
-		$DB = fnDBConn();
-
-		$SQL = "SELECT
-					U.ID,
-					U.USERNAME,
-					U.EMAIL,
-					U.DIN,
-					U.LAST_LOGIN,
-					U.ROLE_ID,
-					U.LANGUAGE_ID,
-					U.COUNTRY_ID,
-					U.VERIFIED,
-					U.MAIL_NOTIFICATION
-				FROM
-					USER AS U
-				WHERE
-					U.ID = '$id'";
-
-		$RESULT = fnDB_DO_SELECT($DB,$SQL);
-
-		$user = new User($RESULT);
-
+		$user = self::find("id = {$id}");
 		return $user;
 	}
 
     public static function getUserWithHashedId($hashedId){
 
-        $DB = fnDBConn();
-
-        $SQL = "SELECT
-					U.ID,
-					U.USERNAME,
-					U.EMAIL,
-					U.MAIL_NOTIFICATION
-				FROM
-					USER AS U
-				WHERE
-					SHA1(MD5(U.ID)) = '$hashedId'";
-
-        $RESULT = fnDB_DO_SELECT($DB,$SQL);
-
-        $user = new User($RESULT);
+        $user = self::find("SHA1(MD5(u.id)) = '".$hashedId."'");
 
         return $user;
     }
@@ -338,24 +244,9 @@ class User {
 
 	public static function sendRecoveryMail($email){
 
-        $DB = fnDBConn();
+        $user = self::find("email = {$email}");
 
-        $t = new Translate();
-        $response = new Response();
-
-        $SQL = "SELECT
-					U.ID,
-					U.USERNAME,
-					U.EMAIL,
-					U.LANGUAGE_ID
-				FROM
-					USER AS U
-				WHERE
-					U.EMAIL = '$email'";
-
-        $RESULT = fnDB_DO_SELECT($DB,$SQL);
-
-        $user = new User($RESULT);
+		$send = Mail::sendMailPasswordRedefinition($user->email, $user->username, sha1(md5($user->id)));
 
         if ($user->email == null){
 
@@ -367,9 +258,8 @@ class User {
             return $response;
         }
 
-		$send = Mail::sendMailPasswordRedefinition($user->email, $user->username, sha1(md5($user->id)));
 
-		if ($send) {
+        if ($send) {
             //enviado com sucesso
 
             $response->status = 1;
@@ -385,7 +275,7 @@ class User {
             $response->description = $t->{"Ocorreu um erro ao tentar enviar o e-mail de redefinição. Tente novamente mais tarde."};
         }
 
-        return $response;
+        return $send;
 
 	}
 

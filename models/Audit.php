@@ -3,77 +3,26 @@
 class Audit {
 
 	public $id;
-    public $userId;
+    public $user_id;
 	public $ip;
-	public $actionDesc;
-	public $din;
+	public $action_desc;
+	public $created_at;
 
 	//construtor da classe
-	public function __construct($array){
+	public function __construct(array $array = []){
 
 		//se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
 		if (!empty($array)) {
-			$this->id = $array['ID'];
-            $this->userId = $array['USER_ID'];
-			$this->ip = $array['IP'];
-			$this->actionDesc = $array['ACTION_DESC'];
-			$this->din = $array['DIN'];
+			$this->id = $array['id'];
+            $this->user_id = $array['user_id'];
+			$this->ip = $array['ip'];
+			$this->action_desc = $array['action_desc'];
+			$this->created_at = $array['created_at'];
 		}
   }
 
 	public function __destruct(){
 
-	}
-
-	public function getAuditWithID($param){
-
-		$DB = fnDBConn();
-
-		$SQL = "SELECT
-					AUD.ID,
-					AUD.ID_USER AS USER_ID,
-					AUD.IP,
-					AUD.ACTION_DESC,
-					AUD.DIN
-				FROM
-					AUDIT AS AUD
-				WHERE
-					AUD.ID = $param
-				ORDEY BY
-					AUD.DIN DESC";
-
-		$RESULT = fnDB_DO_SELECT($DB,$SQL);
-
-		$obj = new Audit($RESULT);
-
-		return $obj;
-	}
-
-	public function getAllAudits(){
-
-		$DB = fnDBConn();
-
-		$SQL = "SELECT
-					AUD.ID,
-					AUD.ID_USER AS USER_ID,
-					AUD.IP,
-					AUD.ACTION_DESC,
-					AUD.DIN
-				FROM
-					AUDIT AS AUD
-				WHERE
-					1";
-
-		$RESULT = fnDB_DO_SELECT_WHILE($DB,$SQL);
-
-		$arr = [];
-
-		foreach ($RESULT as $KEY => $ROW) {
-			$obj = new Audit($ROW);
-			array_push($arr, $obj);
-		}
-
-		return $arr;
 	}
 
     public static function insertAudit($param){

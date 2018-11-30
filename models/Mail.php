@@ -9,7 +9,7 @@ class Mail
 
     public static function sendMailPasswordHasChanged($toEmail, $toName, $user){
 
-        if ($user->mailNotification->passwordchanged == false){
+        if ($user->mail_notification->passwordChanged == false){
             return false;
         }
 
@@ -53,7 +53,7 @@ class Mail
 
     public static function sendMailUserLoggedIn($toEmail, $toName, $user){
 
-        if ($user->mailNotification->loggedIn == false){
+        if ($user->mail_notification->loggedIn == false){
             return false;
         }
 

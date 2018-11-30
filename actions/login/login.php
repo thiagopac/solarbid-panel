@@ -1,9 +1,6 @@
 <?php
-    //response only in json_encode
-    header('Content-type:application/json;charset=utf-8');
-    //header('Content-type:text/html;charset=utf-8');
+    header('Content-type:application/json;charset=utf-8'); //header('Content-type:text/html;charset=utf-8');
 
-	### INCLUDE
 	require_once('../../models/User.php');
 
 	if(isset($_POST['type']) && !empty($_POST['type'])) {
@@ -27,7 +24,27 @@
         $strUsername = strtolower(addslashes($_POST['username']));
         $strPassword = addslashes($_POST['password']);
 
-        $response = User::getUserWithCredentials($strUsername, $strPassword);
+        $user = User::getUserWithCredentials($strUsername, $strPassword);
+
+        if ($user == null) {
+
+            $response = new Response(["status" => "2", "type" => "error", "title" => "Erro", "description" => "Nome de usuário ou senha incorretos"]);
+
+        }else{
+
+            if ($user->activated == false){
+                $response = new Response(["status" => "2", "type" => "error", "title" => "Erro", "description" => "Verifique seu e-mail para efetuar a ativação da sua conta"]);
+            }else{
+                session_start();
+                $_SESSION['USER'] = $user; //$_SESSION['USER']->username;
+
+//                Audit::insertAudit(["user_id" => $affectedUser->id, "action_desc" => "Efetuou login", "ip" => addslashes($_SERVER['REMOTE_ADDR'])]);
+                $sent = Mail::sendMailUserLoggedIn($user->email, $user->username, $user);
+                $response = new Response(["status" => "1", "type" => "success", "title" => "Sucesso", "description" => "Login efetuado com sucesso"]);
+            }
+        }
+
+        echo json_encode($response, JSON_NUMERIC_CHECK);
 
 	}else if($type == "sign-up"){
 
@@ -69,7 +86,5 @@
         $strEmail = strtolower(addslashes($_POST['email']));
 
         $response = User::sendRecoveryMail($strEmail);
-	}
-
-	echo json_encode($response, JSON_NUMERIC_CHECK);
+	}s
 ?>
