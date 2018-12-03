@@ -142,6 +142,19 @@ $t = new Translate();
 							</div>
 							<form class="m-login__form m-form" id="form-signup">
                                 <input type="hidden" name="type" value="sign-up">
+                                <div class="m-form__group form-group" style="text-align: center; border: 1px solid #ebedf2; padding-top: 1.0em; padding-bottom: 1.4em; border-radius: 6px;margin-bottom: 20px">
+                                    <h5 style="padding: 10px"><?= $t->{'Tipo de cadastro'}; ?></h5>
+                                    <div class="m-radio-inline">
+                                        <label class="m-radio">
+                                            <input type="radio" name="registry" value="1"> <?= $t->{'Pessoa Física'}; ?>
+                                            <span></span>
+                                        </label>
+                                        <label class="m-radio">
+                                            <input type="radio" name="registry" value="2"> <?= $t->{'Pessoa Jurídica'}; ?>
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
 								<div class="form-group m-form__group">
 									<input class="form-control m-input" type="text" placeholder="<?= $t->{'Nome de usuário'}; ?>" name="username">
 								</div>

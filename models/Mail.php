@@ -75,8 +75,8 @@ class Mail
         return $send;
     }
 
-    public static function sendMailVerifyAccountCreation($toEmail, $toName, $accountVerify){
-
+    public static function sendMailActivateAccountCreation($toEmail, $toName, $accountActivate){
+        
         $t = new Translate();
 
         $mail = SimpleMail::make()
@@ -86,7 +86,7 @@ class Mail
             ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
-            ->setMessage('<p>Bem-vindo(a) ao Solarbid.<br/><br/>Voc&ecirc; est&aacute; recebendo este e-mail pois se cadastrou na plataforma Solarbid.</p><p>Para continuar o processo e ter acesso a nossas ferramentas, &eacute; necess&aacute;rio a verifica&ccedil;&atilde;o de sua conta, clicando no endere&ccedil;o abaixo ou copiando e colando o link na barra de endere&ccedil;os de seu navegador.</p><p><a href="http://localhost/solarbid/panel/login?account-verify='.$accountVerify.'">http://localhost/solarbid/panel/login?account-verify='.$accountVerify.'</a></p><p>Caso voc&ecirc; n&atilde;o tenha se cadastrado em nossa plataforma e tenha recebido esta mensagem por engano, por favor ignore este e-mail.</p>')
+            ->setMessage('<p>Bem-vindo(a) ao Solarbid.<br/><br/>Voc&ecirc; est&aacute; recebendo este e-mail pois se cadastrou na plataforma Solarbid.</p><p>Para continuar o processo e ter acesso a nossas ferramentas, &eacute; necess&aacute;rio a verifica&ccedil;&atilde;o de sua conta, clicando no endere&ccedil;o abaixo ou copiando e colando o link na barra de endere&ccedil;os de seu navegador.</p><p><a href="http://localhost/solarbid/panel/login?account-activate='.$accountActivate.'">http://localhost/solarbid/panel/login?account-activate='.$accountActivate.'</a></p><p>Caso voc&ecirc; n&atilde;o tenha se cadastrado em nossa plataforma e tenha recebido esta mensagem por engano, por favor ignore este e-mail.</p>')
             ->setWrap(78);
         $send = $mail->send();
 
@@ -95,7 +95,7 @@ class Mail
         return $send;
     }
 
-    public static function sendMailUserAccountVerified($toEmail, $toName){
+    public static function sendMailUserAccountActivated($toEmail, $toName){
 
         $t = new Translate();
 

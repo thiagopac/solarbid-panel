@@ -89,7 +89,7 @@ var SnippetLogin = function() {
                 return;
             }
 
-            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+            // btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
                 url: './actions/login/login.php',
@@ -132,6 +132,9 @@ var SnippetLogin = function() {
 
             form.validate({
                 rules: {
+                    registry: {
+                        required: true
+                    },
                     username: {
                         required: true
                     },
@@ -154,6 +157,7 @@ var SnippetLogin = function() {
                     }
                 },
                 messages: {
+                    registry: "Informe o tipo de cadastro",
                     username: "Informe o nome de usuário",
                     email: "Informe o e-mail",
                     password: "Escolha uma uma senha",
@@ -167,7 +171,7 @@ var SnippetLogin = function() {
                 return;
             }
 
-            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+            // btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
                 url: './actions/login/login.php',
@@ -226,7 +230,7 @@ var SnippetLogin = function() {
                 return;
             }
 
-            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+            // btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
                 url: './actions/login/login.php',
@@ -282,16 +286,16 @@ var SnippetLogin = function() {
 
 var UserAccountValidation = function() {
 
-    var sendUserAccountVerifyParameter = function() {
+    var sendUserAccountActivateParameter = function() {
 
         let searchParams = new URLSearchParams(window.location.search);
-        var accountVerify;
+        var accountActivate;
 
-        if (searchParams.has('account-verify')){
-            accountVerify = searchParams.get('account-verify');
+        if (searchParams.has('account-activate')){
+            accountActivate = searchParams.get('account-activate');
         }
 
-        if (accountVerify == null){
+        if (accountActivate == null){
             return;
         }
 
@@ -299,7 +303,7 @@ var UserAccountValidation = function() {
             url: './actions/login/login.php',
             type: 'POST',
             contentType: "application/x-www-form-urlencoded",
-            data: {"account-verify" : accountVerify},
+            data: {"account-activate" : accountActivate},
             success: function(response, status, xhr) {
 
                 if (response.status == 1) {
@@ -318,7 +322,7 @@ var UserAccountValidation = function() {
     return {
         // public functions
         init: function() {
-            sendUserAccountVerifyParameter();
+            sendUserAccountActivateParameter();
         }
     };
 

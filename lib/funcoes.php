@@ -68,7 +68,7 @@ function fnDB_DO_EXEC($DB, $strSQL){
 
 	return (array(
 		(int)$DB->affected_rows,
-		(int)mysqli_insert_id($DB) ,
+		(int)mysqli_insert_id($DB),
 		$error
 	));
 }
