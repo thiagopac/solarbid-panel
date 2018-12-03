@@ -21,7 +21,7 @@
 
         if ($userActivated->activated == true){
 
-//            Audit::insertAudit(["userId" => $affectedUser->id, "actionDesc" => "Ativou a conta"]);
+//            Audit::insertAudit(["user_id" => $affectedUser->id, "action_desc" => "Ativou a conta"]);
 
             Mail::sendMailUserAccountActivated($userActivated->email, $userActivated->username);
 
@@ -100,7 +100,7 @@
 
             if ($registered != null){
 
-//                Audit::insertAudit(["userId" => $RESULT[1], "actionDesc" => "Se cadastrou"]);
+//                Audit::insertAudit(["user_id" => $RESULT[1], "action_desc" => "Se cadastrou"]);
 
                 Mail::sendMailActivateAccountCreation($registered->email, $registered->username, sha1(md5($registered->id)));
 

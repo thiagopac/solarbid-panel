@@ -89,7 +89,7 @@ var SnippetLogin = function() {
                 return;
             }
 
-            // btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
                 url: './actions/login/login.php',
@@ -171,7 +171,7 @@ var SnippetLogin = function() {
                 return;
             }
 
-            // btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
                 url: './actions/login/login.php',
@@ -230,7 +230,7 @@ var SnippetLogin = function() {
                 return;
             }
 
-            // btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
                 url: './actions/login/login.php',

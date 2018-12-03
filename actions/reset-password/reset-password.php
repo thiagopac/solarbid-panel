@@ -26,19 +26,15 @@
 
         if ($user != null){
 
-//            Audit::insertAudit(["userId" => $affectedUser->id, "actionDesc" => "Alterou a senha"]);
+//            Audit::insertAudit(["user_id" => $affectedUser->id, "action_desc" => "Alterou a senha"]);
 
             Mail::sendMailPasswordHasChanged($affectedUser->email, $affectedUser->username, $affectedUser);
-
             $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Senha alterada com sucesso! Você está sendo redirecionado para a página de login."}]);
-
         }else{
-
             $response = new Response(["status" => "2", "type" => "danger", "title" => $t->{"Erro"}, "description" => $t->{"Ocorreu um erro ao tentar alterar sua senha. Tente novamente mais tarde."}]);
         }
 
         echo json_encode($response, JSON_NUMERIC_CHECK);
-
     }
 
 ?>
