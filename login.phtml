@@ -1,10 +1,17 @@
+<?php
+
+require_once ('./lib/config.php');
+require_once ('./internationalization/Translate.php');
+
+$t = new Translate();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 	<!-- begin::Head -->
 	<head>
 		<meta charset="utf-8" />
-		<title>Painel</title>
+		<title><?=$TITULO?></title>
 		<meta name="description" content="Latest updates and statistic charts">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
@@ -83,13 +90,13 @@
 									</a>
 								</div>
 								<div class="m-login__title">
-									<h3 style="text-transform: uppercase">Junte-se à maior plataforma de pregão eletrônico do Brasil</h3>
+									<h3 style="text-transform: uppercase"><?= $t->{'Junte-se à maior plataforma de pregão eletrônico do Brasil'}; ?></h3>
 								</div>
 								<div class="m-login__desc">
-                                    Comprando ou vendendo, aqui você poupa dinheiro e tempo
+									<?= $t->{'Comprando ou vendendo, aqui você poupa dinheiro e tempo'}; ?>
 								</div>
 								<div class="m-login__form-action">
-									<button type="button" id="m_login_signup" class="btn btn-outline-primary m-btn--pill">Ainda não tem uma conta?</button>
+									<button type="button" id="m_login_signup" class="btn btn-outline-primary m-btn--pill"><?= $t->{'Ainda não tem uma conta?'}; ?></button>
 								</div>
 							</div>
 						</div>
@@ -102,36 +109,36 @@
 					<div class="m-login__contanier">
 						<div class="m-login__signin">
 							<div class="m-login__head">
-								<h3 class="m-login__title" style="text-transform: uppercase">Entre com suas credenciais</h3>
+								<h3 class="m-login__title" style="text-transform: uppercase"><?= $t->{'Entre com suas credenciais'}; ?></h3>
 							</div>
 							<form class="m-login__form m-form" id="form-signin">
                                 <input type="hidden" name="type" value="sign-in">
 								<div class="form-group m-form__group">
-									<input class="form-control m-input" type="text" placeholder="Nome de usuário" name="username" id="username" autocomplete="off">
+									<input class="form-control m-input" type="text" placeholder="<?= $t->{'Nome de usuário'}; ?>" name="username" id="username" autocomplete="off">
 								</div>
 								<div class="form-group m-form__group">
-									<input class="form-control m-input m-login__form-input--last" type="Password" placeholder="Senha" id="password" name="password">
+									<input class="form-control m-input m-login__form-input--last" type="Password" placeholder="<?= $t->{'Senha'}; ?>" id="password" name="password">
 								</div>
 								<div class="row m-login__form-sub">
 									<div class="col m--align-left">
 										<label class="m-checkbox m-checkbox--primary">
-											<input type="checkbox" name="remember"> Lembrar de mim
+											<input type="checkbox" name="remember"> <?= $t->{'Lembrar de mim'}; ?>
 											<span></span>
 										</label>
 									</div>
 									<div class="col m--align-right">
-										<a href="javascript:;" id="m_login_forget_password" class="m-link">Esqueceu a senha?</a>
+										<a href="javascript:;" id="m_login_forget_password" class="m-link"><?= $t->{'Esqueceu a senha?'}; ?></a>
 									</div>
 								</div>
 								<div class="m-login__form-action">
-									<button id="m_login_signin_submit" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--air">Entrar</button>
+									<button id="m_login_signin_submit" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--air"><?= $t->{'Entrar'}; ?></button>
 								</div>
 							</form>
 						</div>
 						<div class="m-login__signup">
 							<div class="m-login__head">
-								<h3 class="m-login__title">Cadastrar</h3>
-								<div class="m-login__desc">Preencha os dados abaixo para iniciar o processo de criação de nova conta</div>
+								<h3 class="m-login__title"><?= $t->{'Cadastrar'}; ?></h3>
+								<div class="m-login__desc"><?= $t->{'Preencha os dados abaixo para iniciar o processo de criação de nova conta'}; ?></div>
 							</div>
 							<form class="m-login__form m-form" id="form-signup">
                                 <input type="hidden" name="type" value="sign-up">
@@ -149,16 +156,16 @@
                                     </div>
                                 </div>
 								<div class="form-group m-form__group">
-									<input class="form-control m-input" type="text" placeholder="Nome de usuário" name="username">
+									<input class="form-control m-input" type="text" placeholder="<?= $t->{'Nome de usuário'}; ?>" name="username">
 								</div>
 								<div class="form-group m-form__group">
-									<input class="form-control m-input" type="text" placeholder="E-mail" name="email" autocomplete="off">
+									<input class="form-control m-input" type="text" placeholder="<?= $t->{'E-mail'}; ?>" name="email" autocomplete="off">
 								</div>
 								<div class="form-group m-form__group">
-									<input class="form-control m-input" type="password" placeholder="Senha" id="password-signup" name="password">
+									<input class="form-control m-input" type="password" placeholder="<?= $t->{'Senha'}; ?>" id="password-signup" name="password">
 								</div>
 								<div class="form-group m-form__group">
-									<input class="form-control m-input m-login__form-input--last" type="password" placeholder="Confirmação de senha" name="rpassword">
+									<input class="form-control m-input m-login__form-input--last" type="password" placeholder="<?= $t->{'Confirmação de senha'}; ?>" name="rpassword">
 								</div>
                                 <div class="m-separator m-separator--dashed"></div>
                                 <div class="m-form__section">
@@ -178,7 +185,7 @@
                                                     <span class="m-option__label">
 																	<span class="m-option__head">
 																		<span class="m-option__title">
-																			Cliente
+																			<?= $t->{'Cliente'}; ?>
 																		</span>
 																	</span>
 																	<span class="m-option__body">
@@ -198,7 +205,7 @@
                                                     <span class="m-option__label">
 																	<span class="m-option__head">
 																		<span class="m-option__title">
-																			Integrador
+																			<?= $t->{'Integrador'}; ?>
 																		</span>
 																	</span>
 																	<span class="m-option__body">
@@ -216,21 +223,21 @@
                                 <div class="m-separator m-separator--dashed"></div>
 								<div class="m-login__form-sub">
 									<label class="m-checkbox m-checkbox--primary">
-										<input type="checkbox" name="agree">Eu concordo com os  <a href="#" class="m-link m-link--primary">Termos de uso</a>.
+										<input type="checkbox" name="agree"><?= $t->{'Eu concordo com os '}; ?> <a href="#" class="m-link m-link--primary"><?= $t->{'Termos de uso'}; ?></a>.
 										<span></span>
 									</label>
 									<span class="m-form__help"></span>
 								</div>
 								<div class="m-login__form-action">
-									<button id="m_login_signup_submit" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--air">Cadastrar</button>
-									<button id="m_login_signup_cancel" class="btn btn-outline-primary m-btn m-btn--pill m-btn--custom">Cancelar</button>
+									<button id="m_login_signup_submit" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--air"><?= $t->{'Cadastrar'}; ?></button>
+									<button id="m_login_signup_cancel" class="btn btn-outline-primary m-btn m-btn--pill m-btn--custom"><?= $t->{'Cancelar'}; ?></button>
 								</div>
 							</form>
 						</div>
 						<div class="m-login__forget-password">
 							<div class="m-login__head">
-								<h3 class="m-login__title">Esqueceu a senha?</h3>
-								<div class="m-login__desc">Coloque seu e-mail para receber as instruções sobre a troca de senha</div>
+								<h3 class="m-login__title"><?= $t->{'Esqueceu a senha?'}; ?></h3>
+								<div class="m-login__desc"><?= $t->{'Coloque seu e-mail para receber as instruções sobre a troca de senha'}; ?></div>
 							</div>
 							<form class="m-login__form m-form" id="form-forgotpassword">
                                 <input type="hidden" name="type" value="forgot-password">
@@ -238,8 +245,8 @@
 									<input class="form-control m-input" type="text" placeholder="E-mail" name="email" id="m_email" autocomplete="off">
 								</div>
 								<div class="m-login__form-action">
-									<button id="m_login_forget_password_submit" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--air">Redefinir</button>
-									<button id="m_login_forget_password_cancel" class="btn btn-outline-primary m-btn m-btn--pill m-btn--custom ">Cancelar</button>
+									<button id="m_login_forget_password_submit" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--air"><?= $t->{'Redefinir'}; ?></button>
+									<button id="m_login_forget_password_cancel" class="btn btn-outline-primary m-btn m-btn--pill m-btn--custom "><?= $t->{'Cancelar'}; ?></button>
 								</div>
 							</form>
 						</div>

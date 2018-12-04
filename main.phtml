@@ -1,7 +1,5 @@
 <?php
 
-  session_start();
-
   include("./body/header.phtml");
 
   $fileExists = file_exists($_GET["page"].".phtml");
@@ -16,6 +14,7 @@
 
   include("./body/footer.phtml");
 
-  //pegar variáveis e fazer chamadas para popular logs e outras funcionalidades
+  session_start();
+  //pegar variáveis e fazer chamadas para popular logse outras funcionalidades
 
 ?>

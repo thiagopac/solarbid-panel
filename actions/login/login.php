@@ -1,24 +1,10 @@
 <?php
-<<<<<<< HEAD
     header('Content-type:application/json;charset=utf-8'); //header('Content-type:text/html;charset=utf-8');
-=======
-    header('Content-type:application/json;charset=utf-8');
->>>>>>> f7e64553de84fbe84d24f6128abff62036bf344d
 
 	require_once('../../models/User.php');
-<<<<<<< HEAD
     require_once('../../internationalization/Translate.php');
-=======
-    require_once '../../models/Connection.php';
-    require_once '../../models/Response.php';
-    require_once '../../internationalization/Translate.php';
->>>>>>> f7e64553de84fbe84d24f6128abff62036bf344d
 
-    User::setConnection(Connection::getInstance('../../lib/configdb.ini'));
-
-
-
-    if(isset($_POST['type']) && !empty($_POST['type'])) {
+	if(isset($_POST['type']) && !empty($_POST['type'])) {
         $type = $_POST['type'];
 	}
 
@@ -37,7 +23,6 @@
 
 //            Audit::insertAudit(["user_id" => $affectedUser->id, "action_desc" => "Ativou a conta"]);
 
-<<<<<<< HEAD
             Mail::sendMailUserAccountActivated($userActivated->email, $userActivated->username);
 
             $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Sua conta foi verificada com sucesso!"}]);
@@ -46,75 +31,19 @@
         }
 
         echo json_encode($response, JSON_NUMERIC_CHECK);
-=======
-//        $response = new Response();
-//
-//        $accountVerify = $_POST['account-verify'];
-//        $response = User::verifyUserAccount($accountVerify);
-
->>>>>>> f7e64553de84fbe84d24f6128abff62036bf344d
 
     }
 
 	if ($type == "sign-in"){
 
-<<<<<<< HEAD
-=======
-//        $response = new Response();
-
->>>>>>> f7e64553de84fbe84d24f6128abff62036bf344d
         ### INPUTS
         $strUsername = strtolower(addslashes($_POST['username']));
         $strPassword = addslashes($_POST['password']);
 
         $user = User::getUserWithCredentials($strUsername, $strPassword);
-<<<<<<< HEAD
-=======
-
-        $response = new Response();
-        $t = new Translate();
 
         if ($user == null) {
 
-            $response->status = 2;
-            $response->type = "error";
-            $response->title = "Erro";
-            $response->description = "Nome de usuário ou senha incorretos";
-
-        }else{
-
-            if ($user->activated == false){
-
-                $response->status = 2;
-                $response->type = "error";
-                $response->title = "Erro";
-                $response->description = "Verifique seu e-mail para efetuar a ativação da sua conta.";
-
-            }else{
-
-                //Inicia a sessao
-                session_start();
-                $_SESSION['USER'] = $user;
-
-//                Audit::insertAudit(['userId' => $user->id, 'actionDesc' => 'Efetuou login']);
-//
-//                Mail::sendMailUserLoggedIn($user->email, $user->username, $user);
-
-                $response->status = 1;
-                $response->type = "success";
-                $response->title = "Sucesso";
-                $response->description = "Login efetuado com sucesso";
-
-                $response->user = $user;
-            }
-
-        }
-
->>>>>>> f7e64553de84fbe84d24f6128abff62036bf344d
-
-        if ($user == null) {
-
-<<<<<<< HEAD
             $response = new Response(["status" => "2", "type" => "danger", "title" => $t->{"Erro"}, "description" => $t->{"Nome de usuário ou senha incorretos"}]);
 
         }else{
@@ -134,9 +63,6 @@
         echo json_encode($response, JSON_NUMERIC_CHECK);
 
 	}else if($type == "sign-up"){
-=======
-//        $response = new Response();
->>>>>>> f7e64553de84fbe84d24f6128abff62036bf344d
 
         ### INPUTS
         $registry = ($_POST['registry']);
@@ -145,7 +71,6 @@
         $strEmail = strtolower(addslashes($_POST['email']));
         $role = ($_POST['role']);
 
-<<<<<<< HEAD
         //TODO: alterar para combos com países e idiomas possíveis
         $languageId = 1;
         $countryId = 1;
@@ -193,38 +118,10 @@
 
 	}else if($type == "forgot-password"){
 
-=======
-//        //TODO: alterar para combos com países e idiomas possíveis
-//        $languageId = 1;
-//        $countryId = 1;
-//
-//        $roleId = null;
-//
-//        switch ($role) {
-//            case "customer":
-//                $roleId = 1;
-//                break;
-//            case "provider":
-//                $roleId = 2;
-//                break;
-//            default:
-//                $roleId = 1; //usuário padrão é o cliente. Admin não é cadastrável
-//                break;
-//        }
-//
-//        //Programacao
-//        $DB = fnDBConn();
-//        $response = User::insertUser($strUsername, $strPassword, $strEmail, $countryId, $languageId, $roleId);
-
-	}else if($type == "forgot-password"){
-
-//        $response = new Response();
->>>>>>> f7e64553de84fbe84d24f6128abff62036bf344d
 
         ### INPUTS
         $strEmail = strtolower(addslashes($_POST['email']));
 
-<<<<<<< HEAD
         $user = User::find("email = '$strEmail'");
 
         if ($user->email == null){
@@ -248,10 +145,4 @@
 
         echo json_encode($response, JSON_NUMERIC_CHECK);
 	}
-=======
-//        $response = User::sendRecoveryMail($strEmail);
-	}
-
-    echo json_encode($response, JSON_NUMERIC_CHECK);
->>>>>>> f7e64553de84fbe84d24f6128abff62036bf344d
 ?>
