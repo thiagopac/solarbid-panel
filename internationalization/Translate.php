@@ -19,7 +19,16 @@ class Translate {
 			$this->lang = "pt-BR"; //pt-BR é o idioma padrão
 		}
 
-		$this->_= json_decode(file_get_contents('./internationalization/'.$this->lang.'.json'), true);
+
+        $fileExists = file_exists("../../internationalization/'.$this->lang.'.json");
+
+		if ($fileExists == true){
+            $this->_= json_decode(file_get_contents('../../internationalization/'.$this->lang.'.json'), true);
+		}else{
+            $this->_= json_decode(file_get_contents('../../../internationalization/'.$this->lang.'.json'), true);
+		}
+
+
 	}
 
 	function __get($text) {
