@@ -1,9 +1,6 @@
 <?php
 
 require_once('../../lib/config.php');
-require_once('Audit.php');
-require_once('Mail.php');
-require_once('Response.php');
 require_once('../../internationalization/Translate.php');
 
 class User {
@@ -22,7 +19,7 @@ class User {
     public $activated;
 
 	//construtor da classe
-	public function __construct(array $array = []){
+	public function __construct($array = []){
 
 		//se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
 		if (!empty($array)) {
@@ -39,7 +36,7 @@ class User {
             $this->mail_notification = json_decode($array['mail_notification']);
             $this->activated = $array['activated'];
 		}
-  }
+    }
 
 	public function __destruct(){
 

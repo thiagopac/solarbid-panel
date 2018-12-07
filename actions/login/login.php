@@ -2,6 +2,10 @@
     header('Content-type:application/json;charset=utf-8'); //header('Content-type:text/html;charset=utf-8');
 
 	require_once('../../models/User.php');
+    require_once('../../models/Audit.php');
+    require_once('../../models/LogUser.php');
+    require_once('../../models/Mail.php');
+    require_once('../../models/Response.php');
     require_once('../../internationalization/Translate.php');
 
 	if(isset($_POST['type']) && !empty($_POST['type'])) {
@@ -10,19 +14,17 @@
 
     $t = new Translate();
 
+//    var_dump(Audit::find("id = 1"));
+
 	//se estiver verificando a nova conta
     if(isset($_POST['account-activate']) && !empty($_POST['account-activate'])) {
 
         $accountActivate = $_POST['account-activate'];
         $userActivated = User::activateUserAccount($accountActivate);
 
-//        var_dump($userActivated);
-//        exit;
-
         if ($userActivated->activated == true){
 
-//            Audit::insertAudit(["user_id" => $affectedUser->id, "action_desc" => "Ativou a conta"]);
-
+            Audit::insertAudit($userActivated->id, "Ativou a conta");
             Mail::sendMailUserAccountActivated($userActivated->email, $userActivated->username);
 
             $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Sua conta foi verificada com sucesso!"}]);
@@ -54,8 +56,10 @@
                 session_start();
                 $_SESSION['USER'] = $user; //$_SESSION['USER']->username;
 
-//                Audit::insertAudit(["user_id" => $affectedUser->id, "action_desc" => "Efetuou login", "ip" => addslashes($_SERVER['REMOTE_ADDR'])]);
-                $sent = Mail::sendMailUserLoggedIn($user->email, $user->username, $user);
+                Audit::insertAudit($user->id, "Efetuou login");
+                LogUser::addUserLog($user->id, "Efetuou login na plataforma");
+                Mail::sendMailUserLoggedIn($user->email, $user->username, $user);
+
                 $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Login efetuado com sucesso"}]);
             }
         }
@@ -100,7 +104,7 @@
 
             if ($registered != null){
 
-//                Audit::insertAudit(["user_id" => $RESULT[1], "action_desc" => "Se cadastrou"]);
+                Audit::insertAudit($registered->id,  "Se cadastrou");
 
                 Mail::sendMailActivateAccountCreation($registered->email, $registered->username, sha1(md5($registered->id)));
 

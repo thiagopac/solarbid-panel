@@ -8,8 +8,10 @@ class Audit {
 	public $action_desc;
 	public $created_at;
 
+	protected static $table = "audit";
+
 	//construtor da classe
-	public function __construct(array $array = []){
+	public function __construct($array = []){
 
 		//se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
 		if (!empty($array)) {
@@ -30,7 +32,7 @@ class Audit {
         $db = fnDBConn();
 
         $class = get_called_class();
-        $table = (new $class())->table;
+        $table = $class::$table;
         $sql = 'SELECT * FROM ' . (is_null($table) ? strtolower($class) : $table);
         $sql .= ($filter !== '') ? " WHERE {$filter}" : "";
         $sql .= ($limit > 0) ? " LIMIT {$limit}" : "";
@@ -42,7 +44,7 @@ class Audit {
         $arr = [];
 
         foreach($result as $key => $row){
-            $obj = new Audit($row);
+            $obj = new $class($row);
             array_push($arr, $obj);
         }
 
@@ -54,13 +56,13 @@ class Audit {
         $db = fnDBConn();
 
         $class = get_called_class();
-        $table = (new $class())->table;
+        $table = $class::$table;
         $sql = 'SELECT * FROM ' . (is_null($table) ? strtolower($class) : $table);
         $sql .= " WHERE {$parameter} ;";
 
         $result = fnDB_DO_SELECT($db,$sql);
 
-        $obj = new Audit($result);
+        $obj = new $class($result);
 
         return $obj;
     }
@@ -71,16 +73,19 @@ class Audit {
 
         $cols = array();
 
+        $class = get_called_class();
+        $table = $class::$table;
+
         foreach($content as $key=>$val) {
             $cols[] = "$key = '$val'";
         }
 
         if (isset($content[id])) {
-            $sql = "UPDATE audit SET ".implode(', ', $cols)." WHERE id = $content[id];";
+            $sql = "UPDATE $table SET ".implode(', ', $cols)." WHERE id = $content[id];";
 
         } else {
             $sql = sprintf(
-                'INSERT INTO audit (%s) VALUES ("%s")',
+                'INSERT INTO '.$table.' (%s) VALUES ("%s")',
                 implode(',',array_keys($content)),
                 implode('","',array_values($content))
             );
@@ -95,44 +100,10 @@ class Audit {
         return $execute;
     }
 
-    public static function insertAudit($param){
-        $DB = fnDBConn();
-
-        $user_id = "";
-        $ip = "";
-        $action_desc = "";
-
-        //tratamento para aceitar objetos ou arrays como parâmetro
-        if ($param->userId != null){
-            $user_id = $param->user_id;
-        }else{
-            $user_id = $param["user_id"];
-        }
-
-        if ($param->actionDesc != null){
-            $action_desc = addslashes($param->action_desc);
-        }else{
-            $action_desc = $param["action_desc"];
-        }
-
+    public static function insertAudit(int $user_id, string $action_desc){
         $ip = addslashes($_SERVER['REMOTE_ADDR']);
-
-
-        $SQL = "INSERT INTO AUDIT
-					(USER_ID,
-					IP,
-					ACTION_DESC)
-				VALUES
-                        ('$user_id',
-					'$ip',
-					'$action_desc')";
-
-        $RET = fnDB_DO_EXEC($DB,$SQL);
-
-        // $paramUser->id = $RET[1]; //esse array retorna na posição 0 o número de linhas afetadas pelo update e na posição 1 o id do regitro inserido
-
-        return $RET;
+        $content = array("user_id" => $user_id, "action_desc" => $action_desc, "ip" => $ip);
+        self::save($content);
     }
-
 }
 ?>
