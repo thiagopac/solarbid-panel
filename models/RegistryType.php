@@ -1,22 +1,17 @@
 <?php
 
-class LogUser {
+class RegistryType {
 
 	public $id;
     public $description;
-    public $created_at;
-	public $user_id;
 
-    protected static $table = "log_user";
+    protected static $table = "registry_type";
 
-	public function __construct($array = []){
+	public function __construct($array){
 
 		if (!empty($array)) {
-
 			$this->id = $array['id'];
             $this->description = $array['description'];
-			$this->created_at = $array['created_at'];
-            $this->user_id = $array['user_id'];
 		}
   }
 
@@ -95,12 +90,6 @@ class LogUser {
         $execute = fnDB_DO_EXEC($db,$sql);
 
         return $execute;
-    }
-
-    public static function addUserLog(int $user_id, string $description){
-        $ip = addslashes($_SERVER['REMOTE_ADDR']);
-        $content = array("user_id" => $user_id, "description" => $description);//, "ip" => $ip); ADICIONAR IP NA TABELA DE USER LOG
-        self::save($content);
     }
 
 }

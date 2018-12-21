@@ -10,10 +10,8 @@ class Audit {
 
 	protected static $table = "audit";
 
-	//construtor da classe
 	public function __construct($array = []){
 
-		//se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
 		if (!empty($array)) {
 			$this->id = $array['id'];
             $this->user_id = $array['user_id'];

@@ -18,10 +18,10 @@ class User {
     public $mail_notification;
     public $activated;
 
-	//construtor da classe
+    protected static $table = "user";
+
 	public function __construct($array = []){
 
-		//se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
 		if (!empty($array)) {
 			$this->id = $array['id'];
 			$this->username = $array['username'];
@@ -118,7 +118,7 @@ class User {
         return $existing == null ? false : true;
     }
 
-    public static function getUserWithCredentials($username, $password) {
+    public static function getUserByUsernameAndPassword($username, $password) {
 
         $user = self::find("username = '".$username."'");
         $access = password_verify($password, $user->password); //password é um hash possível do que foi recebido
@@ -126,13 +126,13 @@ class User {
         return $access == true ? $user : null;
     }
 
-	public static function getUserWithId($id){
+	public static function getUserById($id){
 
 		$user = self::find("id = {$id}");
 		return $user;
 	}
 
-    public static function getUserWithHashedId($hashedId){
+    public static function getUserByHashedId($hashedId){
 
         $user = self::find("SHA1(MD5(id)) = '".$hashedId."'");
 
@@ -161,7 +161,7 @@ class User {
 
         $hpassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $affectedUser = User::getUserWithHashedId($hashedId);
+        $affectedUser = User::getUserByHashedId($hashedId);
 
         $content = array("password" => $hpassword, "id" => $affectedUser->id);
 
@@ -172,13 +172,13 @@ class User {
 
     public static function activateUserAccount($hashedId){
 
-        $affectedUser = User::getUserWithHashedId($hashedId);
+        $affectedUser = User::getUserByHashedId($hashedId);
 
         $content = array("id" => $affectedUser->id, "activated" => true);
 
         self::save($content);
 
-        return User::getUserWithHashedId($hashedId);
+        return User::getUserByHashedId($hashedId);
     }
 
 }

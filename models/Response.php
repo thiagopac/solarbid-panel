@@ -1,17 +1,13 @@
 <?php
 
-class Response
-{
+class Response {
 
     public $status;
     public $type;
     public $title;
     public $description;
 
-    //construtor da classe
-    public function __construct(array $array = [])
-    {
-        //se o array não estiver vazio, inicializar as propriedades do objeto com os valores do array
+    public function __construct(array $array = []){
         if (!empty($array)) {
             $this->status = $array['status'];
             $this->type = $array['type'];

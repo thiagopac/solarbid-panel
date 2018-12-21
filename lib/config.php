@@ -49,7 +49,7 @@
 	}
 
 //VARIAVEIS
-	$TITULO = "Painel";
+	$TITULO = "Solarbid";
 
 //INCLUDES
 	include('funcoes.php');

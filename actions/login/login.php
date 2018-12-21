@@ -42,7 +42,7 @@
         $strUsername = strtolower(addslashes($_POST['username']));
         $strPassword = addslashes($_POST['password']);
 
-        $user = User::getUserWithCredentials($strUsername, $strPassword);
+        $user = User::getUserByUsernameAndPassword($strUsername, $strPassword);
 
         if ($user == null) {
 
