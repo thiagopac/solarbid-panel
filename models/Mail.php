@@ -58,7 +58,7 @@ class Mail
         }
 
         $t = new Translate();
-        $body = file_get_contents('../../templates/mail/pt-BR/loggedin.html');
+        $body = file_get_contents('../../templates/mail/pt-BR/logged-in.html');
         $body = str_replace('{name}', $user->username, $body);
 
         $mail = SimpleMail::make()
@@ -77,18 +77,23 @@ class Mail
         return $send;
     }
 
-    public static function sendMailActivateAccountCreation($toEmail, $toName, $accountActivate){
+    public static function sendMailActivateAccountCreation($user){
 
         $t = new Translate();
 
+        $t = new Translate();
+        $body = file_get_contents('../../templates/mail/pt-BR/account-created.html');
+        $body = str_replace('{name}', $user->username, $body);
+        $body = str_replace('{activation}', sha1(md5($user->id)), $body);
+
         $mail = SimpleMail::make()
-            ->setTo($toEmail, $toName)
+            ->setTo($user->email, $user->username)
             ->setSubject($t->{"Bem-vindo(a) ao Solarbid"})
             ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
             ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
-            ->setMessage('<p>Bem-vindo(a) ao Solarbid.<br/><br/>Voc&ecirc; est&aacute; recebendo este e-mail pois se cadastrou na plataforma Solarbid.</p><p>Para continuar o processo e ter acesso a nossas ferramentas, &eacute; necess&aacute;rio a verifica&ccedil;&atilde;o de sua conta, clicando no endere&ccedil;o abaixo ou copiando e colando o link na barra de endere&ccedil;os de seu navegador.</p><p><a href="http://localhost/solarbid/panel/login?account-activate='.$accountActivate.'">http://localhost/solarbid/panel/login?account-activate='.$accountActivate.'</a></p><p>Caso voc&ecirc; n&atilde;o tenha se cadastrado em nossa plataforma e tenha recebido esta mensagem por engano, por favor ignore este e-mail.</p>')
+            ->setMessage($body)
             ->setWrap(78);
         $send = $mail->send();
 

@@ -106,7 +106,7 @@
 
                 Audit::insertAudit($registered->id,  "Se cadastrou");
 
-                Mail::sendMailActivateAccountCreation($registered->email, $registered->username, sha1(md5($registered->id)));
+                Mail::sendMailActivateAccountCreation($registered);
 
                 $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Cadastro efetuado com sucesso. Verifique seu e-mail para efetuar a ativação da sua conta."}]);
             }else{
