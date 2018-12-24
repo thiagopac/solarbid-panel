@@ -25,16 +25,16 @@ class User {
 		if (!empty($array)) {
 			$this->id = $array['id'];
 			$this->username = $array['username'];
-            $this->password = $array['password'];
-            $this->email = $array['email'];
+      $this->password = $array['password'];
+      $this->email = $array['email'];
 			$this->created_at = $array['created_at'];
 			$this->updated_at = $array['updated_at'];
-            $this->role_id = $array['role_id'];
-            $this->country_id = $array['country_id'];
+      $this->role_id = $array['role_id'];
+      $this->country_id = $array['country_id'];
 			$this->language_id = $array['language_id'];
-            $this->registry_type_id = $array['registry_type_id'];
-            $this->mail_notification = json_decode($array['mail_notification']);
-            $this->activated = $array['activated'];
+      $this->registry_type_id = $array['registry_type_id'];
+      $this->mail_notification = json_decode($array['mail_notification']);
+      $this->activated = $array['activated'];
 		}
     }
 
@@ -128,16 +128,16 @@ class User {
 
 	public static function getUserById($id){
 
-		$user = self::find("id = {$id}");
-		return $user;
+			$user = self::find("id = {$id}");
+			return $user;
 	}
 
-    public static function getUserByHashedId($hashedId){
+  public static function getUserByHashedId($hashedId){
 
-        $user = self::find("SHA1(MD5(id)) = '".$hashedId."'");
+      $user = self::find("SHA1(MD5(id)) = '".$hashedId."'");
 
-        return $user;
-    }
+      return $user;
+  }
 
 	public static function insertUser($content){
 

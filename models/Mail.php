@@ -51,7 +51,7 @@ class Mail
         return $send;
     }
 
-    public static function sendMailUserLoggedIn($toEmail, $toName, $user){
+    public static function sendMailUserLoggedIn($user){
 
         if ($user->mail_notification->loggedIn == false){
             return false;
@@ -59,10 +59,10 @@ class Mail
 
         $t = new Translate();
         $body = file_get_contents('../../templates/mail/pt-BR/loggedin.html');
-        $body = str_replace('{name}', $toName, $body);
+        $body = str_replace('{name}', $user->username, $body);
 
         $mail = SimpleMail::make()
-            ->setTo($toEmail, $toName)
+            ->setTo($user->email, $user->username)
             ->setSubject($t->{"Você efetuou login através de um dispositivo"})
             ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
             ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
