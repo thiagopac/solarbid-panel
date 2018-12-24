@@ -5,6 +5,9 @@
     ### INCLUDE
     require_once('../../models/User.php');
     require_once('../../internationalization/Translate.php');
+    require_once('../../models/Audit.php');
+    require_once('../../models/Mail.php');
+    require_once('../../models/LogUser.php');
 
     $t = new Translate();
 
