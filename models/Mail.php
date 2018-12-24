@@ -110,12 +110,12 @@ class Mail
     public static function sendMailUserAccountActivated($user){
 
         $t = new Translate();
-        $body = file_get_contents('../../templates/mail/pt-BR/account-created.html');
+        $body = file_get_contents('../../templates/mail/pt-BR/account-activated.html');
         $body = str_replace('{name}', $user->username, $body);
 
         $mail = SimpleMail::make()
             ->setTo($user->email, $user->username)
-            ->setSubject($t->{"Sua conta foi verificada"})
+            ->setSubject($t->{"Sua conta foi ativada"})
             ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
             ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
