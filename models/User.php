@@ -153,7 +153,7 @@ class User {
 
         $user = self::find("email = '$email'");
 
-        return Mail::sendMailPasswordRedefinition($user->email, $user->username, sha1(md5($user->id)));
+        return Mail::sendMailPasswordRedefinition($user);
 	}
 
     public static function resetUserPassword($password, $hashedId){

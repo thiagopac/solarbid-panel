@@ -7,22 +7,24 @@ require_once('../../internationalization/Translate.php');
 class Mail
 {
 
-    public static function sendMailPasswordHasChanged($toEmail, $toName, $user){
+    public static function sendMailPasswordHasChanged($user){
 
         if ($user->mail_notification->passwordChanged == false){
             return false;
         }
 
         $t = new Translate();
+        $body = file_get_contents('../../templates/mail/pt-BR/password-changed.html');
+        $body = str_replace('{name}', $user->username, $body);
 
         $mail = SimpleMail::make()
-            ->setTo($toEmail, $toName)
+            ->setTo($user->email, $user->username)
             ->setSubject($t->{"Sua senha foi alterada"})
             ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
             ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
-            ->setMessage($t->{'<p>Esta &eacute; uma mensagem de seguran&ccedil;a. Voc&ecirc; alterou sua senha. Caso voc&ecirc; n&atilde;o tenha efetuado a troca de senha, por favor entre em contato conosco atrav&eacute;s do endere&ccedil;o <a href="mailto:contato@solarbid.com.br">contato@solarbid.com.br</a></p>'})
+            ->setMessage($t->{$body})
             ->setWrap(78);
         $send = $mail->send();
 
@@ -31,18 +33,21 @@ class Mail
         return $send;
     }
 
-    public static function sendMailPasswordRedefinition($toEmail, $toName, $validate){
+    public static function sendMailPasswordRedefinition($user){
 
         $t = new Translate();
+        $body = file_get_contents('../../templates/mail/pt-BR/password-changed.html');
+        $body = str_replace('{name}', $user->username, $body);
+        $body = str_replace('{redefinition}', sha1(md5($user->id)), $body);
 
         $mail = SimpleMail::make()
-            ->setTo($toEmail, $toName)
+            ->setTo($user->email, $user->username)
             ->setSubject($t->{"Redefinição de senha"})
             ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
             ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
-            ->setMessage('<p>Voc&ecirc; est&aacute; recebendo este e-mail devido a sua solicita&ccedil;&atilde;o de redefini&ccedil;&atilde;o de senha.<br/><br/>Para gerar uma nova senha, por favor acesse a seguinte URL:</p><p><a href="http://localhost/solarbid/panel/reset-password?validate='.$validate.'">http://localhost/solarbid/panel/reset-password?validate='.$validate.'</a></p><p>Caso voc&ecirc; n&atilde;o tenha requisitado a redefini&ccedil;&atilde;o de senha, apenas ignore este e-mail.</p>')
+            ->setMessage($body)
             ->setWrap(78);
         $send = $mail->send();
 
@@ -102,18 +107,20 @@ class Mail
         return $send;
     }
 
-    public static function sendMailUserAccountActivated($toEmail, $toName){
+    public static function sendMailUserAccountActivated($user){
 
         $t = new Translate();
+        $body = file_get_contents('../../templates/mail/pt-BR/account-created.html');
+        $body = str_replace('{name}', $user->username, $body);
 
         $mail = SimpleMail::make()
-            ->setTo($toEmail, $toName)
+            ->setTo($user->email, $user->username)
             ->setSubject($t->{"Sua conta foi verificada"})
             ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
             ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
-            ->setMessage($t->{'<p>Sua conta Solarbid foi verificada com sucesso! Acesse o site e continue seu cadastro.</p>'})
+            ->setMessage($t->{$body})
             ->setWrap(78);
         $send = $mail->send();
 

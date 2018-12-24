@@ -25,7 +25,7 @@
         if ($userActivated->activated == true){
 
             Audit::insertAudit($userActivated->id, "Ativou a conta");
-            Mail::sendMailUserAccountActivated($userActivated->email, $userActivated->username);
+            Mail::sendMailUserAccountActivated($userActivated);
 
             $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Sua conta foi verificada com sucesso!"}]);
         }else{
