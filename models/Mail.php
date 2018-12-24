@@ -36,7 +36,7 @@ class Mail
     public static function sendMailPasswordRedefinition($user){
 
         $t = new Translate();
-        $body = file_get_contents('../../templates/mail/pt-BR/password-changed.html');
+        $body = file_get_contents('../../templates/mail/pt-BR/password-redefinition.html');
         $body = str_replace('{name}', $user->username, $body);
         $body = str_replace('{redefinition}', sha1(md5($user->id)), $body);
 
