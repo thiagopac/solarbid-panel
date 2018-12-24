@@ -8,6 +8,7 @@
     require_once('../../models/Audit.php');
     require_once('../../models/Mail.php');
     require_once('../../models/LogUser.php');
+    require_once('../../models/Response.php');
 
     $t = new Translate();
 
