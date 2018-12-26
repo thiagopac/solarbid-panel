@@ -3,9 +3,37 @@
 require_once('../../lib/config.php');
 require_once('../../lib/class.simple_mail.php');
 require_once('../../internationalization/Translate.php');
+require_once('../../lib/funcoes.php');
 
-class Mail
-{
+class Mail {
+
+    public static function sendMailUserLoggedIn($user, $audit){
+
+        if ($user->mail_notification->loggedIn == false){
+            return false;
+        }
+
+        $t = new Translate();
+        $body = file_get_contents('../../templates/mail/pt-BR/logged-in.html');
+        $body = str_replace('{name}', $user->username, $body);
+        $body = str_replace('{ip}', $audit->ip, $body);
+        $body = str_replace('{date}', fnDateYMDHHIISStoDMYHHIISS($audit->created_at), $body);
+
+        $mail = SimpleMail::make()
+            ->setTo($user->email, $user->username)
+            ->setSubject($t->{"Você efetuou login através de um dispositivo"})
+            ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
+            ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
+            ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
+            ->setHtml()
+            ->setMessage($body)
+            ->setWrap(78);
+        $send = $mail->send();
+
+        //echo $mail->debug();
+
+        return $send;
+    }
 
     public static function sendMailPasswordHasChanged($user){
 
@@ -43,32 +71,6 @@ class Mail
         $mail = SimpleMail::make()
             ->setTo($user->email, $user->username)
             ->setSubject($t->{"Redefinição de senha"})
-            ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
-            ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
-            ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
-            ->setHtml()
-            ->setMessage($body)
-            ->setWrap(78);
-        $send = $mail->send();
-
-        //echo $mail->debug();
-
-        return $send;
-    }
-
-    public static function sendMailUserLoggedIn($user){
-
-        if ($user->mail_notification->loggedIn == false){
-            return false;
-        }
-
-        $t = new Translate();
-        $body = file_get_contents('../../templates/mail/pt-BR/logged-in.html');
-        $body = str_replace('{name}', $user->username, $body);
-
-        $mail = SimpleMail::make()
-            ->setTo($user->email, $user->username)
-            ->setSubject($t->{"Você efetuou login através de um dispositivo"})
             ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
             ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())

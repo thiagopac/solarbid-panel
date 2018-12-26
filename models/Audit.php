@@ -101,7 +101,7 @@ class Audit {
     public static function insertAudit(int $user_id, string $action_desc){
         $ip = addslashes($_SERVER['REMOTE_ADDR']);
         $content = array("user_id" => $user_id, "action_desc" => $action_desc, "ip" => $ip);
-        self::save($content);
+        return self::save($content);
     }
 }
 ?>

@@ -16,14 +16,25 @@ function fnLogText($strMessage, $booDie = false){
 
 }
 
-function fnDateVisualToDB($dateVisual){
-	$dateDB = date("Y-m-d", strtotime($dateVisual));
-	return $dateDB;
+function fnDateDMYtoYMD($param){
+	$result = date("Y-m-d", strtotime($param));
+	return $result;
 }
 
-function fnDateDBtoVisual($dateDB){
-	$dateVisual = date("m/d/Y", strtotime($dateDB));
-	return $dateVisual;
+function fnDateYMDtoDMY($param){
+	$result = date("d/m/Y", strtotime($param));
+	return $result;
+}
+
+
+function fnDateDMYHHIISStoYMDHHIISS($param){
+	$result = date("Y-m-d H:i:s", strtotime($param));
+	return $result;
+}
+
+function fnDateYMDHHIISStoDMYHHIISS($param){
+	$result = date("d/m/Y H:i:s", strtotime($param));
+	return $result;
 }
 
 function fnDBConn(){

@@ -56,9 +56,12 @@
                 session_start();
                 $_SESSION['USER'] = $user; //$_SESSION['USER']->username;
 
-                Audit::insertAudit($user->id, "Efetuou login");
+                $inserted = Audit::insertAudit($user->id, "Efetuou login");
                 LogUser::addUserLog($user->id, "Efetuou login na plataforma");
-                Mail::sendMailUserLoggedIn($user);
+
+                $audit = Audit::find("id = '".$inserted[1]."'"); //inserted[1] tem o id da audit inserida
+
+                Mail::sendMailUserLoggedIn($user, $audit);
 
                 $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Login efetuado com sucesso"}]);
             }
