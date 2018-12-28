@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Dez-2018 às 20:02
+-- Tempo de geração: 28/12/2018 às 17:27
 -- Versão do servidor: 5.6.37
--- PHP Version: 7.1.8
+-- Versão do PHP: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `solarbid_panel`
+-- Banco de dados: `solarbid_panel`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `admin`
+-- Estrutura para tabela `admin`
 --
 
 CREATE TABLE IF NOT EXISTS `admin` (
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `audit`
+-- Estrutura para tabela `audit`
 --
 
 CREATE TABLE IF NOT EXISTS `audit` (
@@ -44,12 +44,49 @@ CREATE TABLE IF NOT EXISTS `audit` (
   `action_desc` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `audit`
+--
+
+INSERT INTO `audit` (`id`, `ip`, `action_desc`, `created_at`, `user_id`) VALUES
+(1, '::1', 'Efetuou login', '2018-12-21 13:46:28', 1),
+(2, '::1', 'Efetuou login', '2018-12-21 16:51:07', 1),
+(3, '::1', 'Efetuou login', '2018-12-21 17:12:18', 1),
+(4, '::1', 'Efetuou login', '2018-12-26 13:00:19', 1),
+(5, '::1', 'Efetuou login', '2018-12-26 13:35:51', 1),
+(6, '::1', 'Efetuou login', '2018-12-26 16:40:00', 1),
+(7, '::1', 'Efetuou login', '2018-12-26 16:59:39', 1),
+(8, '::1', 'Efetuou login', '2018-12-28 16:07:41', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `country`
+-- Estrutura para tabela `core`
+--
+
+CREATE TABLE IF NOT EXISTS `core` (
+  `id` int(11) NOT NULL,
+  `version` char(10) NOT NULL DEFAULT '0',
+  `domain` varchar(65) NOT NULL,
+  `contact` varchar(80) NOT NULL,
+  `do_not_reply` varchar(65) NOT NULL,
+  `currency` varchar(20) NOT NULL DEFAULT 'BRL',
+  `language` varchar(10) NOT NULL DEFAULT 'pt-BR'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `core`
+--
+
+INSERT INTO `core` (`id`, `version`, `domain`, `contact`, `do_not_reply`, `currency`, `language`) VALUES
+(1, '0.0.1', 'http://localhost/', 'solarbid@ownergy.com.br', 'naoresponda@solarbid.com.br', 'BRL', 'pt-BR');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `country`
 --
 
 CREATE TABLE IF NOT EXISTS `country` (
@@ -58,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `country` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `country`
+-- Fazendo dump de dados para tabela `country`
 --
 
 INSERT INTO `country` (`id`, `description`) VALUES
@@ -67,7 +104,7 @@ INSERT INTO `country` (`id`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `customer`
+-- Estrutura para tabela `customer`
 --
 
 CREATE TABLE IF NOT EXISTS `customer` (
@@ -79,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `fisical_person`
+-- Estrutura para tabela `fisical_person`
 --
 
 CREATE TABLE IF NOT EXISTS `fisical_person` (
@@ -94,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `fisical_person` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `integrator`
+-- Estrutura para tabela `integrator`
 --
 
 CREATE TABLE IF NOT EXISTS `integrator` (
@@ -106,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `integrator` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `language`
+-- Estrutura para tabela `language`
 --
 
 CREATE TABLE IF NOT EXISTS `language` (
@@ -116,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `language` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `language`
+-- Fazendo dump de dados para tabela `language`
 --
 
 INSERT INTO `language` (`id`, `description`, `code`) VALUES
@@ -125,7 +162,7 @@ INSERT INTO `language` (`id`, `description`, `code`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `legal_person`
+-- Estrutura para tabela `legal_person`
 --
 
 CREATE TABLE IF NOT EXISTS `legal_person` (
@@ -138,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `legal_person` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `log_application`
+-- Estrutura para tabela `log_application`
 --
 
 CREATE TABLE IF NOT EXISTS `log_application` (
@@ -150,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `log_application` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `log_server`
+-- Estrutura para tabela `log_server`
 --
 
 CREATE TABLE IF NOT EXISTS `log_server` (
@@ -162,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `log_server` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `log_user`
+-- Estrutura para tabela `log_user`
 --
 
 CREATE TABLE IF NOT EXISTS `log_user` (
@@ -170,12 +207,26 @@ CREATE TABLE IF NOT EXISTS `log_user` (
   `description` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `log_user`
+--
+
+INSERT INTO `log_user` (`id`, `description`, `created_at`, `user_id`) VALUES
+(1, 'Efetuou login na plataforma', '2018-12-21 13:46:28', 1),
+(2, 'Efetuou login na plataforma', '2018-12-21 16:51:07', 1),
+(3, 'Efetuou login na plataforma', '2018-12-21 17:12:18', 1),
+(4, 'Efetuou login na plataforma', '2018-12-26 13:00:19', 1),
+(5, 'Efetuou login na plataforma', '2018-12-26 13:35:51', 1),
+(6, 'Efetuou login na plataforma', '2018-12-26 16:40:00', 1),
+(7, 'Efetuou login na plataforma', '2018-12-26 16:59:39', 1),
+(8, 'Efetuou login na plataforma', '2018-12-28 16:07:41', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `registry_type`
+-- Estrutura para tabela `registry_type`
 --
 
 CREATE TABLE IF NOT EXISTS `registry_type` (
@@ -184,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `registry_type` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `registry_type`
+-- Fazendo dump de dados para tabela `registry_type`
 --
 
 INSERT INTO `registry_type` (`id`, `description`) VALUES
@@ -194,7 +245,7 @@ INSERT INTO `registry_type` (`id`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `role`
+-- Estrutura para tabela `role`
 --
 
 CREATE TABLE IF NOT EXISTS `role` (
@@ -203,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `role`
+-- Fazendo dump de dados para tabela `role`
 --
 
 INSERT INTO `role` (`id`, `description`) VALUES
@@ -214,7 +265,7 @@ INSERT INTO `role` (`id`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Estrutura para tabela `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -233,105 +284,111 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `user`
+-- Fazendo dump de dados para tabela `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `created_at`, `updated_at`, `role_id`, `country_id`, `language_id`, `registry_type_id`, `mail_notification`, `activated`) VALUES
-(1, 'thiago', '$2y$10$Ojpb8dZJNNpePUGp1nxbpu5JyDbI2JNTGFz7ynXTfpB68dVaNuSrm', 'thiagopac@gmail.com', '2018-11-29 17:35:20', '2018-12-03 19:58:00', 1, 1, 1, 1, '{"loggedIn":true,"passwordChanged":true}', 1),
+(1, 'thiago', '$2y$10$Ojpb8dZJNNpePUGp1nxbpu5JyDbI2JNTGFz7ynXTfpB68dVaNuSrm', 'thiagopac@gmail.com', '2018-11-29 17:35:20', '2018-12-26 13:00:04', 1, 1, 1, 1, '{"loggedIn":true,"passwordChanged":false}', 1),
 (2, 'cliente', '$2y$10$Z7LiFGwms5bxVZWllxgR2er56XcM4EGiz4kycK7XcGLtZ97eMjO4O', 'cliente@cliente.com.br', '2018-12-03 19:15:59', '2018-12-03 19:28:54', 2, 1, 1, 1, '{"loggedIn":true,"passwordChanged":true}', 1),
 (3, 'empresa', '$2y$10$EvhRtf02r1JWtDVp4QxyOeRdyvrVbKt4z6rgVbbsdgNIZ71XNdsvG', 'empresa@empresa.com.br', '2018-12-03 19:28:31', '2018-12-03 19:29:32', 3, 1, 1, 2, '{"loggedIn":true,"passwordChanged":true}', 1);
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `admin`
+-- Índices de tabela `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_admin_user1_idx` (`user_id`);
 
 --
--- Indexes for table `audit`
+-- Índices de tabela `audit`
 --
 ALTER TABLE `audit`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_audit_user1_idx` (`user_id`);
 
 --
--- Indexes for table `country`
+-- Índices de tabela `core`
+--
+ALTER TABLE `core`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `country`
 --
 ALTER TABLE `country`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customer`
+-- Índices de tabela `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_customer_user1_idx` (`user_id`);
 
 --
--- Indexes for table `fisical_person`
+-- Índices de tabela `fisical_person`
 --
 ALTER TABLE `fisical_person`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_fisical_person_user1_idx` (`user_id`);
 
 --
--- Indexes for table `integrator`
+-- Índices de tabela `integrator`
 --
 ALTER TABLE `integrator`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_provider_user1_idx` (`user_id`);
 
 --
--- Indexes for table `language`
+-- Índices de tabela `language`
 --
 ALTER TABLE `language`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `legal_person`
+-- Índices de tabela `legal_person`
 --
 ALTER TABLE `legal_person`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_legal_person_user1_idx` (`user_id`);
 
 --
--- Indexes for table `log_application`
+-- Índices de tabela `log_application`
 --
 ALTER TABLE `log_application`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `log_server`
+-- Índices de tabela `log_server`
 --
 ALTER TABLE `log_server`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `log_user`
+-- Índices de tabela `log_user`
 --
 ALTER TABLE `log_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_log_user_user1_idx` (`user_id`);
 
 --
--- Indexes for table `registry_type`
+-- Índices de tabela `registry_type`
 --
 ALTER TABLE `registry_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `role`
+-- Índices de tabela `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Índices de tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
@@ -341,127 +398,132 @@ ALTER TABLE `user`
   ADD KEY `fk_user_registry_type1_idx` (`registry_type_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT de tabela `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `audit`
+-- AUTO_INCREMENT de tabela `audit`
 --
 ALTER TABLE `audit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `country`
+-- AUTO_INCREMENT de tabela `core`
+--
+ALTER TABLE `core`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de tabela `country`
 --
 ALTER TABLE `country`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT de tabela `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `fisical_person`
+-- AUTO_INCREMENT de tabela `fisical_person`
 --
 ALTER TABLE `fisical_person`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `integrator`
+-- AUTO_INCREMENT de tabela `integrator`
 --
 ALTER TABLE `integrator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `language`
+-- AUTO_INCREMENT de tabela `language`
 --
 ALTER TABLE `language`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `legal_person`
+-- AUTO_INCREMENT de tabela `legal_person`
 --
 ALTER TABLE `legal_person`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `log_application`
+-- AUTO_INCREMENT de tabela `log_application`
 --
 ALTER TABLE `log_application`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `log_server`
+-- AUTO_INCREMENT de tabela `log_server`
 --
 ALTER TABLE `log_server`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `log_user`
+-- AUTO_INCREMENT de tabela `log_user`
 --
 ALTER TABLE `log_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `registry_type`
+-- AUTO_INCREMENT de tabela `registry_type`
 --
 ALTER TABLE `registry_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `role`
+-- AUTO_INCREMENT de tabela `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Limitadores para a tabela `admin`
+-- Restrições para tabelas `admin`
 --
 ALTER TABLE `admin`
   ADD CONSTRAINT `fk_admin_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `audit`
+-- Restrições para tabelas `audit`
 --
 ALTER TABLE `audit`
   ADD CONSTRAINT `fk_audit_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `customer`
+-- Restrições para tabelas `customer`
 --
 ALTER TABLE `customer`
   ADD CONSTRAINT `fk_customer_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `fisical_person`
+-- Restrições para tabelas `fisical_person`
 --
 ALTER TABLE `fisical_person`
   ADD CONSTRAINT `fk_fisical_person_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `integrator`
+-- Restrições para tabelas `integrator`
 --
 ALTER TABLE `integrator`
   ADD CONSTRAINT `fk_provider_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `legal_person`
+-- Restrições para tabelas `legal_person`
 --
 ALTER TABLE `legal_person`
   ADD CONSTRAINT `fk_legal_person_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `log_user`
+-- Restrições para tabelas `log_user`
 --
 ALTER TABLE `log_user`
   ADD CONSTRAINT `fk_log_user_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `user`
+-- Restrições para tabelas `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fk_user_country1` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,

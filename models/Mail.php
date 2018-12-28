@@ -4,6 +4,7 @@ require_once('../../lib/config.php');
 require_once('../../lib/class.simple_mail.php');
 require_once('../../internationalization/Translate.php');
 require_once('../../lib/funcoes.php');
+require_once('../../models/Core.php');
 
 class Mail {
 
@@ -18,12 +19,16 @@ class Mail {
         $body = str_replace('{name}', $user->username, $body);
         $body = str_replace('{ip}', $audit->ip, $body);
         $body = str_replace('{date}', fnDateYMDHHIISStoDMYHHIISS($audit->created_at), $body);
+        $body = str_replace('{reference}', sha1(md5($user->id)), $body);
+        $body = str_replace('{domain}', Core::$domain, $body);
+        $body = str_replace('{contact}', Core::$contact, $body);
+
 
         $mail = SimpleMail::make()
             ->setTo($user->email, $user->username)
             ->setSubject($t->{"Você efetuou login através de um dispositivo"})
-            ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
-            ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
+            ->setFrom(Core::$do_not_reply, 'Solarbid')
+            ->setReplyTo(Core::$do_not_reply, 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
             ->setMessage($body)
@@ -44,12 +49,14 @@ class Mail {
         $t = new Translate();
         $body = file_get_contents('../../templates/mail/pt-BR/password-changed.html');
         $body = str_replace('{name}', $user->username, $body);
+        $body = str_replace('{domain}', Core::$domain, $body);
+        $body = str_replace('{contact}', Core::$contact, $body);
 
         $mail = SimpleMail::make()
             ->setTo($user->email, $user->username)
             ->setSubject($t->{"Sua senha foi alterada"})
-            ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
-            ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
+            ->setFrom(Core::$do_not_reply, 'Solarbid')
+            ->setReplyTo(Core::$do_not_reply, 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
             ->setMessage($t->{$body})
@@ -67,12 +74,14 @@ class Mail {
         $body = file_get_contents('../../templates/mail/pt-BR/password-redefinition.html');
         $body = str_replace('{name}', $user->username, $body);
         $body = str_replace('{redefinition}', sha1(md5($user->id)), $body);
+        $body = str_replace('{domain}', Core::$domain, $body);
+        $body = str_replace('{contact}', Core::$contact, $body);
 
         $mail = SimpleMail::make()
             ->setTo($user->email, $user->username)
             ->setSubject($t->{"Redefinição de senha"})
-            ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
-            ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
+            ->setFrom(Core::$do_not_reply, 'Solarbid')
+            ->setReplyTo(Core::$do_not_reply, 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
             ->setMessage($body)
@@ -92,12 +101,14 @@ class Mail {
         $body = file_get_contents('../../templates/mail/pt-BR/account-created.html');
         $body = str_replace('{name}', $user->username, $body);
         $body = str_replace('{activation}', sha1(md5($user->id)), $body);
+        $body = str_replace('{domain}', Core::$domain, $body);
+        $body = str_replace('{contact}', Core::$contact, $body);
 
         $mail = SimpleMail::make()
             ->setTo($user->email, $user->username)
             ->setSubject($t->{"Bem-vindo(a) ao Solarbid"})
-            ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
-            ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
+            ->setFrom(Core::$do_not_reply, 'Solarbid')
+            ->setReplyTo(Core::$do_not_reply, 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
             ->setMessage($body)
@@ -114,12 +125,14 @@ class Mail {
         $t = new Translate();
         $body = file_get_contents('../../templates/mail/pt-BR/account-activated.html');
         $body = str_replace('{name}', $user->username, $body);
+        $body = str_replace('{domain}', Core::$domain, $body);
+        $body = str_replace('{contact}', Core::$contact, $body);
 
         $mail = SimpleMail::make()
             ->setTo($user->email, $user->username)
             ->setSubject($t->{"Sua conta foi ativada"})
-            ->setFrom('naoresponda@solarbid.com.br', 'Solarbid')
-            ->setReplyTo('naoresponda@solarbid.com.br', 'Solarbid')
+            ->setFrom(Core::$do_not_reply, 'Solarbid')
+            ->setReplyTo(Core::$do_not_reply, 'Solarbid')
             ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
             ->setHtml()
             ->setMessage($t->{$body})
