@@ -118,6 +118,12 @@ class User {
         return $existing == null ? false : true;
     }
 
+    public static function checkExistingEmail($email) {
+
+        $existing = self::all("email = '".$email."'");
+        return $existing == null ? false : true;
+    }
+
     public static function getUserByUsernameAndPassword($username, $password) {
 
         $user = self::find("username = '".$username."'");

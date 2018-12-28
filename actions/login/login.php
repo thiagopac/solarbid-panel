@@ -101,8 +101,9 @@
 
         //checar se username já não está em uso
         $existingUsername = User::checkExistingUsername($content[username]);
+        $existingEmail = User::checkExistingEmail($content[email]);
 
-        if ($existingUsername == false){
+        if ($existingUsername == false && $existingEmail == false){
             $registered = User::insertUser($content);
 
             if ($registered != null){
@@ -117,7 +118,12 @@
             }
 
         }else{
-            $response = new Response(["status" => "2", "type" => "danger", "title" => $t->{"Erro"}, "description" => $t->{"Este nome de usuário já está sendo utilizado. Por favor, escolha outro."}]);
+
+            if ($existingUsername == true){
+                $response = new Response(["status" => "2", "type" => "danger", "title" => $t->{"Erro"}, "description" => $t->{"Este nome de usuário já está sendo utilizado. Por favor, escolha outro."}]);
+            }else if($existingEmail == true){
+                $response = new Response(["status" => "2", "type" => "danger", "title" => $t->{"Erro"}, "description" => $t->{"Este e-mail já está sendo utilizado. Por favor, utilize outro e-mail ou clique em Esqueci minha senha."}]);
+            }
         }
 
         echo json_encode($response, JSON_NUMERIC_CHECK);
