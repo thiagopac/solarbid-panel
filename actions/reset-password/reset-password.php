@@ -31,8 +31,9 @@
         if ($user != null){
 
             Audit::insertAudit($user->id, "Alterou a senha");
-
             Mail::sendMailPasswordHasChanged($user);
+            LogUser::addUserLog($user->id, $t->{"Alteração de senha efetuada"});
+
             $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Senha alterada com sucesso! Você está sendo redirecionado para a página de login."}]);
         }else{
             $response = new Response(["status" => "2", "type" => "danger", "title" => $t->{"Erro"}, "description" => $t->{"Ocorreu um erro ao tentar alterar sua senha. Tente novamente mais tarde."}]);

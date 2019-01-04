@@ -26,6 +26,7 @@
 
             Audit::insertAudit($userActivated->id, "Ativou a conta");
             Mail::sendMailUserAccountActivated($userActivated);
+            LogUser::addUserLog($user->id, $t->{"Verificação de conta efetuada"});
 
             $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Sua conta foi verificada com sucesso!"}]);
         }else{
@@ -109,8 +110,8 @@
             if ($registered != null){
 
                 Audit::insertAudit($registered->id,  "Se cadastrou");
-
                 Mail::sendMailActivateAccountCreation($registered);
+                LogUser::addUserLog($user->id, $t->{"Se cadastrou na plataforma"});
 
                 $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Cadastro efetuado com sucesso. Verifique seu e-mail para efetuar a ativação da sua conta."}]);
             }else{
@@ -146,6 +147,8 @@
 
             if ($send) {
                 //enviado com sucesso
+
+                LogUser::addUserLog($user->id, $t->{"Requisitou e-mail para alteração de senha"});
 
                 $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"E-mail de redefinição de senha enviado com sucesso. Por favor, verifique sua caixa de e-mail e siga as instruções para redefinir sua senha."}]);
             } else {
