@@ -7,7 +7,6 @@ class Core {
 //    public $domain;
 //    public $contact;
 //    public $do_not_reply;
-//    public $currency;
 //    public $language;
 
 //    protected static $table = "core";
@@ -16,8 +15,7 @@ class Core {
     public static $domain = "http://localhost/";
     public static $contact = "contato@solarbid.com.br";
     public static $do_not_reply = "naoresponda@solarbid.com.br";
-    public static $currency = "BRL";
-    public static $language = "pt-BR";
+    public static $language = "pt_BR";
 
 //    public function __construct($array){
 //

@@ -12,8 +12,8 @@ class User {
 	public $created_at;
 	public $updated_at;
     public $role_id;
-	public $country_id;
-    public $language_id;
+	public $country;
+    public $language;
     public $registry_type_id;
     public $mail_notification;
     public $activated;
@@ -30,8 +30,8 @@ class User {
             $this->created_at = $array['created_at'];
             $this->updated_at = $array['updated_at'];
             $this->role_id = $array['role_id'];
-            $this->country_id = $array['country_id'];
-            $this->language_id = $array['language_id'];
+            $this->country = $array['country'];
+            $this->language = $array['language'];
             $this->registry_type_id = $array['registry_type_id'];
             $this->mail_notification = json_decode($array['mail_notification']);
             $this->activated = $array['activated'];

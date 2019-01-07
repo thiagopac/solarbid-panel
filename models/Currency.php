@@ -12,12 +12,12 @@ class Currency {
 	public function __construct($array){
 
 		if (!empty($array)) {
-			$this->id = $array['CURRENCY_ID'];
-			$this->code = $array['CURRENCY_CODE'];
-			$this->name = $array['CURRENCY_NAME'];
-			$this->symbol = $array['CURRENCY_SYMBOL'];
+			$this->id = $array['id'];
+			$this->code = $array['code'];
+			$this->name = $array['name'];
+			$this->symbol = $array['symbol'];
 		}
-  }
+  	}
 
 	public function __destruct(){
 
