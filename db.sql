@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/01/2019 às 17:51
+-- Tempo de geração: 07/01/2019 às 18:41
 -- Versão do servidor: 5.6.37
 -- Versão do PHP: 7.1.8
 
@@ -46,7 +46,14 @@ CREATE TABLE IF NOT EXISTS `auction` (
   `currency_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `auction`
+--
+
+INSERT INTO `auction` (`id`, `owner`, `winner`, `desired_value`, `currency_id`, `created_at`, `updated_at`) VALUES
+(1, 2, NULL, 2500.00, 1, '2019-01-07 18:39:06', '2019-01-07 18:40:05');
 
 -- --------------------------------------------------------
 
@@ -60,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `audit` (
   `action_desc` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Fazendo dump de dados para tabela `audit`
@@ -71,7 +78,8 @@ INSERT INTO `audit` (`id`, `ip`, `action_desc`, `created_at`, `user_id`) VALUES
 (2, '::1', 'Ativou a conta', '2018-12-28 19:40:53', 4),
 (3, '::1', 'Efetuou login', '2018-12-28 19:41:48', 4),
 (4, '::1', 'Ativou a conta', '2018-12-28 19:43:02', 4),
-(5, '::1', 'Alterou a senha', '2018-12-28 19:44:46', 4);
+(5, '::1', 'Alterou a senha', '2018-12-28 19:44:46', 4),
+(6, '::1', 'Efetuou login', '2019-01-07 18:21:31', 1);
 
 -- --------------------------------------------------------
 
@@ -85,7 +93,14 @@ CREATE TABLE IF NOT EXISTS `bid` (
   `bidder` int(11) NOT NULL,
   `auction_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'CURRENT_TIMESTAMP'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `bid`
+--
+
+INSERT INTO `bid` (`id`, `value`, `bidder`, `auction_id`, `created_at`) VALUES
+(1, 8750.00, 3, 1, '2019-01-07 18:40:45');
 
 -- --------------------------------------------------------
 
@@ -191,6 +206,7 @@ CREATE TABLE IF NOT EXISTS `legal_person` (
 CREATE TABLE IF NOT EXISTS `log_application` (
   `id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `type` varchar(10) DEFAULT 'info',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -203,6 +219,7 @@ CREATE TABLE IF NOT EXISTS `log_application` (
 CREATE TABLE IF NOT EXISTS `log_server` (
   `id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `type` varchar(10) DEFAULT 'info',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -217,14 +234,37 @@ CREATE TABLE IF NOT EXISTS `log_user` (
   `description` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Fazendo dump de dados para tabela `log_user`
 --
 
 INSERT INTO `log_user` (`id`, `description`, `created_at`, `user_id`) VALUES
-(1, 'Efetuou login na plataforma', '2018-12-28 19:41:48', 4);
+(1, 'Efetuou login na plataforma', '2018-12-28 19:41:48', 4),
+(2, 'Efetuou login na plataforma', '2019-01-07 18:21:31', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `notification`
+--
+
+CREATE TABLE IF NOT EXISTS `notification` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `type` varchar(10) DEFAULT 'info',
+  `status` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `notification`
+--
+
+INSERT INTO `notification` (`id`, `description`, `created_at`, `type`, `status`) VALUES
+(1, 'Notificação de teste 1', '2019-01-07 18:37:11', 'danger', 'Cuidado'),
+(2, 'Notificação de teste 2', '2019-01-07 18:37:30', 'warning', 'Atenção');
 
 -- --------------------------------------------------------
 
@@ -391,6 +431,12 @@ ALTER TABLE `log_user`
   ADD KEY `fk_log_user_user1_idx` (`user_id`);
 
 --
+-- Índices de tabela `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `registry_type`
 --
 ALTER TABLE `registry_type`
@@ -423,17 +469,17 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de tabela `auction`
 --
 ALTER TABLE `auction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de tabela `audit`
 --
 ALTER TABLE `audit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de tabela `bid`
 --
 ALTER TABLE `bid`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de tabela `core`
 --
@@ -478,7 +524,12 @@ ALTER TABLE `log_server`
 -- AUTO_INCREMENT de tabela `log_user`
 --
 ALTER TABLE `log_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de tabela `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de tabela `registry_type`
 --
