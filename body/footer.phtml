@@ -1,3 +1,9 @@
+<?php
+    require_once('internationalization/Translate.php');
+    $t = new Translate();
+
+    $user = $_SESSION['USER'];
+?>
 </div>
 
 <!-- end:: Body -->
@@ -58,10 +64,10 @@
 
 
             <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_quick_sidebar_tabs_settings" role="tab">Settings</a>
+                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_quick_sidebar_tabs_settings" role="tab"><?=$t->{"Configurações"}?></a>
             </li>
             <li class="nav-item m-tabs__item">
-                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_logs" role="tab">Logs</a>
+                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_logs" role="tab"><?=$t->{"Logs"}?></a>
             </li>
         </ul>
         <div class="tab-content">

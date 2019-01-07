@@ -10,22 +10,29 @@ class Translate {
 		if ($_SESSION['USER']->LANGUAGE_ID != null) {
 
             if ($_SESSION['USER']->LANGUAGE_ID == 1) {
-            $this->lang = "pt-BR";
+            $this->lang = "pt_BR";
             }else if($_SESSION['USER']->LANGUAGE_ID == 2){
-            $this->lang = "en-US";
+            $this->lang = "en_US";
             }
 
 		}else{
-			$this->lang = "pt-BR"; //pt-BR é o idioma padrão
+			$this->lang = "pt_BR"; //pt-BR é o idioma padrão
 		}
 
-
-        $fileExists = file_exists("../../internationalization/'.$this->lang.'.json");
-
-		if ($fileExists == true){
-            $this->_= json_decode(file_get_contents('../../internationalization/'.$this->lang.'.json'), true);
-		}else{
-            $this->_= json_decode(file_get_contents('../../../internationalization/'.$this->lang.'.json'), true);
+		if (file_exists("internationalization/'.$this->lang.'.json") == true){
+			$this->_= json_decode(file_get_contents("internationalization/'.$this->lang.'.json"), true);
+		}else if (file_exists("./internationalization/".$this->lang.".json") == true){
+            $this->_= json_decode(file_get_contents("./internationalization/".$this->lang.".json"), true);
+		}else if (file_exists("../internationalization/".$this->lang.".json") == true){
+			$this->_= json_decode(file_get_contents("../internationalization/".$this->lang.".json"), true);
+		}else if (file_exists("../../internationalization/".$this->lang.".json") == true){
+			$this->_= json_decode(file_get_contents("../../internationalization/".$this->lang.".json"), true);
+		}else if (file_exists("../../../internationalization/".$this->lang.".json") == true){
+			$this->_= json_decode(file_get_contents("../../../internationalization/".$this->lang.".json"), true);
+		}else if (file_exists("../../../../internationalization/".$this->lang.".json") == true){
+			$this->_= json_decode(file_get_contents("../../../../internationalization/".$this->lang.".json"), true);
+		}else if (file_exists("../../../../../internationalization/".$this->lang.".json") == true){
+			$this->_= json_decode(file_get_contents("../../../../../internationalization/".$this->lang.".json"), true);
 		}
 
 
