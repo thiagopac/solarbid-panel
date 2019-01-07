@@ -1,13 +1,15 @@
 <?php
 
-class LogApplication {
+class Notification {
 
 	public $id;
     public $description;
     public $type;
     public $created_at;
+    public $status;
+    public $user_id;
 
-    protected static $table = "log_application";
+    protected static $table = "notification";
 
 	public function __construct($array){
 
@@ -16,6 +18,8 @@ class LogApplication {
             $this->description = $array['description'];
             $this->type = $array['type'];
 			$this->created_at = $array['created_at'];
+            $this->status = $array['status'];
+            $this->user_id = $array['user_id'];
 		}
   }
 

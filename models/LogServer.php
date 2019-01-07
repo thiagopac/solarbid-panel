@@ -4,6 +4,7 @@ class LogServer {
 
 	public $id;
     public $description;
+    public $type;
     public $created_at;
 
     protected static $table = "log_server";
@@ -13,6 +14,7 @@ class LogServer {
 		if (!empty($array)) {
             $this->id = $array['id'];
             $this->description = $array['description'];
+            $this->type = $array['type'];
             $this->created_at = $array['created_at'];
 		}
     }
