@@ -51,6 +51,4 @@
 //VARIAVEIS
 	$TITULO = "Solarbid";
 
-//INCLUDES
-	include('funcoes.php');
 ?>

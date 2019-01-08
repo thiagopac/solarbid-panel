@@ -1,9 +1,10 @@
 <?php
 
-require_once ('./lib/config.php');
-require_once ('./internationalization/Translate.php');
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+    require_once "$root/panel/lib/config.php";
+    require_once "$root/panel/internationalization/Translate.php";
 
-$t = new Translate();
+    $t = new Translate();
 ?>
 <!DOCTYPE html>
 <html lang="en">

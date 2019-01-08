@@ -1,8 +1,8 @@
 <?php
-    require_once('internationalization/Translate.php');
     $t = new Translate();
 
-    $user = $_SESSION['USER'];
+    $user = unserialize($_SESSION['USER']);
+    var_dump($user->username);
 ?>
 <div class="tab-pane active" id="m_quick_sidebar_tabs_settings" role="tabpanel">
     <div class="m-list-settings m-scrollable">

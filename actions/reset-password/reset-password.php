@@ -3,12 +3,11 @@
     header('Content-type:application/json;charset=utf-8'); //header('Content-type:text/html;charset=utf-8');
 
     ### INCLUDE
-    require_once('../../models/User.php');
-    require_once('../../internationalization/Translate.php');
-    require_once('../../models/Audit.php');
-    require_once('../../models/Mail.php');
-    require_once('../../models/LogUser.php');
-    require_once('../../models/Response.php');
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+    require_once "$root/panel/models/User.php";
+    require_once "$root/panel/models/Audit.php";
+    require_once "$root/panel/models/LogUser.php";
+    require_once "$root/panel/models/Response.php";
 
     $t = new Translate();
 

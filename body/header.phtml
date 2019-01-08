@@ -1,5 +1,7 @@
 <?php
-require_once ('./lib/config.php');
+    ### INCLUDE
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+    require_once "$root/panel/lib/config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">

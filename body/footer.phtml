@@ -1,8 +1,7 @@
 <?php
-    require_once('internationalization/Translate.php');
     $t = new Translate();
 
-    $user = $_SESSION['USER'];
+    $user = unserialize($_SESSION['USER']);
 ?>
 </div>
 

@@ -1,12 +1,13 @@
 <?php
     header('Content-type:application/json;charset=utf-8'); //header('Content-type:text/html;charset=utf-8');
 
-	require_once('../../models/User.php');
-    require_once('../../models/Audit.php');
-    require_once('../../models/LogUser.php');
-    require_once('../../models/Mail.php');
-    require_once('../../models/Response.php');
-    require_once('../../internationalization/Translate.php');
+    ### INCLUDE
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+    require_once "$root/panel/models/User.php";
+    require_once "$root/panel/models/Audit.php";
+    require_once "$root/panel/models/LogUser.php";
+    require_once "$root/panel/models/Response.php";
+    require_once "$root/panel/models/Mail.php";
 
 	if(isset($_POST['type']) && !empty($_POST['type'])) {
         $type = $_POST['type'];
@@ -55,7 +56,7 @@
                 $response = new Response(["status" => "2", "type" => "danger", "title" => $t->{"Erro"}, "description" => $t->{"Verifique seu e-mail para efetuar a ativação da sua conta. Não recebeu o e-mail para ativação? Então, <a class='m--font-info' href='http://localhost/solarbid/panel/login?account-activate=".sha1(md5($user->id))."'>Clique aqui</a>"}]);
             }else{
                 session_start();
-                $_SESSION['USER'] = $user; //$_SESSION['USER']->username;
+                $_SESSION['USER'] = serialize($user); //$_SESSION['USER']->username;
 
                 $inserted = Audit::insertAudit($user->id, "Efetuou login");
                 LogUser::addUserLog($user->id, "Efetuou login na plataforma");

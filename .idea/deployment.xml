@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Solarbid-Panel">
-    <serverData>
-      <paths name="Solarbid-Panel">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="solarbid-panel" />
-          </mappings>
-        </serverdata>
-      </paths>
-    </serverData>
-  </component>
+  <component name="PublishConfigData" serverName="Solarbid" />
 </project>
