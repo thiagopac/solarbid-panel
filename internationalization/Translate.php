@@ -16,7 +16,7 @@ class Translate {
             }
 
 		}else{
-			$this->lang = "pt_BR"; //pt-BR é o idioma padrão
+			$this->lang = "pt_BR"; //pt_BR é o idioma padrão
 		}
 
 		if (file_exists("internationalization/'.$this->lang.'.json") == true){

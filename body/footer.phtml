@@ -54,12 +54,12 @@
     <div class="m-quick-sidebar__content m--hide">
         <span id="m_quick_sidebar_close" class="m-quick-sidebar__close"><i class="la la-close"></i></span>
         <ul id="m_quick_sidebar_tabs" class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
-<!--            --><?php
-//            if (file_exists("./body/top-quick-sidebar-messages.phtml")) {
-//              echo '<li class="nav-item m-tabs__item">
-//                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_quick_sidebar_tabs_messenger" role="tab">Messages</a>
-//                    </li>';
-//            }?>
+            <?php
+            if (file_exists("./body/top-quick-sidebar-messages.phtml")) {
+              echo '<li class="nav-item m-tabs__item" style="display: none">
+                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_messenger" role="tab">Messages</a>
+                    </li>';
+            }?>
 
 
             <li class="nav-item m-tabs__item">
@@ -71,9 +71,9 @@
         </ul>
         <div class="tab-content">
             <?php
-//            if (file_exists("./body/top-quick-sidebar-messages.phtml")) {
-//                include("./body/top-quick-sidebar-messages.phtml");
-//            }
+            if (file_exists("./body/top-quick-sidebar-messages.phtml")) {
+                include("./body/top-quick-sidebar-messages.phtml");
+            }
 
             if (file_exists("./body/top-quick-sidebar-settings.phtml")) {
                 include("./body/top-quick-sidebar-settings.phtml");

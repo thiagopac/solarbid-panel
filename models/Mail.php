@@ -19,7 +19,7 @@
             }
 
             $t = new Translate();
-            $body = file_get_contents('../../templates/mail/pt-BR/logged-in.html');
+            $body = file_get_contents('../../templates/mail/pt_BR/logged-in.html');
             $body = str_replace('{name}', $user->username, $body);
             $body = str_replace('{ip}', $audit->ip, $body);
             $body = str_replace('{date}', fnDateYMDHHIISStoDMYHHIISS($audit->created_at), $body);
@@ -53,7 +53,7 @@
             }
 
             $t = new Translate();
-            $body = file_get_contents('../../templates/mail/pt-BR/password-changed.html');
+            $body = file_get_contents('../../templates/mail/pt_BR/password-changed.html');
             $body = str_replace('{name}', $user->username, $body);
             $body = str_replace('{domain}', Core::$domain, $body);
             $body = str_replace('{contact}', Core::$contact, $body);
@@ -77,7 +77,7 @@
         public static function sendMailPasswordRedefinition($user){
 
             $t = new Translate();
-            $body = file_get_contents('../../templates/mail/pt-BR/password-redefinition.html');
+            $body = file_get_contents('../../templates/mail/pt_BR/password-redefinition.html');
             $body = str_replace('{name}', $user->username, $body);
             $body = str_replace('{redefinition}', sha1(md5($user->id)), $body);
             $body = str_replace('{domain}', Core::$domain, $body);
@@ -104,7 +104,7 @@
             $t = new Translate();
 
             $t = new Translate();
-            $body = file_get_contents('../../templates/mail/pt-BR/account-created.html');
+            $body = file_get_contents('../../templates/mail/pt_BR/account-created.html');
             $body = str_replace('{name}', $user->username, $body);
             $body = str_replace('{activation}', sha1(md5($user->id)), $body);
             $body = str_replace('{domain}', Core::$domain, $body);
@@ -129,7 +129,7 @@
         public static function sendMailUserAccountActivated($user){
 
             $t = new Translate();
-            $body = file_get_contents('../../templates/mail/pt-BR/account-activated.html');
+            $body = file_get_contents('../../templates/mail/pt_BR/account-activated.html');
             $body = str_replace('{name}', $user->username, $body);
             $body = str_replace('{domain}', Core::$domain, $body);
             $body = str_replace('{contact}', Core::$contact, $body);

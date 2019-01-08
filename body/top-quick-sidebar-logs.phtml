@@ -1,90 +1,55 @@
+<?php
+
+    ### INCLUDE
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+    require_once "$root/panel/models/LogApplication.php";
+    require_once "$root/panel/models/LogServer.php";
+
+    $t = new Translate();
+
+    $user = unserialize($_SESSION['USER']);
+
+    $application_logs = LogApplication::all("created_at >= '$user->created_at' ORDER BY created_at DESC LIMIT 10");
+    $server_logs = LogServer::all();
+?>
+
 <div class="tab-pane" id="m_quick_sidebar_tabs_logs" role="tabpanel">
     <div class="m-list-timeline m-scrollable">
         <div class="m-list-timeline__group">
             <div class="m-list-timeline__heading">
-                System Logs
+                <?=$t->{"Logs da Plataforma"}?>
             </div>
             <div class="m-list-timeline__items">
+                <?php foreach ($application_logs as $appLog) { ?>
                 <div class="m-list-timeline__item">
                     <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <a href="" class="m-list-timeline__text">12 new users registereda <span class="m-badge m-badge--warning m-badge--wide">important</span></a>
-                    <span class="m-list-timeline__time">Just now</span>
+                    <label class="m-list-timeline__text"><?=$appLog->description?> <?php if($appLog->type != null) {?><span class="m-badge m-badge--<?=$appLog->type?> m-badge--wide"><?=$appLog->status?></span><?php } ?></label>
+                    <span class="m-list-timeline__time"><?=fnDateYMDHHIISStoDMYHHIISS($appLog->created_at)?></span>
                 </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">System shutdown</a>
-                    <span class="m-list-timeline__time">11 mins</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-danger"></span>
-                    <a href="" class="m-list-timeline__text">New invoice received</a>
-                    <span class="m-list-timeline__time">20 mins</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-warning"></span>
-                    <a href="" class="m-list-timeline__text">Database overloaded 89% <span class="m-badge m-badge--success m-badge--wide">resolved</span></a>
-                    <span class="m-list-timeline__time">1 hr</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <a href="" class="m-list-timeline__text">System error</a>
-                    <span class="m-list-timeline__time">2 hrs</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">Production server down <span class="m-badge m-badge--danger m-badge--wide">pending</span></a>
-                    <span class="m-list-timeline__time">3 hrs</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <a href="" class="m-list-timeline__text">Production server up</a>
-                    <span class="m-list-timeline__time">5 hrs</span>
-                </div>
+                <?php } ?>
+                <?php if (count($application_logs) < 1) {?>
+                    <p style="text-align: center"><?=$t->{"Nenhum log ainda"}?></p>
+                <?php } ?>
             </div>
         </div>
         <div class="m-list-timeline__group">
             <div class="m-list-timeline__heading">
-                Applications Logs
+                <?=$t->{"Logs do Servidor"}?>
             </div>
             <div class="m-list-timeline__items">
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">New order received <span class="m-badge m-badge--info m-badge--wide">urgent</span></a>
-                    <span class="m-list-timeline__time">7 hrs</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <a href="" class="m-list-timeline__text">12 new users registered</a>
-                    <span class="m-list-timeline__time">Just now</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">System shutdown</a>
-                    <span class="m-list-timeline__time">11 mins</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-danger"></span>
-                    <a href="" class="m-list-timeline__text">New invoices received</a>
-                    <span class="m-list-timeline__time">20 mins</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-warning"></span>
-                    <a href="" class="m-list-timeline__text">Database overloaded 89%</a>
-                    <span class="m-list-timeline__time">1 hr</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <a href="" class="m-list-timeline__text">System error <span class="m-badge m-badge--info m-badge--wide">pending</span></a>
-                    <span class="m-list-timeline__time">2 hrs</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">Production server down</a>
-                    <span class="m-list-timeline__time">3 hrs</span>
-                </div>
+                <?php foreach ($server_logs as $serverLog) { ?>
+                    <div class="m-list-timeline__item">
+                        <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
+                        <label href="" class="m-list-timeline__text"><?=$serverLog->description?> <?php if($serverLog->type != null) {?><span class="m-badge m-badge--<?=$serverLog->type?> m-badge--wide"><?=$serverLog->status?></span><?php } ?></label>
+                        <span class="m-list-timeline__time"><?=fnDateYMDHHIISStoDMYHHIISS($serverLog->created_at)?></span>
+                    </div>
+                <?php } ?>
+                <?php if (count($server_logs) < 1) {?>
+                    <p style="text-align: center"><?=$t->{"Nenhum log ainda"}?></p>
+                <?php } ?>
             </div>
         </div>
-        <div class="m-list-timeline__group">
+        <!--<div class="m-list-timeline__group">
             <div class="m-list-timeline__heading">
                 Server Logs
             </div>
@@ -94,52 +59,7 @@
                     <a href="" class="m-list-timeline__text">Production server up</a>
                     <span class="m-list-timeline__time">5 hrs</span>
                 </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">New order received</a>
-                    <span class="m-list-timeline__time">7 hrs</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <a href="" class="m-list-timeline__text">12 new users registered</a>
-                    <span class="m-list-timeline__time">Just now</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">System shutdown</a>
-                    <span class="m-list-timeline__time">11 mins</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-danger"></span>
-                    <a href="" class="m-list-timeline__text">New invoice received</a>
-                    <span class="m-list-timeline__time">20 mins</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-warning"></span>
-                    <a href="" class="m-list-timeline__text">Database overloaded 89%</a>
-                    <span class="m-list-timeline__time">1 hr</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <a href="" class="m-list-timeline__text">System error</a>
-                    <span class="m-list-timeline__time">2 hrs</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">Production server down</a>
-                    <span class="m-list-timeline__time">3 hrs</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <a href="" class="m-list-timeline__text">Production server up</a>
-                    <span class="m-list-timeline__time">5 hrs</span>
-                </div>
-                <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-                    <a href="" class="m-list-timeline__text">New order received</a>
-                    <span class="m-list-timeline__time">1117 hrs</span>
-                </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>

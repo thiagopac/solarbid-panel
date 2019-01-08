@@ -4,37 +4,26 @@
     $user = unserialize($_SESSION['USER']);
 //    var_dump($user->mail_notification);
 ?>
-<div class="tab-pane active" id="m_quick_sidebar_tabs_settings" role="tabpanel">
-    <div class="m-list-settings m-scrollable">
-        <div class="m-list-settings__group">
-            <div class="m-list-settings__heading"><?=$t->{"Ajustes"}?></div>
-            <?php foreach ($user->mail_notification as $notification) {?>
-                <div class="m-list-settings__item">
-                    <span class="m-list-settings__item-label"><?=$t->{"$notification->name"}?></span>
-                    <span class="m-list-settings__item-control">
-                        <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-                            <label>
-                                <input type="checkbox" <?=$notification->state == 1? "checked" : ""?> name="">
-                                <span></span>
-                            </label>
-                        </span>
-                    </span>
+    <div class="tab-pane active" id="m_quick_sidebar_tabs_settings" role="tabpanel">
+        <form class="m-login__form m-form" id="form-mail-notification">
+            <div class="m-list-settings m-scrollable">
+                <div class="m-list-settings__group">
+                    <div class="m-list-settings__heading"><?=$t->{"Notificações por e-mail"}?></div>
+                    <?php foreach ($user->mail_notification as $notification) {?>
+                        <div class="m-list-settings__item">
+                            <span class="m-list-settings__item-label"><?=$t->{"$notification->name"}?></span>
+                            <span class="m-list-settings__item-control">
+                                <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
+                                    <label>
+                                        <input type="checkbox" <?=$notification->state == 1? "checked" : ""?> name="<?=$notification->name?>">
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </span>
+                        </div>
+                    <?php } ?>
                 </div>
-            <?php } ?>
-        </div>
-            <!--<div class="m-list-settings__group">
-                <div class="m-list-settings__heading">System Settings</div>
-                <div class="m-list-settings__item">
-                    <span class="m-list-settings__item-label">System Logs</span>
-                    <span class="m-list-settings__item-control">
-                                            <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-                                                <label>
-                                                    <input type="checkbox" name="">
-                                                    <span></span>
-                                                </label>
-                                            </span>
-                                        </span>
-                </div>
-            </div>-->
+            </div>
+        </form>
     </div>
-</div>
+    <script src="./actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js" type="text/javascript"></script>
