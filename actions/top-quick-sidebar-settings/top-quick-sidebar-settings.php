@@ -13,6 +13,10 @@
     $name = $_POST['name'];
     $value = $_POST['value'];
 
+    $strNotification = "Criar json com o ajuste alterado";
+
+//    $content = array("mail_notification" => $hpassword, "id" => $affectedUser->id);
+
 //
 //    $user = User::getUserByUsernameAndPassword($strUsername, $strPassword);
 //
