@@ -12,8 +12,10 @@
 
         public static function sendMailUserLoggedIn($user, $audit){
 
-            if ($user->mail_notification->loggedIn == false){
-                return false;
+            foreach ($user->mail_notification as $notification){
+                if ($notification->name == "loggedIn" && $notification->state == false){
+                    return false;
+                }
             }
 
             $t = new Translate();
@@ -44,8 +46,10 @@
 
         public static function sendMailPasswordHasChanged($user){
 
-            if ($user->mail_notification->passwordChanged == false){
-                return false;
+            foreach ($user->mail_notification as $notification){
+                if ($notification->name == "loggedIn" && $notification->state == false){
+                    return false;
+                }
             }
 
             $t = new Translate();

@@ -2,23 +2,25 @@
     $t = new Translate();
 
     $user = unserialize($_SESSION['USER']);
-    var_dump($user->username);
+//    var_dump($user->mail_notification);
 ?>
 <div class="tab-pane active" id="m_quick_sidebar_tabs_settings" role="tabpanel">
     <div class="m-list-settings m-scrollable">
         <div class="m-list-settings__group">
-            <div class="m-list-settings__heading"><?=$t->{"Notificações por e-mail"}?></div>
-            <div class="m-list-settings__item">
-                <span class="m-list-settings__item-label"><?=$t->{"loggedIn"}?></span>
-                <span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" checked="checked" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-            </div>
+            <div class="m-list-settings__heading"><?=$t->{"Ajustes"}?></div>
+            <?php foreach ($user->mail_notification as $notification) {?>
+                <div class="m-list-settings__item">
+                    <span class="m-list-settings__item-label"><?=$t->{"$notification->name"}?></span>
+                    <span class="m-list-settings__item-control">
+                        <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
+                            <label>
+                                <input type="checkbox" <?=$notification->state == 1? "checked" : ""?> name="">
+                                <span></span>
+                            </label>
+                        </span>
+                    </span>
+                </div>
+            <?php } ?>
         </div>
             <!--<div class="m-list-settings__group">
                 <div class="m-list-settings__heading">System Settings</div>

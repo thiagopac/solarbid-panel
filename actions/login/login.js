@@ -75,14 +75,17 @@ var SnippetLogin = function() {
 
             form.validate({
                 rules: {
-                    email: {
+                    username: {
                         required: true,
-                        email: true
                     },
                     password: {
                         required: true
                     }
-                }
+                },
+                messages: {
+                     username: "Informe o nome de usuário",
+                     password: "Insira sua senha"
+                 }
             });
 
             if (!form.valid()) {
@@ -159,7 +162,7 @@ var SnippetLogin = function() {
                 messages: {
                     registry: "Informe o tipo de cadastro",
                     username: "Informe o nome de usuário",
-                    email: "Informe o e-mail",
+                    email: "Verifique o campo de e-mail",
                     password: "Escolha uma uma senha",
                     rpassword: "A confirmação de senha deve ser igual ao campo senha",
                     role: "Selecione o tipo de usuário",
@@ -223,7 +226,10 @@ var SnippetLogin = function() {
                         required: true,
                         email: true
                     }
-                }
+                },
+                 messages: {
+                      email: "Verifique o campo de e-mail",
+                  }
             });
 
             if (!form.valid()) {
