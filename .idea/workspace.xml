@@ -2,28 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95aa136e-b204-4329-8dc7-8e7c087e05d0" name="Default Changelist" comment="evolução">
-      <change afterPath="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/footer.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/footer.phtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/body/top-notifications.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/top-notifications.phtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/body/top-quick-sidebar-logs.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/top-quick-sidebar-logs.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/top-quick-sidebar-messages.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/top-quick-sidebar-messages.phtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internationalization/Translate.php" beforeDir="false" afterPath="$PROJECT_DIR$/internationalization/Translate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/funcoes.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/funcoes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LogApplication.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/LogApplication.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LogServer.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/LogServer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Mail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Notification.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/account-activated.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/account-activated.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/account-created.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/account-created.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/images/facebook@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/images/facebook@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/images/linkedin@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/images/linkedin@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/images/twitter@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/images/twitter@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/images/youtube@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/images/youtube@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/logged-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/logged-in.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/password-changed.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/password-changed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/pt-BR/password-redefinition.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/pt_BR/password-redefinition.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,28 +21,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml">
+        <entry file="file://$PROJECT_DIR$/body/top-notifications.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="61" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+            <state relative-caret-position="706">
+              <caret line="78" column="88" lean-forward="true" selection-start-line="78" selection-start-column="88" selection-end-line="78" selection-end-column="88" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#span#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#li#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js">
+        <entry file="file://$PROJECT_DIR$/body/top-quick-sidebar-logs.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="78" lean-forward="true" selection-start-line="11" selection-start-column="78" selection-end-line="11" selection-end-column="78" />
+            <state relative-caret-position="506">
+              <caret line="42" column="98" lean-forward="true" selection-start-line="42" selection-start-column="98" selection-end-line="42" selection-end-column="139" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="869">
+              <caret line="689" lean-forward="true" selection-start-line="689" selection-end-line="689" />
             </state>
           </provider>
         </entry>
@@ -64,17 +54,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>curr</find>
-      <find>Settings</find>
-      <find>settings</find>
-      <find>m_quick_sidebar_tabs_settings</find>
-      <find>$18M</find>
-      <find>'</find>
-      <find>require_once</find>
-      <find>funcoes.php</find>
-      <find>config.php</find>
-      <find>new</find>
-      <find>session_st</find>
       <find>$_SESSION['USER']`</find>
       <find>include &quot;$root/panel/internationalization/Translate.php&quot;;</find>
       <find>Translate.php</find>
@@ -94,6 +73,17 @@
       <find>data</find>
       <find>active</find>
       <find>return (mUtilElementDataStore[element.customDataTag] &amp;&amp; mUtilElementDataStore[element.customDataTag][name]) ? true : false;</find>
+      <find>::save</find>
+      <find>session</find>
+      <find>showMsg</find>
+      <find>form</find>
+      <find>$content</find>
+      <find>User Notifications</find>
+      <find>flaticon-alarm</find>
+      <find>events</find>
+      <find>width</find>
+      <find>stack__item</find>
+      <find>content</find>
     </findStrings>
     <replaceStrings>
       <replace>internationalization/&quot;.$this-&gt;lang.&quot;.json</replace>
@@ -108,17 +98,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/actions/login/login.php" />
-        <option value="$PROJECT_DIR$/models/LogApplication.php" />
-        <option value="$PROJECT_DIR$/models/LogServer.php" />
-        <option value="$PROJECT_DIR$/lib/funcoes.php" />
-        <option value="$PROJECT_DIR$/assets/demo/base/scripts.bundle.js" />
-        <option value="$PROJECT_DIR$/body/top-quick-sidebar-logs.phtml" />
         <option value="$PROJECT_DIR$/body/footer.phtml" />
         <option value="$PROJECT_DIR$/body/top-quick-sidebar-messages.phtml" />
-        <option value="$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml" />
         <option value="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js" />
+        <option value="$PROJECT_DIR$/main.phtml" />
+        <option value="$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml" />
         <option value="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.php" />
+        <option value="$PROJECT_DIR$/models/User.php" />
+        <option value="$PROJECT_DIR$/models/Notification.php" />
+        <option value="$PROJECT_DIR$/body/top-quick-sidebar-logs.phtml" />
+        <option value="$PROJECT_DIR$/body/top-notifications.phtml" />
+        <option value="$PROJECT_DIR$/db.sql" />
       </list>
     </option>
   </component>
@@ -150,12 +140,6 @@
               <item name="panel" type="462c0819:PsiDirectoryNode" />
               <item name="actions" type="462c0819:PsiDirectoryNode" />
               <item name="login" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="panel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="panel" type="462c0819:PsiDirectoryNode" />
-              <item name="actions" type="462c0819:PsiDirectoryNode" />
-              <item name="reset-password" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="panel" type="b2602c69:ProjectViewProjectNode" />
@@ -200,7 +184,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -250,80 +234,83 @@
     <option name="LAST_COMMIT_MESSAGE" value="evolução" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/actions/reset-password/reset-password.php">
+    <entry file="file://$PROJECT_DIR$/actions/login/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        <state relative-caret-position="75">
+          <caret line="5" column="31" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.phtml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reset-password.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="122" column="68" selection-start-line="122" selection-start-column="48" selection-end-line="122" selection-end-column="68" />
+        <state relative-caret-position="315">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/demo/base/scripts.bundle.js">
+    <entry file="file://$PROJECT_DIR$/models/LogUser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="707" column="34" lean-forward="true" selection-start-line="707" selection-start-column="34" selection-end-line="707" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/body/top-quick-sidebar-logs.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="48" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/body/top-quick-sidebar-messages.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="49" lean-forward="true" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/actions/reset-password/reset-password.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/body/footer.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="70" column="13" lean-forward="true" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="78" lean-forward="true" selection-start-line="11" selection-start-column="78" selection-end-line="11" selection-end-column="78" />
+        <state relative-caret-position="30">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="61" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="61" />
+        <state relative-caret-position="45">
+          <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="89" column="31" selection-start-line="89" selection-start-column="31" selection-end-line="89" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actions/login/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="108" column="51" selection-start-line="108" selection-start-column="44" selection-end-line="108" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="71" column="27" selection-start-line="71" selection-start-column="27" selection-end-line="71" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        <state relative-caret-position="405">
+          <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/body/top-quick-sidebar-logs.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="42" column="98" lean-forward="true" selection-start-line="42" selection-start-column="98" selection-end-line="42" selection-end-column="139" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/body/top-notifications.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="706">
+          <caret line="78" column="88" lean-forward="true" selection-start-line="78" selection-start-column="88" selection-end-line="78" selection-end-column="88" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#span#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#li#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="869">
+          <caret line="689" lean-forward="true" selection-start-line="689" selection-end-line="689" />
         </state>
       </provider>
     </entry>

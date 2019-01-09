@@ -20,6 +20,7 @@
         public $registry_type_id;
         public $mail_notification;
         public $activated;
+        public $last_seen;
 
         protected static $table = "user";
 
@@ -38,6 +39,7 @@
                 $this->registry_type_id = $array['registry_type_id'];
                 $this->mail_notification = json_decode($array['mail_notification']);
                 $this->activated = $array['activated'];
+                $this->last_seen = $array['last_seen'];
             }
         }
 

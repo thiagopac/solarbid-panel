@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Jan-2019 às 02:23
+-- Tempo de geração: 09/01/2019 às 19:50
 -- Versão do servidor: 5.6.37
--- PHP Version: 7.1.8
+-- Versão do PHP: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `solarbid_panel`
+-- Banco de dados: `solarbid_panel`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `admin`
+-- Estrutura para tabela `admin`
 --
 
 CREATE TABLE IF NOT EXISTS `admin` (
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auction`
+-- Estrutura para tabela `auction`
 --
 
 CREATE TABLE IF NOT EXISTS `auction` (
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `auction` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `auction`
+-- Fazendo dump de dados para tabela `auction`
 --
 
 INSERT INTO `auction` (`id`, `owner`, `winner`, `desired_value`, `currency_id`, `created_at`, `updated_at`) VALUES
@@ -58,19 +58,19 @@ INSERT INTO `auction` (`id`, `owner`, `winner`, `desired_value`, `currency_id`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `audit`
+-- Estrutura para tabela `audit`
 --
 
 CREATE TABLE IF NOT EXISTS `audit` (
   `id` int(11) NOT NULL,
   `ip` varchar(15) NOT NULL,
   `action_desc` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `audit`
+-- Fazendo dump de dados para tabela `audit`
 --
 
 INSERT INTO `audit` (`id`, `ip`, `action_desc`, `created_at`, `user_id`) VALUES
@@ -91,12 +91,21 @@ INSERT INTO `audit` (`id`, `ip`, `action_desc`, `created_at`, `user_id`) VALUES
 (15, '::1', 'Efetuou login', '2019-01-08 02:00:00', 1),
 (16, '::1', 'Efetuou login', '2019-01-08 02:02:18', 1),
 (17, '::1', 'Efetuou login', '2019-01-08 02:02:57', 1),
-(18, '::1', 'Efetuou login', '2019-01-08 02:15:49', 1);
+(18, '::1', 'Efetuou login', '2019-01-08 02:15:49', 1),
+(19, '::1', 'Efetuou login', '2019-01-08 11:39:55', 1),
+(20, '::1', 'Efetuou login', '2019-01-09 11:29:45', 1),
+(21, '::1', 'Efetuou login', '2019-01-09 11:31:01', 1),
+(22, '::1', 'Efetuou login', '2019-01-09 12:17:41', 1),
+(23, '::1', 'Efetuou login', '2019-01-09 14:47:35', 1),
+(24, '::1', 'Efetuou login', '2019-01-09 14:48:02', 1),
+(25, '::1', 'Efetuou login', '2019-01-09 14:48:41', 1),
+(26, '::1', 'Efetuou login', '2019-01-09 18:33:36', 1),
+(27, '::1', 'Efetuou login', '2019-01-09 18:55:27', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `bid`
+-- Estrutura para tabela `bid`
 --
 
 CREATE TABLE IF NOT EXISTS `bid` (
@@ -108,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `bid` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `bid`
+-- Fazendo dump de dados para tabela `bid`
 --
 
 INSERT INTO `bid` (`id`, `value`, `bidder`, `auction_id`, `created_at`) VALUES
@@ -117,7 +126,7 @@ INSERT INTO `bid` (`id`, `value`, `bidder`, `auction_id`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `core`
+-- Estrutura para tabela `core`
 --
 
 CREATE TABLE IF NOT EXISTS `core` (
@@ -130,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `core` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `core`
+-- Fazendo dump de dados para tabela `core`
 --
 
 INSERT INTO `core` (`id`, `version`, `domain`, `contact`, `do_not_reply`, `language`) VALUES
@@ -139,7 +148,7 @@ INSERT INTO `core` (`id`, `version`, `domain`, `contact`, `do_not_reply`, `langu
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `currency`
+-- Estrutura para tabela `currency`
 --
 
 CREATE TABLE IF NOT EXISTS `currency` (
@@ -151,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `currency` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `currency`
+-- Fazendo dump de dados para tabela `currency`
 --
 
 INSERT INTO `currency` (`id`, `code`, `name`, `symbol`, `locale`) VALUES
@@ -160,7 +169,7 @@ INSERT INTO `currency` (`id`, `code`, `name`, `symbol`, `locale`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `customer`
+-- Estrutura para tabela `customer`
 --
 
 CREATE TABLE IF NOT EXISTS `customer` (
@@ -172,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `fisical_person`
+-- Estrutura para tabela `fisical_person`
 --
 
 CREATE TABLE IF NOT EXISTS `fisical_person` (
@@ -187,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `fisical_person` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `integrator`
+-- Estrutura para tabela `integrator`
 --
 
 CREATE TABLE IF NOT EXISTS `integrator` (
@@ -199,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `integrator` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `legal_person`
+-- Estrutura para tabela `legal_person`
 --
 
 CREATE TABLE IF NOT EXISTS `legal_person` (
@@ -212,60 +221,62 @@ CREATE TABLE IF NOT EXISTS `legal_person` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `log_application`
+-- Estrutura para tabela `log_application`
 --
 
 CREATE TABLE IF NOT EXISTS `log_application` (
   `id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `type` varchar(10) DEFAULT 'info',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `type` varchar(10) DEFAULT 'metal',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `log_application`
+-- Fazendo dump de dados para tabela `log_application`
 --
 
-INSERT INTO `log_application` (`id`, `description`, `type`, `created_at`) VALUES
-(1, 'Funcionalidade de configuração de alertas por e-mail liberada em breve.', 'info', '2019-01-08 02:10:19'),
-(2, '11 bugs foram corrigidos', 'warning', '2019-01-08 02:10:19');
+INSERT INTO `log_application` (`id`, `description`, `type`, `created_at`, `status`) VALUES
+(1, 'Funcionalidade de configuração de alertas por e-mail liberada em breve.', 'info', '2019-01-06 10:35:23', ''),
+(2, '11 bugs foram corrigidos', 'warning', '2019-01-07 10:39:13', 'Importante');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `log_server`
+-- Estrutura para tabela `log_server`
 --
 
 CREATE TABLE IF NOT EXISTS `log_server` (
   `id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `type` varchar(10) DEFAULT 'info',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `type` varchar(10) DEFAULT 'metal',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `log_server`
+-- Fazendo dump de dados para tabela `log_server`
 --
 
-INSERT INTO `log_server` (`id`, `description`, `type`, `created_at`) VALUES
-(1, 'Manutenção do servidor entre 10h e 12h de domingo (14/01/2019)', 'warning', '2019-01-08 02:11:50'),
-(2, 'Instabilidade detectada nos servidores entre 01/01/2019 e 05/01/2019', 'danger', '2019-01-08 02:11:50');
+INSERT INTO `log_server` (`id`, `description`, `type`, `created_at`, `status`) VALUES
+(1, 'Manutenção do servidor entre 10h e 12h de domingo (14/01/2019)', 'warning', '2019-01-08 12:27:32', ''),
+(2, 'Instabilidade detectada nos servidores entre 01/01/2019 e 05/01/2019', 'danger', '2019-01-08 12:27:34', 'Atenção');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `log_user`
+-- Estrutura para tabela `log_user`
 --
 
 CREATE TABLE IF NOT EXISTS `log_user` (
   `id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `log_user`
+-- Fazendo dump de dados para tabela `log_user`
 --
 
 INSERT INTO `log_user` (`id`, `description`, `created_at`, `user_id`) VALUES
@@ -282,34 +293,46 @@ INSERT INTO `log_user` (`id`, `description`, `created_at`, `user_id`) VALUES
 (11, 'Efetuou login na plataforma', '2019-01-08 02:00:00', 1),
 (12, 'Efetuou login na plataforma', '2019-01-08 02:02:18', 1),
 (13, 'Efetuou login na plataforma', '2019-01-08 02:02:57', 1),
-(14, 'Efetuou login na plataforma', '2019-01-08 02:15:49', 1);
+(14, 'Efetuou login na plataforma', '2019-01-08 02:15:49', 1),
+(15, 'Efetuou login na plataforma', '2019-01-08 11:39:55', 1),
+(16, 'Efetuou login na plataforma', '2019-01-09 11:29:45', 1),
+(17, 'Efetuou login na plataforma', '2019-01-09 11:31:01', 1),
+(18, 'Efetuou login na plataforma', '2019-01-09 12:17:41', 1),
+(19, 'Efetuou login na plataforma', '2019-01-09 14:47:35', 1),
+(20, 'Efetuou login na plataforma', '2019-01-09 14:48:02', 1),
+(21, 'Efetuou login na plataforma', '2019-01-09 14:48:41', 1),
+(22, 'Efetuou login na plataforma', '2019-01-09 18:33:36', 1),
+(23, 'Efetuou login na plataforma', '2019-01-09 18:55:27', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `notification`
+-- Estrutura para tabela `notification`
 --
 
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `type` varchar(10) DEFAULT 'info',
-  `status` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `type` varchar(10) DEFAULT 'metal',
+  `status` varchar(20) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `is_read` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `notification`
+-- Fazendo dump de dados para tabela `notification`
 --
 
-INSERT INTO `notification` (`id`, `description`, `created_at`, `type`, `status`) VALUES
-(1, 'Notificação de teste 1', '2019-01-07 18:37:11', 'danger', 'Cuidado'),
-(2, 'Notificação de teste 2', '2019-01-07 18:37:30', 'warning', 'Atenção');
+INSERT INTO `notification` (`id`, `description`, `created_at`, `type`, `status`, `user_id`, `is_read`) VALUES
+(1, 'Notificação de teste 1', '2019-01-09 11:26:30', 'danger', 'Atenção', 1, 1),
+(2, 'Notificação de teste 2', '2019-01-09 09:19:33', 'metal', NULL, 1, 1),
+(3, 'Notificação de teste 3', '2019-01-09 18:27:52', 'metal', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `registry_type`
+-- Estrutura para tabela `registry_type`
 --
 
 CREATE TABLE IF NOT EXISTS `registry_type` (
@@ -318,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `registry_type` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `registry_type`
+-- Fazendo dump de dados para tabela `registry_type`
 --
 
 INSERT INTO `registry_type` (`id`, `description`) VALUES
@@ -328,7 +351,7 @@ INSERT INTO `registry_type` (`id`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `role`
+-- Estrutura para tabela `role`
 --
 
 CREATE TABLE IF NOT EXISTS `role` (
@@ -337,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `role`
+-- Fazendo dump de dados para tabela `role`
 --
 
 INSERT INTO `role` (`id`, `description`) VALUES
@@ -348,7 +371,7 @@ INSERT INTO `role` (`id`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Estrutura para tabela `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -363,32 +386,33 @@ CREATE TABLE IF NOT EXISTS `user` (
   `registry_type_id` int(11) NOT NULL,
   `mail_notification` varchar(10000) NOT NULL DEFAULT '{"loggedIn":true,"passwordChanged":true}',
   `activated` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Ativação por e-mail',
-  `country` varchar(45) NOT NULL DEFAULT 'Brasil'
+  `country` varchar(45) NOT NULL DEFAULT 'Brasil',
+  `last_seen` timestamp NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `user`
+-- Fazendo dump de dados para tabela `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `created_at`, `updated_at`, `role_id`, `language`, `registry_type_id`, `mail_notification`, `activated`, `country`) VALUES
-(1, 'thiago', '$2y$10$Ojpb8dZJNNpePUGp1nxbpu5JyDbI2JNTGFz7ynXTfpB68dVaNuSrm', 'thiagopac@gmail.com', '2018-11-29 17:35:20', '2019-01-08 02:15:31', 1, 'pt_BR', 1, '[{"name":"loggedIn","state":true},{"name":"passwordChanged","state":true}]', 1, 'Brasil'),
-(2, 'cliente', '$2y$10$Z7LiFGwms5bxVZWllxgR2er56XcM4EGiz4kycK7XcGLtZ97eMjO4O', 'cliente@cliente.com.br', '2018-12-03 19:15:59', '2019-01-08 01:59:41', 2, 'pt_BR', 1, '[{"name":"loggedIn","state":true},{"name":"passwordChanged","state":true}]', 1, 'Brasil'),
-(3, 'empresa', '$2y$10$EvhRtf02r1JWtDVp4QxyOeRdyvrVbKt4z6rgVbbsdgNIZ71XNdsvG', 'empresa@empresa.com.br', '2018-12-03 19:28:31', '2019-01-08 01:59:43', 3, 'pt_BR', 2, '[{"name":"loggedIn","state":true},{"name":"passwordChanged","state":true}]', 1, 'Brasil'),
-(4, 'ingred', '$2y$10$4tsZq8ecA1p4VsGoNqw.Zu.J/I4eLyRwgX4YQs1pkhSBoNCRhiolC', 'thiago.pires@ownergy.com.br', '2018-12-28 19:39:50', '2019-01-08 01:59:44', 2, 'pt_BR', 1, '[{"name":"loggedIn","state":true},{"name":"passwordChanged","state":true}]', 1, 'Brasil');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `created_at`, `updated_at`, `role_id`, `language`, `registry_type_id`, `mail_notification`, `activated`, `country`, `last_seen`) VALUES
+(1, 'thiago', '$2y$10$Ojpb8dZJNNpePUGp1nxbpu5JyDbI2JNTGFz7ynXTfpB68dVaNuSrm', 'thiagopac@gmail.com', '2018-11-29 17:35:20', '2019-01-09 14:48:53', 1, 'pt_BR', 1, '[{"name":"loggedIn","state":false},{"name":"passwordChanged","state":true}]', 1, 'Brasil', '2019-01-09 18:11:44'),
+(2, 'cliente', '$2y$10$Z7LiFGwms5bxVZWllxgR2er56XcM4EGiz4kycK7XcGLtZ97eMjO4O', 'cliente@cliente.com.br', '2018-12-03 19:15:59', '2019-01-08 01:59:41', 2, 'pt_BR', 1, '[{"name":"loggedIn","state":true},{"name":"passwordChanged","state":true}]', 1, 'Brasil', '2019-01-09 18:11:44'),
+(3, 'empresa', '$2y$10$EvhRtf02r1JWtDVp4QxyOeRdyvrVbKt4z6rgVbbsdgNIZ71XNdsvG', 'empresa@empresa.com.br', '2018-12-03 19:28:31', '2019-01-08 01:59:43', 3, 'pt_BR', 2, '[{"name":"loggedIn","state":true},{"name":"passwordChanged","state":true}]', 1, 'Brasil', '2019-01-09 18:11:44'),
+(4, 'ingred', '$2y$10$4tsZq8ecA1p4VsGoNqw.Zu.J/I4eLyRwgX4YQs1pkhSBoNCRhiolC', 'thiago.pires@ownergy.com.br', '2018-12-28 19:39:50', '2019-01-08 01:59:44', 2, 'pt_BR', 1, '[{"name":"loggedIn","state":true},{"name":"passwordChanged","state":true}]', 1, 'Brasil', '2019-01-09 18:11:44');
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `admin`
+-- Índices de tabela `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_admin_user1_idx` (`user_id`);
 
 --
--- Indexes for table `auction`
+-- Índices de tabela `auction`
 --
 ALTER TABLE `auction`
   ADD PRIMARY KEY (`id`),
@@ -397,14 +421,14 @@ ALTER TABLE `auction`
   ADD KEY `fk_auction_currency1_idx` (`currency_id`);
 
 --
--- Indexes for table `audit`
+-- Índices de tabela `audit`
 --
 ALTER TABLE `audit`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_audit_user1_idx` (`user_id`);
 
 --
--- Indexes for table `bid`
+-- Índices de tabela `bid`
 --
 ALTER TABLE `bid`
   ADD PRIMARY KEY (`id`),
@@ -412,84 +436,85 @@ ALTER TABLE `bid`
   ADD KEY `fk_bid_auction1_idx` (`auction_id`);
 
 --
--- Indexes for table `core`
+-- Índices de tabela `core`
 --
 ALTER TABLE `core`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `currency`
+-- Índices de tabela `currency`
 --
 ALTER TABLE `currency`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customer`
+-- Índices de tabela `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_customer_user1_idx` (`user_id`);
 
 --
--- Indexes for table `fisical_person`
+-- Índices de tabela `fisical_person`
 --
 ALTER TABLE `fisical_person`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_fisical_person_user1_idx` (`user_id`);
 
 --
--- Indexes for table `integrator`
+-- Índices de tabela `integrator`
 --
 ALTER TABLE `integrator`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_provider_user1_idx` (`user_id`);
 
 --
--- Indexes for table `legal_person`
+-- Índices de tabela `legal_person`
 --
 ALTER TABLE `legal_person`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_legal_person_user1_idx` (`user_id`);
 
 --
--- Indexes for table `log_application`
+-- Índices de tabela `log_application`
 --
 ALTER TABLE `log_application`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `log_server`
+-- Índices de tabela `log_server`
 --
 ALTER TABLE `log_server`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `log_user`
+-- Índices de tabela `log_user`
 --
 ALTER TABLE `log_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_log_user_user1_idx` (`user_id`);
 
 --
--- Indexes for table `notification`
+-- Índices de tabela `notification`
 --
 ALTER TABLE `notification`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_notification_user1_idx` (`user_id`);
 
 --
--- Indexes for table `registry_type`
+-- Índices de tabela `registry_type`
 --
 ALTER TABLE `registry_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `role`
+-- Índices de tabela `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Índices de tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
@@ -497,106 +522,106 @@ ALTER TABLE `user`
   ADD KEY `fk_user_registry_type1_idx` (`registry_type_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT de tabela `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `auction`
+-- AUTO_INCREMENT de tabela `auction`
 --
 ALTER TABLE `auction`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `audit`
+-- AUTO_INCREMENT de tabela `audit`
 --
 ALTER TABLE `audit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
--- AUTO_INCREMENT for table `bid`
+-- AUTO_INCREMENT de tabela `bid`
 --
 ALTER TABLE `bid`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `core`
+-- AUTO_INCREMENT de tabela `core`
 --
 ALTER TABLE `core`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `currency`
+-- AUTO_INCREMENT de tabela `currency`
 --
 ALTER TABLE `currency`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT de tabela `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `fisical_person`
+-- AUTO_INCREMENT de tabela `fisical_person`
 --
 ALTER TABLE `fisical_person`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `integrator`
+-- AUTO_INCREMENT de tabela `integrator`
 --
 ALTER TABLE `integrator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `legal_person`
+-- AUTO_INCREMENT de tabela `legal_person`
 --
 ALTER TABLE `legal_person`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `log_application`
+-- AUTO_INCREMENT de tabela `log_application`
 --
 ALTER TABLE `log_application`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `log_server`
+-- AUTO_INCREMENT de tabela `log_server`
 --
 ALTER TABLE `log_server`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `log_user`
+-- AUTO_INCREMENT de tabela `log_user`
 --
 ALTER TABLE `log_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
--- AUTO_INCREMENT for table `notification`
+-- AUTO_INCREMENT de tabela `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `registry_type`
+-- AUTO_INCREMENT de tabela `registry_type`
 --
 ALTER TABLE `registry_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `role`
+-- AUTO_INCREMENT de tabela `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Limitadores para a tabela `admin`
+-- Restrições para tabelas `admin`
 --
 ALTER TABLE `admin`
   ADD CONSTRAINT `fk_admin_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `auction`
+-- Restrições para tabelas `auction`
 --
 ALTER TABLE `auction`
   ADD CONSTRAINT `fk_action_user2` FOREIGN KEY (`winner`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -604,50 +629,56 @@ ALTER TABLE `auction`
   ADD CONSTRAINT `fk_auction_user1` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `audit`
+-- Restrições para tabelas `audit`
 --
 ALTER TABLE `audit`
   ADD CONSTRAINT `fk_audit_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `bid`
+-- Restrições para tabelas `bid`
 --
 ALTER TABLE `bid`
   ADD CONSTRAINT `fk_bid_auction1` FOREIGN KEY (`auction_id`) REFERENCES `auction` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_bid_user1` FOREIGN KEY (`bidder`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `customer`
+-- Restrições para tabelas `customer`
 --
 ALTER TABLE `customer`
   ADD CONSTRAINT `fk_customer_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `fisical_person`
+-- Restrições para tabelas `fisical_person`
 --
 ALTER TABLE `fisical_person`
   ADD CONSTRAINT `fk_fisical_person_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `integrator`
+-- Restrições para tabelas `integrator`
 --
 ALTER TABLE `integrator`
   ADD CONSTRAINT `fk_provider_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `legal_person`
+-- Restrições para tabelas `legal_person`
 --
 ALTER TABLE `legal_person`
   ADD CONSTRAINT `fk_legal_person_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `log_user`
+-- Restrições para tabelas `log_user`
 --
 ALTER TABLE `log_user`
   ADD CONSTRAINT `fk_log_user_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `user`
+-- Restrições para tabelas `notification`
+--
+ALTER TABLE `notification`
+  ADD CONSTRAINT `fk_notification_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restrições para tabelas `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fk_user_registry_type1` FOREIGN KEY (`registry_type_id`) REFERENCES `registry_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,

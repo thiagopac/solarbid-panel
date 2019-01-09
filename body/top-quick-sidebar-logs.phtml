@@ -22,9 +22,9 @@
             <div class="m-list-timeline__items">
                 <?php foreach ($application_logs as $appLog) { ?>
                 <div class="m-list-timeline__item">
-                    <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                    <label class="m-list-timeline__text"><?=$appLog->description?> <?php if($appLog->type != null) {?><span class="m-badge m-badge--<?=$appLog->type?> m-badge--wide"><?=$appLog->status?></span><?php } ?></label>
-                    <span class="m-list-timeline__time"><?=fnDateYMDHHIISStoDMYHHIISS($appLog->created_at)?></span>
+                    <span class="m-list-timeline__badge m-list-timeline__badge--<?=$appLog->type?>"></span>
+                    <label class="m-list-timeline__text"><?=$appLog->description?> <?php if($appLog->status != null) {?> <span class="m-badge m-badge--<?=$appLog->type?> m-badge--wide"><?=$appLog->status?></span><?php } ?> </label>
+                    <span class="m-list-timeline__time"><?=fnTimeElapsed($appLog->created_at)?></span>
                 </div>
                 <?php } ?>
                 <?php if (count($application_logs) < 1) {?>
@@ -39,9 +39,9 @@
             <div class="m-list-timeline__items">
                 <?php foreach ($server_logs as $serverLog) { ?>
                     <div class="m-list-timeline__item">
-                        <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-                        <label href="" class="m-list-timeline__text"><?=$serverLog->description?> <?php if($serverLog->type != null) {?><span class="m-badge m-badge--<?=$serverLog->type?> m-badge--wide"><?=$serverLog->status?></span><?php } ?></label>
-                        <span class="m-list-timeline__time"><?=fnDateYMDHHIISStoDMYHHIISS($serverLog->created_at)?></span>
+                        <span class="m-list-timeline__badge m-list-timeline__badge--<?=$serverLog->type?>"></span>
+                        <label href="" class="m-list-timeline__text"><?=$serverLog->description?> <?php if($serverLog->status != null) { ?><span class="m-badge m-badge--<?=$serverLog->type?> m-badge--wide"><?=$serverLog->status?></span><?php } ?> </label>
+                        <span class="m-list-timeline__time"><?=fnTimeElapsed($serverLog->created_at)?></span>
                     </div>
                 <?php } ?>
                 <?php if (count($server_logs) < 1) {?>

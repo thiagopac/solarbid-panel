@@ -8,6 +8,7 @@ class Notification {
     public $created_at;
     public $status;
     public $user_id;
+    public $is_read;
 
     protected static $table = "notification";
 
@@ -20,6 +21,7 @@ class Notification {
 			$this->created_at = $array['created_at'];
             $this->status = $array['status'];
             $this->user_id = $array['user_id'];
+            $this->is_read = $array['is_read'];
 		}
   }
 

@@ -2,8 +2,22 @@ window.onload = function(){
 
 $('#form-mail-notification input[type="checkbox"]').change(function(){
 
-//    console.log($(this).attr('name'));
-//    console.log($(this).prop('checked'));
+    var showMsg = function(type, msg) {
+
+        toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000"
+            };
+            toastr[type](msg);
+    }
 
     $.ajax({
          url: './actions/top-quick-sidebar-settings/top-quick-sidebar-settings.php',
@@ -14,17 +28,15 @@ $('#form-mail-notification input[type="checkbox"]').change(function(){
 
              if (response.status == 1) {
 
-                 console.log("sucesso");
+                 showMsg(response.type, response.description);
 
              } else {
-                 console.log("erro");
+                 showMsg(response.type, response.description);
              }
 
          }
     });
 
 });
-
-
 
 }

@@ -1,15 +1,23 @@
 <?php
+
+    ### INCLUDE
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+    require_once "$root/panel/internationalization/Translate.php";
+    require_once "$root/panel/models/User.php";
+
     $t = new Translate();
 
     $user = unserialize($_SESSION['USER']);
-//    var_dump($user->mail_notification);
+    $refreshedUser = User::getUserById($user->id);
+
+//    var_dump($refreshedUser->mail_notification);
 ?>
     <div class="tab-pane active" id="m_quick_sidebar_tabs_settings" role="tabpanel">
         <form class="m-login__form m-form" id="form-mail-notification">
             <div class="m-list-settings m-scrollable">
                 <div class="m-list-settings__group">
                     <div class="m-list-settings__heading"><?=$t->{"Notificações por e-mail"}?></div>
-                    <?php foreach ($user->mail_notification as $notification) {?>
+                    <?php foreach ($refreshedUser->mail_notification as $notification) {?>
                         <div class="m-list-settings__item">
                             <span class="m-list-settings__item-label"><?=$t->{"$notification->name"}?></span>
                             <span class="m-list-settings__item-control">
