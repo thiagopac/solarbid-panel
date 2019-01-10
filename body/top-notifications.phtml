@@ -48,7 +48,8 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="topbar_notifications_notifications" role="tabpanel">
                             <div class="m-scrollable" data-scrollable="true" data-height="250" data-mobile-height="200">
-                                <div class="m-list-timeline m-list-timeline--skin-light">
+
+                                <div class="m-list-timeline--skin-light">
                                     <div class="m-list-timeline__items">
                                     <?php foreach ($newNotifications as $notification) { ?>
                                         <div class="m-list-timeline__item">
@@ -58,6 +59,7 @@
                                             <?php   $content = array("is_read" => json_encode(1), "id" => $notification->id);
                                             $update = Notification::save($content); ?>
                                         </div>
+                                        <hr/>
                                     <?php } ?>
                                     <?php foreach ($oldNotifications as $notification) { ?>
                                         <div class="m-list-timeline__item">
@@ -65,9 +67,11 @@
                                             <span class="m-list-timeline__text"><?=$notification->description?> <?php if($notification->status != null) {?><span class="m-badge m-badge--<?=$notification->type?> m-badge--wide"> <?=$notification->status?></span><?php } ?></span>
                                             <span class="m-list-timeline__time"><?=fnTimeElapsed($notification->created_at, false, $user->language)?></span>
                                         </div>
+                                        <hr/>
                                     <?php } ?>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="tab-pane" id="topbar_notifications_logs" role="tabpanel">
