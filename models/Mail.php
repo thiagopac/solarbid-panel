@@ -5,7 +5,7 @@
     require_once "$root/panel/lib/config.php";
     require_once "$root/panel/lib/class.simple_mail.php";
     require_once "$root/panel/internationalization/Translate.php";
-    require_once "$root/panel/lib/funcoes.php";
+    require_once "$root/panel/lib/functions.php";
     require_once "$root/panel/models/Core.php";
 
     class Mail {

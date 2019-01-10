@@ -3,7 +3,7 @@
     ### INCLUDE
     $root = realpath($_SERVER["DOCUMENT_ROOT"]);
     require_once "$root/panel/lib/config.php";
-    require_once "$root/panel/lib/funcoes.php";
+    require_once "$root/panel/lib/functions.php";
 
     class LogApplication {
 

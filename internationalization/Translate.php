@@ -1,5 +1,5 @@
 <?php
-// include("./lib/funcoes.php");
+// include("./lib/functions.php");
 
 class Translate {
 	// idioma atual

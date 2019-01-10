@@ -1,11 +1,25 @@
+<?php
+    ### INCLUDE
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+    require_once "$root/panel/internationalization/Translate.php";
+    require_once "$root/panel/models/User.php";
+
+    $t = new Translate();
+
+    $user = unserialize($_SESSION['USER']);
+    $refreshedUser = User::getUserById($user->id);
+
+?>
 <li class="m-nav__item m-topbar__user-profile  m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
     <a href="#" class="m-nav__link m-dropdown__toggle">
-<span class="m-topbar__userpic">
-<img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless m--img-centered" alt="" />
-</span>
+		<span class="m-topbar__userpic">
+			<img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless m--img-centered" alt="" />
+		</span>
         <span class="m-nav__link-icon m-topbar__usericon  m--hide">
-<span class="m-nav__link-icon-wrapper"><i class="flaticon-user-ok"></i></span>
-</span>
+			<span class="m-nav__link-icon-wrapper">
+				<i class="flaticon-user-ok"></i>
+			</span>
+		</span>
         <span class="m-topbar__username m--hide">Nick</span>
     </a>
     <div class="m-dropdown__wrapper">
@@ -17,8 +31,12 @@
                         <img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt="" />
                     </div>
                     <div class="m-card-user__details">
-                        <span class="m-card-user__name m--font-weight-500">Mark Andre</span>
-                        <a href="" class="m-card-user__email m--font-weight-300 m-link">mark.andre@gmail.com</a>
+						<span class="m-card-user__name m--font-weight-500">
+							<?=$refreshedUser->username?>
+						</span>
+                        <a href="" class="m-card-user__email m--font-weight-300 m-link">
+                            <?=$refreshedUser->email?>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -32,27 +50,24 @@
                             <a href="profile.html" class="m-nav__link">
                                 <i class="m-nav__link-icon flaticon-profile-1"></i>
                                 <span class="m-nav__link-title">
-      <span class="m-nav__link-wrap">
-        <span class="m-nav__link-text">My Profile</span>
-        <span class="m-nav__link-badge"><span class="m-badge m-badge--success">2</span></span>
-      </span>
-    </span>
+									<span class="m-nav__link-wrap">
+										<span class="m-nav__link-text">
+											<?=$t->{"Meu perfil"}?>
+										</span>
+										<span class="m-nav__link-badge">
+											<span class="m-badge m-badge--success">2</span>
+										</span>
+									</span>
+								</span>
                             </a>
                         </li>
                         <li class="m-nav__item">
                             <a href="profile.html" class="m-nav__link">
                                 <i class="m-nav__link-icon flaticon-share"></i>
-                                <span class="m-nav__link-text">Activity</span>
+                                <span class="m-nav__link-text"><?=$t->{"Atividades"}?></span>
                             </a>
                         </li>
-                        <li class="m-nav__item">
-                            <a href="profile.html" class="m-nav__link">
-                                <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                <span class="m-nav__link-text">Messages</span>
-                            </a>
-                        </li>
-                        <li class="m-nav__separator m-nav__separator--fit">
-                        </li>
+                        <li class="m-nav__separator m-nav__separator--fit"></li>
                         <li class="m-nav__item">
                             <a href="profile.html" class="m-nav__link">
                                 <i class="m-nav__link-icon flaticon-info"></i>
@@ -62,13 +77,12 @@
                         <li class="m-nav__item">
                             <a href="profile.html" class="m-nav__link">
                                 <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                <span class="m-nav__link-text">Support</span>
+                                <span class="m-nav__link-text">Suporte</span>
                             </a>
                         </li>
-                        <li class="m-nav__separator m-nav__separator--fit">
-                        </li>
+                        <li class="m-nav__separator m-nav__separator--fit"></li>
                         <li class="m-nav__item">
-                            <a href="snippets/pages/user/login-1.html" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
+                            <a href="./login" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
                         </li>
                     </ul>
                 </div>

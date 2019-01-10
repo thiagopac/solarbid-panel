@@ -58,6 +58,9 @@
                 session_start();
                 $_SESSION['USER'] = serialize($user); //$_SESSION['USER']->username;
 
+                $content = array("last_seen" => date("Y-m-d H:i:s") , "id" => $user->id);
+                User::save($content);
+
                 $inserted = Audit::insertAudit($user->id, "Efetuou login");
                 LogUser::addUserLog($user->id, "Efetuou login na plataforma");
 

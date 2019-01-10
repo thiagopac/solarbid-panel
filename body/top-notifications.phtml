@@ -53,8 +53,8 @@
                                     <div class="m-list-timeline__items">
                                     <?php foreach ($newNotifications as $notification) { ?>
                                         <div class="m-list-timeline__item">
-                                            <span class="m-list-timeline__badge m-list-timeline__badge--<?=$notification->type?>"></span>
-                                            <span class="m-list-timeline__text"><span style = "font-weight: bold"><?=$notification->description?> </span><?php if($notification->status != null) {?><span class="m-badge m-badge--<?=$notification->type?> m-badge--wide"> <?=$notification->status?></span><?php } ?></span>
+                                            <span class="m-list-timeline__badge m-list-timeline__badge--<?=$notification->type?>"><span class="m-badge m-badge--info m-badge--dot"></span></span>
+                                            <span class="m-list-timeline__text" style="text-align: justify"><?=$notification->description?><?php if($notification->status != null) {?><span class="m-badge m-badge--<?=$notification->type?> m-badge--wide"> <?=$notification->status?></span><?php } ?></span>
                                             <span class="m-list-timeline__time"><?=fnTimeElapsed($notification->created_at, false, $user->language)?></span>
                                             <?php   $content = array("is_read" => json_encode(1), "id" => $notification->id);
                                             $update = Notification::save($content); ?>
@@ -64,7 +64,7 @@
                                     <?php foreach ($oldNotifications as $notification) { ?>
                                         <div class="m-list-timeline__item">
                                             <span class="m-list-timeline__badge m-list-timeline__badge--<?=$notification->type?>"></span>
-                                            <span class="m-list-timeline__text"><?=$notification->description?> <?php if($notification->status != null) {?><span class="m-badge m-badge--<?=$notification->type?> m-badge--wide"> <?=$notification->status?></span><?php } ?></span>
+                                            <span class="m-list-timeline__text" style="text-align: justify"><?=$notification->description?> <?php if($notification->status != null) {?><span class="m-badge m-badge--<?=$notification->type?> m-badge--wide"> <?=$notification->status?></span><?php } ?></span>
                                             <span class="m-list-timeline__time"><?=fnTimeElapsed($notification->created_at, false, $user->language)?></span>
                                         </div>
                                         <hr/>
