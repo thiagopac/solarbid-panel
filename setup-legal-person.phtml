@@ -1,0 +1,18 @@
+<?php
+
+    ### USER SESSION
+    $user = unserialize($_SESSION['USER']);
+    $fisicalPerson = unserialize($_SESSION['FISICAL_PERSON']);
+    $legalPerson = unserialize($_SESSION['LEGAL_PERSON']);
+
+    ### PAGE STRUCTURE SESSION VARS
+    $_SESSION['top-menu-admin'] = $user->role_id == 1 ? true : false;
+    $_SESSION['top-quick-search'] = false;
+    $_SESSION['top-notifications'] = false;
+    $_SESSION['top-quick-actions'] = false;
+    $_SESSION['top-profile'] = false;
+    $_SESSION['top-quick-sidebar'] = false;
+    $_SESSION['menu-left'] = false;
+
+?>
+<p>Legal person</p>

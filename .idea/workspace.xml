@@ -2,21 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95aa136e-b204-4329-8dc7-8e7c087e05d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/FisicalPerson.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/LegalPerson.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/actions/setup-legal-person/setup-legal-person.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/actions/setup-legal-person/setup-legal-person.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup-legal-person.phtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/actions/login/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/login/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/login/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/header.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/header.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/menu-left.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/menu-left.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/top-notifications.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/top-notifications.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/top-profile.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/top-profile.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/default.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/login.phtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/main.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup-fisical-person.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/setup-fisical-person.phtml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,31 +14,51 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1052951331">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="js" value="2" />
+          <entry key="php" value="3" />
+          <entry key="phtml" value="2" />
+          <entry key="sql" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JavaScript" value="2" />
+          <entry key="PHP" value="5" />
+          <entry key="SQL" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="phtml" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PHP" value="12" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="113" selection-start-line="15" selection-start-column="113" selection-end-line="15" selection-end-column="113" />
+            <state relative-caret-position="270">
+              <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/router.php">
+        <entry file="file://$PROJECT_DIR$/setup-legal-person.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="66" column="50" lean-forward="true" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/body/top-profile.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="753">
-              <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
+            <state relative-caret-position="255">
+              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -111,8 +121,9 @@
         <option value="$PROJECT_DIR$/actions/login/login.js" />
         <option value="$PROJECT_DIR$/body/top-profile.phtml" />
         <option value="$PROJECT_DIR$/login.phtml" />
-        <option value="$PROJECT_DIR$/main.phtml" />
         <option value="$PROJECT_DIR$/router.php" />
+        <option value="$PROJECT_DIR$/main.phtml" />
+        <option value="$PROJECT_DIR$/setup-legal-person.phtml" />
       </list>
     </option>
   </component>
@@ -127,6 +138,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -144,6 +156,18 @@
               <item name="panel" type="462c0819:PsiDirectoryNode" />
               <item name="actions" type="462c0819:PsiDirectoryNode" />
               <item name="login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="panel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="panel" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
+              <item name="setup-fisical-person" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="panel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="panel" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
+              <item name="setup-legal-person" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="panel" type="b2602c69:ProjectViewProjectNode" />
@@ -175,7 +199,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -186,6 +209,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/actions" />
+      <recent name="$PROJECT_DIR$/actions/setup-fisical-person" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/models" />
     </key>
@@ -203,10 +228,10 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
+    <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20607029" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21246007" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -288,17 +313,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.phtml">
+    <entry file="file://$PROJECT_DIR$/db.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="113" selection-start-line="15" selection-start-column="113" selection-end-line="15" selection-end-column="113" />
+        <state relative-caret-position="601">
+          <caret line="41" column="24" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/actions/setup-legal-person/setup-fisical-person.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actions/setup-legal-person/setup-legal-person.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actions/setup-legal-person/setup-legal-person.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/router.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="66" column="50" lean-forward="true" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
+        <state relative-caret-position="523">
+          <caret line="56" column="67" lean-forward="true" selection-start-line="56" selection-start-column="67" selection-end-line="56" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup-legal-person.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
         </state>
       </provider>
     </entry>
