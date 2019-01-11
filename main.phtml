@@ -1,23 +1,18 @@
 <?php
+    ### VALIDATE SESSION
     session_start();
-
-    if ($_SESSION == null) { header('Location: ./login'); }
 
     ### INCLUDE
     $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-    require_once "$root/panel/body/header.phtml";
     require_once "$root/panel/models/User.php";
     require_once "$root/panel/internationalization/Translate.php";
+    require_once "$root/panel/models/LegalPerson.php";
+    require_once "$root/panel/models/FisicalPerson.php";
 
-    $fileExists = file_exists($_GET["page"].".phtml");
-
-    if ($fileExists == true) {
-      //carrega página que veio no get
-      include($_GET["page"].".phtml"); //views são sempre PHTML
-    }else{
-      //exibe erro 404
-      print("<meta http-equiv='refresh' content='0;url=404'>");
-    }
-
-    include("./body/footer.phtml");
+    ### BODY PAGE CONSTRUCT
+    require_once "$root/panel/body/header.phtml";
+    $file = $_GET["page"].".phtml";
+    $fileExists = file_exists($file);
+    if ($fileExists == true) { include($file); }else{ print("<meta http-equiv='refresh' content='0;url=404'>"); }
+    require_once "$root/panel/body/footer.phtml";
 ?>

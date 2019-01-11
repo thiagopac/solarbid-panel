@@ -1,46 +1,18 @@
-<!-- BEGIN: Page -->
-<div class="m-grid__item m-grid__item--fluid m-wrapper">
-	<!-- BEGIN: Subheader -->
-	<div class="m-subheader ">
-	  <div class="d-flex align-items-center">
-			<div class="mr-auto">
-				<h3 class="m-subheader__title m-subheader__title--separator">Título da página</h3>
-				<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-					<li class="m-nav__item m-nav__item--home">
-						<a href="#" class="m-nav__link m-nav__link--icon">
-							<i class="m-nav__link-icon la la-home"></i>
-						</a>
-					</li>
-					<li class="m-nav__separator">-</li>
-					<li class="m-nav__item">
-						<a href="" class="m-nav__link">
-							<span class="m-nav__link-text">Resources</span>
-						</a>
-					</li>
-					<li class="m-nav__separator">-</li>
-					<li class="m-nav__item">
-						<a href="" class="m-nav__link">
-							<span class="m-nav__link-text">Timesheet</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-	    <div>
-				<?php
-					if (file_exists("./body/page-drop-menu.php")) {
-						include("./body/page-drop-menu.php");
-					}
-				?>
-	    </div>
-	  </div>
-	</div>
-	<!-- END: Subheader -->
+<?php
 
-	<!-- BEGIN: Content -->
-	<div class="m-content">
-		<code>Conteúdo da página</code>
-	</div>
-	<!-- END: Content -->
+    ### USER SESSION
+    $user = unserialize($_SESSION['USER']);
+    $fisicalPerson = unserialize($_SESSION['FISICAL_PERSON']);
+    $legalPerson = unserialize($_SESSION['LEGAL_PERSON']);
 
-</div>
-<!-- END: Page -->
+    ### PAGE STRUCTURE SESSION VARS
+    $_SESSION['top-menu-admin'] = $user->role_id == 1 ? true : false;
+    $_SESSION['top-quick-search'] = false;
+    $_SESSION['top-notifications'] = false;
+    $_SESSION['top-quick-actions'] = false;
+    $_SESSION['top-profile'] = false;
+    $_SESSION['top-quick-sidebar'] = false;
+    $_SESSION['menu-left'] = false;
+
+?>
+<p>Fisical person</p>

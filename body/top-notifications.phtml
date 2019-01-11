@@ -69,6 +69,9 @@
                                         </div>
                                         <hr/>
                                     <?php } ?>
+                                    <?php if (count($newNotifications) < 1 && count($oldNotifications) < 1) {?>
+                                        <p style="text-align: center"><?=$t->{"Nenhuma notificação ainda"}?></p>
+                                    <?php } ?>
                                     </div>
                                 </div>
 

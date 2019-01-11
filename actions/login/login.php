@@ -8,6 +8,8 @@
     require_once "$root/panel/models/LogUser.php";
     require_once "$root/panel/models/Response.php";
     require_once "$root/panel/models/Mail.php";
+    require_once "$root/panel/models/FisicalPerson.php";
+    require_once "$root/panel/models/LegalPerson.php";
 
 	if(isset($_POST['type']) && !empty($_POST['type'])) {
         $type = $_POST['type'];
@@ -57,6 +59,14 @@
             }else{
                 session_start();
                 $_SESSION['USER'] = serialize($user); //$_SESSION['USER']->username;
+
+                if ($user->registry_type_id == 1){
+                    $fisicalPerson = FisicalPerson::find("user_id = '$user->id'");
+                    $_SESSION['FISICAL_PERSON'] = serialize($fisicalPerson);
+                }else if($user->registry_type_id == 2){
+                    $legalPerson = LegalPerson::find("user_id = '$user->id'");
+                    $_SESSION['LEGAL_PERSON'] = serialize($legalPerson);
+                }
 
                 $content = array("last_seen" => date("Y-m-d H:i:s") , "id" => $user->id);
                 User::save($content);

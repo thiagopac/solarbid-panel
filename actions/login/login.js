@@ -111,7 +111,7 @@ var SnippetLogin = function() {
                             //reset button to original state
                             btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
 
-                            location.href = "./main?page=dashboard";
+                            location.href = "./router?page=dashboard";
 
                         }, 2000);
 
