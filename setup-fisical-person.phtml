@@ -70,47 +70,44 @@
                 <div class="m-wizard__steps">
                     <div class="m-wizard__step m-wizard__step--current" m-wizard-target="m_wizard_form_step_1">
                         <a href="#" class="m-wizard__step-number">
-                            <span><i class="fa  flaticon-placeholder"></i></span>
+                            <span><i class="fa  flaticon-user"></i></span>
                         </a>
                         <div class="m-wizard__step-info">
                             <div class="m-wizard__step-title">
-                                1. Informações pessoais
+                                1. <?=$t->{"Informações pessoais"}?>
                             </div>
                             <div class="m-wizard__step-desc">
-                                Lorem ipsum doler amet elit<br>
-                                sed eiusmod tempors
+                                <?=$t->{"Dados pessoais e <br>de contato"}?>
                             </div>
                         </div>
                     </div>
                     <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_2">
                         <a href="#" class="m-wizard__step-number">
-                            <span><i class="fa  flaticon-layers"></i></span>
+                            <span><i class="fa  flaticon-placeholder"></i></span>
                         </a>
                         <div class="m-wizard__step-info">
                             <div class="m-wizard__step-title">
-                                2. Account Setup
+                                2. <?=$t->{"Dados de endereço"}?>
                             </div>
                             <div class="m-wizard__step-desc">
-                                Lorem ipsum doler amet elit<br>
-                                sed eiusmod tempors
+                                <?=$t->{"Dados <br>de sua localização"}?>
                             </div>
                         </div>
                     </div>
-                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_3">
-                        <a href="#" class="m-wizard__step-number">
-                            <span><i class="fa  flaticon-layers"></i></span>
-                        </a>
-                        <div class="m-wizard__step-info">
-                            <div class="m-wizard__step-title">
-                                3. Confirmation
-                            </div>
-                            <div class="m-wizard__step-desc">
-                                Lorem ipsum doler amet elit<br>
-                                sed eiusmod tempors
+                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_3">
+                            <a href="#" class="m-wizard__step-number">
+                                <span><i class="fa  flaticon-layers"></i></span>
+                            </a>
+                            <div class="m-wizard__step-info">
+                                <div class="m-wizard__step-title">
+                                    3. <?=$t->{"Confirmação"}?>
+                                </div>
+                                <div class="m-wizard__step-desc">
+                                    <?=$t->{"Termos de uso <br>e confirmação"}?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
 
             <!--end: Form Wizard Nav -->
@@ -121,10 +118,6 @@
         <!--begin: Form Wizard Form-->
         <div class="m-wizard__form">
 
-            <!--
-1) Use m-form--label-align-left class to alight the form input lables to the right
-2) Use m-form--state class to highlight input control borders on form validation
--->
             <form class="m-form m-form--label-align-left- m-form--state-" id="m_form">
 
                 <!--begin: Form Body -->
@@ -136,76 +129,43 @@
                             <div class="col-xl-8 offset-xl-2">
                                 <div class="m-form__section m-form__section--first">
                                     <div class="m-form__heading">
-                                        <h3 class="m-form__heading-title">Client Details</h3>
+                                        <h3 class="m-form__heading-title"><?=$t->{"Dados pessoais"}?></h3>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">* Name:</label>
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Nome completo"}?>: *</label>
                                         <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="name" class="form-control m-input" placeholder="" value="Nick Stone">
-                                            <span class="m-form__help">Please enter your first and last names</span>
+                                            <input type="text" name="name" class="form-control m-input" placeholder="<?=$t->{"John Doe"}?>" value="">
+                                            <span class="m-form__help"><?=$t->{"Coloque seu nome completo, sem omitir ou abreviar nenhum nome"}?></span>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">* Email:</label>
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Como prefere ser chamado"}?>: *</label>
                                         <div class="col-xl-9 col-lg-9">
-                                            <input type="email" name="email" class="form-control m-input" placeholder="" value="nick.stone@gmail.com">
-                                            <span class="m-form__help">We'll never share your email with anyone else</span>
+                                            <input type="text" name="name" class="form-control m-input" placeholder="<?=$t->{"John"}?>" value="">
+                                            <span class="m-form__help"><?=$t->{"Primeiro nome, sobrenome, nome composto ou apelido"}?></span>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">* Phone</label>
-                                        <div class="col-xl-9 col-lg-9">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                                                <input type="text" name="phone" class="form-control m-input" placeholder="" value="1-541-754-3010">
-                                            </div>
-                                            <span class="m-form__help">Enter your valid phone in US phone format. E.g: 1-541-754-3010</span>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
                                         <h3 class="m-form__heading-title">
-                                            Mailing Address
-                                            <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="Some help text goes here"></i>
+                                            Contato
+<!--                                            <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="Some help text goes here"></i>-->
                                         </h3>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">* Address Line 1:</label>
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Telefone celular"}?>: *</label>
                                         <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="address1" class="form-control m-input" placeholder="" value="Headquarters 1120 N Street Sacramento 916-654-5266">
-                                            <span class="m-form__help">Street address, P.O. box, company name, c/o</span>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
+                                                <input type="text" name="phone" class="form-control m-input" placeholder="<?=$t->{"(××)×××××-××××"}?>" value="">
+                                            </div>
+                                            <span class="m-form__help"><?=$t->{"Coloque o seu telefone no formato válido para o Brasil (××)×××××-××××"}?></span>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">Address Line 2:</label>
-                                        <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="address2" class="form-control m-input" placeholder="" value="P.O. Box 942873 Sacramento, CA 94273-0001">
-                                            <span class="m-form__help">Appartment, suite, unit, building, floor, etc</span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">* City:</label>
-                                        <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="city" class="form-control m-input" placeholder="" value="Polo Alto">
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">* State:</label>
-                                        <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="state" class="form-control m-input" placeholder="" value="California">
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">* Country:</label>
-                                        <div class="col-xl-9 col-lg-9">
-                                            <select name="country" class="form-control m-input">
-                                                <option value="">Select</option>
-                                                <option value="AF">Afghanistan</option>
-                                            </select>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -219,12 +179,12 @@
                             <div class="col-xl-8 offset-xl-2">
                                 <div class="m-form__section m-form__section--first">
                                     <div class="m-form__heading">
-                                        <h3 class="m-form__heading-title">Account Details</h3>
+                                        <h3 class="m-form__heading-title"><?=$t->{"Endereço"}?></h3>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-12">
-                                            <label class="form-control-label">* URL:</label>
-                                            <input type="url" name="account_url" class="form-control m-input" placeholder="" value="http://sinortech.vertoffice.com">
+                                            <label class="form-control-label"><?=$t->{"Rua / Avenida"}?>: *</label>
+                                            <input type="url" name="account_url" class="form-control m-input" placeholder="<?=$t->{"Ex: Rua Araguari"}?>" value="">
                                             <span class="m-form__help">Please enter your preferred URL to your dashboard</span>
                                         </div>
                                     </div>
@@ -238,110 +198,6 @@
                                             <label class="form-control-label">* Password:</label>
                                             <input type="password" name="account_password" class="form-control m-input" placeholder="" value="qwerty">
                                             <span class="m-form__help">Please use letters and at least one number and symbol</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                <div class="m-form__section">
-                                    <div class="m-form__heading">
-                                        <h3 class="m-form__heading-title">Client Settings</h3>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label">* User Group:</label>
-                                            <div class="m-radio-inline">
-                                                <label class="m-radio m-radio--solid m-radio--brand">
-                                                    <input type="radio" name="account_group" checked="" value="2"> Sales Person
-                                                    <span></span>
-                                                </label>
-                                                <label class="m-radio m-radio--solid m-radio--brand">
-                                                    <input type="radio" name="account_group" value="2"> Customer
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                            <span class="m-form__help">Please select user group</span>
-                                        </div>
-                                        <div class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label">* Communications:</label>
-                                            <div class="m-checkbox-inline">
-                                                <label class="m-checkbox m-checkbox--solid m-checkbox--brand">
-                                                    <input type="checkbox" name="account_communication[]" checked value="email"> Email
-                                                    <span></span>
-                                                </label>
-                                                <label class="m-checkbox m-checkbox--solid  m-checkbox--brand">
-                                                    <input type="checkbox" name="account_communication[]" value="sms"> SMS
-                                                    <span></span>
-                                                </label>
-                                                <label class="m-checkbox m-checkbox--solid  m-checkbox--brand">
-                                                    <input type="checkbox" name="account_communication[]" value="phone"> Phone
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                            <span class="m-form__help">Please select user communication options</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                <div class="m-form__section">
-                                    <div class="m-form__heading">
-                                        <h3 class="m-form__heading-title">Delivery Type</h3>
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <label class="m-option">
-																			<span class="m-option__control">
-																				<span class="m-radio m-radio--state-brand">
-																					<input type="radio" name="billing_delivery" value="">
-																					<span></span>
-																				</span>
-																			</span>
-                                                    <span class="m-option__label">
-																				<span class="m-option__head">
-																					<span class="m-option__title">
-																						Standart Delevery
-																					</span>
-																					<span class="m-option__focus">
-																						Free
-																					</span>
-																				</span>
-																				<span class="m-option__body">
-																					Estimated 14-20 Day Shipping
-																					(&nbsp;Duties end taxes may be due
-																					upon delivery&nbsp;)
-																				</span>
-																			</span>
-                                                </label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label class="m-option">
-																			<span class="m-option__control">
-																				<span class="m-radio m-radio--state-brand">
-																					<input type="radio" name="billing_delivery" value="">
-																					<span></span>
-																				</span>
-																			</span>
-                                                    <span class="m-option__label">
-																				<span class="m-option__head">
-																					<span class="m-option__title">
-																						Fast Delevery
-																					</span>
-																					<span class="m-option__focus">
-																						$&nbsp;8.00
-																					</span>
-																				</span>
-																				<span class="m-option__body">
-																					Estimated 2-5 Day Shipping
-																					(&nbsp;Duties end taxes may be due
-																					upon delivery&nbsp;)
-																				</span>
-																			</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="m-form__help">
-
-                                            <!--must use this helper element to display error message for the options-->
                                         </div>
                                     </div>
                                 </div>
@@ -568,7 +424,6 @@
     <!--end: Form Wizard-->
 </div>
 <script>
-    //== Class definition
 var WizardDemo = function () {
     //== Base elements
     var wizardEl = $('#m_wizard');
@@ -606,15 +461,15 @@ var WizardDemo = function () {
                 //=== Client Information(step 1)
                 //== Client details
                 name: {
-                    required: true
+                    required: false
                 },
                 email: {
                     required: true,
                     email: true
                 },
                 phone: {
-                    required: true,
-                    phoneUS: true
+                    required: false,
+                    phoneUS: false
                 },
 
                 //== Mailing address

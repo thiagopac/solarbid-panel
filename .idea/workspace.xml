@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="95aa136e-b204-4329-8dc7-8e7c087e05d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/footer.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/footer.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/header.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/header.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internationalization/pt_BR.json" beforeDir="false" afterPath="$PROJECT_DIR$/internationalization/pt_BR.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/setup-fisical-person.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/setup-fisical-person.phtml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,52 +11,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1052951331">
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="js" value="3" />
-          <entry key="json" value="1" />
-          <entry key="php" value="5" />
-          <entry key="phtml" value="9" />
-          <entry key="sql" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="3" />
-          <entry key="PHP" value="14" />
-          <entry key="SQL" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="phtml" value="245" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="PHP" value="245" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup-fisical-person.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+            <state relative-caret-position="562">
+              <caret line="217" column="100" lean-forward="true" selection-start-line="217" selection-start-column="100" selection-end-line="217" selection-end-column="100" />
             </state>
           </provider>
         </entry>
@@ -68,7 +26,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>jquer</find>
       <find>m_login_reset_submit</find>
       <find>customDataTag</find>
       <find>data</find>
@@ -98,6 +55,7 @@
       <find>/main</find>
       <find>main</find>
       <find>logout</find>
+      <find>account_communication</find>
     </findStrings>
     <replaceStrings>
       <replace>internationalization/&quot;.$this-&gt;lang.&quot;.json</replace>
@@ -138,7 +96,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,30 +117,7 @@
             <path>
               <item name="panel" type="b2602c69:ProjectViewProjectNode" />
               <item name="panel" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="panel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="panel" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="panel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="panel" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="panel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="panel" type="462c0819:PsiDirectoryNode" />
               <item name="body" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="panel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="panel" type="462c0819:PsiDirectoryNode" />
-              <item name="internationalization" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="panel" type="b2602c69:ProjectViewProjectNode" />
@@ -210,13 +144,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -239,9 +174,9 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21671991" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21033014" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -263,8 +198,8 @@
       <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="evolução" />
@@ -335,10 +270,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup-fisical-person.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+        <state relative-caret-position="562">
+          <caret line="217" column="100" lean-forward="true" selection-start-line="217" selection-start-column="100" selection-end-line="217" selection-end-column="100" />
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
