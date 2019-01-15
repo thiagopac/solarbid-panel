@@ -35,9 +35,9 @@
         <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
                 <li class="m-portlet__nav-item">
-                    <a href="#" data-toggle="m-tooltip" class="m-portlet__nav-link m-portlet__nav-link--icon" data-direction="left" data-width="auto" title="Get help with filling up this form">
+                    <!--<a href="#" data-toggle="m-tooltip" class="m-portlet__nav-link m-portlet__nav-link--icon" data-direction="left" data-width="auto" title="Get help with filling up this form">
                         <i class="flaticon-info m--icon-font-size-lg3"></i>
-                    </a>
+                    </a>-->
                 </li>
             </ul>
         </div>
@@ -350,7 +350,7 @@
     <!--end: Form Wizard-->
 </div>
 <script>
-var WizardDemo = function () {
+var WizardForm = function () {
     //== Base elements
     var wizardEl = $('#m_wizard');
     var formEl = $('#m_form');
@@ -384,56 +384,32 @@ var WizardDemo = function () {
 
             //== Validation rules
             rules: {
-                //=== Informações pessoais(step 1)
-                //== Dados pessoais
-                fullname: {
-                    required: true
-                },
-                nickname: {
-                    required: true
-                },
-
-                //== Contato
-                phone: {
-                    required: true,
-                    phoneUS: false
-                },
-
-                //== Dados de endereço(step 2)
-                street: {
-                    required: true
-                },
-                number: {
-                    required: true
-                },
-                neighborhood: {
-                    required: true
-                },
-                city: {
-                    required: true
-                },
-                state: {
-                    required: true
-                },
-                country: {
-                    required: true
-                },
-,
-
-                //=== Confirmação(step 3)
-                terms_of_use: {
-                    required: true
-                },
-                privacy_policy: {
-                    required: true
-                }
+                fullname: { required: true },
+                nickname: { required: true },
+                phone: { required: true,  phoneUS: false },
+                street: { required: true },
+                number: { required: true },
+                neighborhood: { required: true },
+                city: { required: true },
+                state: { required: true },
+                country: { required: true },
+                terms_of_use: { required: true },
+                privacy_policy: { required: true }
             },
 
             //== Validation messages
             messages: {
-                fullname: {
-                    required: "You must accept the Terms and Conditions agreement!"
-                }
+                fullname: { required: '<?=$t->{"Insira seu nome completo"}?>'},
+                nickname: { required: '<?=$t->{"Insira o termo como prefere ser chamado"}?>'},
+                phone: { required: '<?=$t->{"Coloque o seu telefone celular no formato (××)×××××-××××"}?>'},
+                street: { required: '<?=$t->{"Insira o nome da sua rua"}?>'},
+                number: { required: '<?=$t->{"Coloque o número da residência"}?>'},
+                neighborhood: { required: '<?=$t->{"Insira o nome do bairro ou região da residência"}?>'},
+                city: { required: '<?=$t->{"Insira o nome da cidade da residência"}?>'},
+                state: { required: '<?=$t->{"Escolha o estado"}?>'},
+                country: { required: '<?=$t->{"Marque o país"}?>'},
+                terms_of_use: { required: '<?=$t->{"É necessário concordar com os Termos de Uso para continuar"}?>'},
+                privacy_policy: { required: '<?=$t->{"É necessário concordar com a Política de Privacidade para continuar"}?>'}
             },
 
             //== Display error
@@ -441,10 +417,10 @@ var WizardDemo = function () {
                 mUtil.scrollTop();
 
                 swal({
-                    "title": "",
-                    "text": "There are some errors in your submission. Please correct them.",
-                    "type": "error",
-                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                    "title": '',
+                    "text": '<?=$t->{"Existem alguns erros no formulário. Por favor, corrija-os para continuar."}?>',
+                    "type": 'error',
+                    "confirmButtonClass": 'btn btn-secondary m-btn m-btn--wide'
                 });
             },
 
@@ -473,10 +449,10 @@ var WizardDemo = function () {
                         //mApp.unblock(formEl);
 
                         swal({
-                            "title": "",
-                            "text": "The application has been successfully submitted!",
-                            "type": "success",
-                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                            "title": '',
+                            "text": '<?=$t->{"Seu cadastro foi concluído com sucesso."}?>',
+                            "type": 'success',
+                            "confirmButtonClass": 'btn btn-secondary m-btn m-btn--wide'
                         });
                     }
                 });
@@ -498,6 +474,6 @@ var WizardDemo = function () {
 }();
 
 jQuery(document).ready(function() {
-    WizardDemo.init();
+    WizardForm.init();
 });
 </script>
