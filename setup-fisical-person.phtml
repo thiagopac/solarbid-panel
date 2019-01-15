@@ -5,6 +5,9 @@
     $fisicalPerson = unserialize($_SESSION['FISICAL_PERSON']);
     $legalPerson = unserialize($_SESSION['LEGAL_PERSON']);
 
+    $termsOfUse = TermsOfUse::find("language = '$user->language' ORDER BY created_at DESC LIMIT 1");
+    $privacyPolicy = PrivacyPolicy::find("language = '$user->language' ORDER BY created_at DESC LIMIT 1");
+
     ### PAGE STRUCTURE SESSION VARS
     $_SESSION['top-menu-admin'] = $user->role_id == 1 ? true : false;
     $_SESSION['top-quick-search'] = false;
@@ -134,14 +137,14 @@
                                     <div class="form-group m-form__group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Nome completo"}?>: *</label>
                                         <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="name" class="form-control m-input" placeholder="<?=$t->{"John Doe"}?>" value="">
+                                            <input type="text" name="fullname" class="form-control m-input" placeholder="<?=$t->{"Ex: João Andrade da Silva"}?>" value="">
                                             <span class="m-form__help"><?=$t->{"Coloque seu nome completo, sem omitir ou abreviar nenhum nome"}?></span>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Como prefere ser chamado"}?>: *</label>
                                         <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="name" class="form-control m-input" placeholder="<?=$t->{"John"}?>" value="">
+                                            <input type="text" name="nickname" class="form-control m-input" placeholder="<?=$t->{"Ex: João"}?>" value="">
                                             <span class="m-form__help"><?=$t->{"Primeiro nome, sobrenome, nome composto ou apelido"}?></span>
                                         </div>
                                     </div>
@@ -182,180 +185,98 @@
                                         <h3 class="m-form__heading-title"><?=$t->{"Endereço"}?></h3>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-lg-12">
-                                            <label class="form-control-label"><?=$t->{"Rua / Avenida"}?>: *</label>
-                                            <input type="url" name="account_url" class="form-control m-input" placeholder="<?=$t->{"Ex: Rua Araguari"}?>" value="">
-                                            <span class="m-form__help">Please enter your preferred URL to your dashboard</span>
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Rua / Avenida / Alameda / Travessa"}?>: *</label>
+                                            <input type="text" name="street" class="form-control m-input" placeholder="<?=$t->{"Ex: Rua Araguari"}?>" value="">
+                                            <span class="m-form__help"><?=$t->{"Logradouro da residência"}?></span>
+                                        </div>
+                                        <div class="col-lg-3 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Número"}?>: *</label>
+                                            <input type="text" name="number" class="form-control m-input" placeholder="<?=$t->{"Ex: 100"}?>" value="">
+                                            <span class="m-form__help"><?=$t->{"Número da residência"}?></span>
+                                        </div>
+                                        <div class="col-lg-3 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Bairro / Região"}?>: *</label>
+                                            <input type="text" name="neighborhood" class="form-control m-input" placeholder="<?=$t->{"Ex: Santo Agostinho"}?>" value="">
+                                            <span class="m-form__help"><?=$t->{"Bairro ou região da residência"}?></span>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label">* Username:</label>
-                                            <input type="text" name="account_username" class="form-control m-input" placeholder="" value="nick.stone">
-                                            <span class="m-form__help">Your username to login to your dashboard</span>
+                                            <label class="form-control-label"><?=$t->{"Cidade"}?>: *</label>
+                                            <input type="text" name="city" class="form-control m-input" placeholder="<?=$t->{"Ex: Belo Horizonte"}?>" value="">
+                                            <span class="m-form__help"><?=$t->{"Cidade da residência"}?></span>
                                         </div>
-                                        <div class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label">* Password:</label>
-                                            <input type="password" name="account_password" class="form-control m-input" placeholder="" value="qwerty">
-                                            <span class="m-form__help">Please use letters and at least one number and symbol</span>
+                                        <div class="col-lg-3 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Estado"}?>: *</label>
+                                            <select name="state" class="form-control m-input">
+                                                <option value=""><?=$t->{"Selecione..."}?></option>
+                                                <option value="AC">Acre</option>
+                                                <option value="AL">Alagoas</option>
+                                                <option value="AP">Amapá</option>
+                                                <option value="AM">Amazonas</option>
+                                                <option value="BA">Bahia</option>
+                                                <option value="CE">Ceará</option>
+                                                <option value="DF">Distrito Federal</option>
+                                                <option value="ES">Espírito Santo</option>
+                                                <option value="GO">Goiás</option>
+                                                <option value="MA">Maranhão</option>
+                                                <option value="MT">Mato Grosso</option>
+                                                <option value="MS">Mato Grosso do Sul</option>
+                                                <option value="MG">Minas Gerais</option>
+                                                <option value="PA">Pará</option>
+                                                <option value="PB">Paraíba</option>
+                                                <option value="PR">Paraná</option>
+                                                <option value="PE">Pernambuco</option>
+                                                <option value="PI">Piauí</option>
+                                                <option value="RJ">Rio de Janeiro</option>
+                                                <option value="RN">Rio Grande do Norte</option>
+                                                <option value="RS">Rio Grande do Sul</option>
+                                                <option value="RO">Rondônia</option>
+                                                <option value="RR">Roraima</option>
+                                                <option value="SC">Santa Catarina</option>
+                                                <option value="SP">São Paulo</option>
+                                                <option value="SE">Sergipe</option>
+                                                <option value="TO">Tocantins</option>
+                                            </select>
+                                            <span class="m-form__help"><?=$t->{"Estado da residência"}?></span>
+                                        </div>
+                                        <div class="col-lg-3 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"País"}?>: *</label>
+                                            <select name="country" class="form-control m-input">
+                                                <option value=""><?=$t->{"Selecione..."}?></option>
+                                                <option value="BRA">Brasil</option>
+                                                <!-- 3 DIGITS COUNTRY CODES: https://www.worldatlas.com/aatlas/ctycodes.htm -->
+                                            </select>
+                                            <span class="m-form__help"><?=$t->{"País da residência"}?></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <!--end: Form Wizard Step 2-->
 
                     <!--begin: Form Wizard Step 3-->
                     <div class="m-wizard__form-step" id="m_wizard_form_step_3">
                         <div class="row">
                             <div class="col-xl-8 offset-xl-2">
-
                                 <!--begin::Section-->
-                                <ul class="nav nav-tabs m-tabs-line--2x m-tabs-line m-tabs-line--danger" role="tablist">
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_form_confirm_1" role="tab">1. Client Information</a>
-                                    </li>
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_form_confirm_2" role="tab">2. Account Setup</a>
-                                    </li>
-                                    <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_form_confirm_3" role="tab">3. Billing Setup</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content m--margin-top-40">
-                                    <div class="tab-pane active" id="m_form_confirm_1" role="tabpanel">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__heading">
-                                                <h4 class="m-form__heading-title">Client Details</h4>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Name:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">Nick Stone</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Email:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">nick.stone@gmail.com</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Phone</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">+206-78-55034890</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                        <div class="m-form__section">
-                                            <div class="m-form__heading">
-                                                <h4 class="m-form__heading-title">Corresponding Address <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="Some help text goes here"></i></h4>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Address Line 1:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">Headquarters 1120 N Street Sacramento 916-654-5266</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Address Line 2:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">P.O. Box 942873 Sacramento, CA 94273-0001</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">City:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">Polo Alto</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">State:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">California</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Country:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">USA</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="m_form_confirm_2" role="tabpanel">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__heading">
-                                                <h4 class="m-form__heading-title">Account Details</h4>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">URL:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">sinortech.vertoffice.com</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Username:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">sinortech.admin</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Password:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">*********</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                        <div class="m-form__section">
-                                            <div class="m-form__heading">
-                                                <h4 class="m-form__heading-title">Account Details</h4>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">URL:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">sinortech.vertoffice.com</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Username:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">sinortech.admin</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group m-form__group--sm row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Password:</label>
-                                                <div class="col-xl-9 col-lg-9">
-                                                    <span class="m-form__control-static">*********</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="m_form_confirm_3" role="tabpanel">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__section">
-                                                <div class="m-form__heading">
-                                                    <h4 class="m-form__heading-title">Client Settings</h4>
-                                                </div>
-                                                <div class="form-group m-form__group m-form__group--sm row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">User Group:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-form__control-static">Customer</span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group m-form__group--sm row">
-                                                    <label class="col-xl-3 col-lg-3 col-form-label">Communications:</label>
-                                                    <div class="col-xl-9 col-lg-9">
-                                                        <span class="m-form__control-static">Phone, Email</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                <div class="m-form__heading" style="text-align: center">
+                                    <h3 class="m-form__heading-title"><?=$t->{"Termos de Uso"}?></h3>
+                                </div>
+
+                                <div class="m-scrollable m-scroller ps ps--active-y" data-scrollbar-shown="true" data-scrollable="true" data-height="300" style="overflow:hidden; height: 300px; padding: 20px; margin: 10px 0 30px 0; border: 4px solid #efefef">
+                                    <?=$termsOfUse->text?>
+                                </div>
+
+                                <div class="m-form__heading" style="text-align: center">
+                                    <h3 class="m-form__heading-title"><?=$t->{"Política de Privacidade"}?></h3>
+                                </div>
+
+                                <div class="m-scrollable m-scroller ps ps--active-y" data-scrollbar-shown="true" data-scrollable="true" data-height="300" style="overflow:hidden; height: 300px; padding: 20px; margin: 10px 0 30px 0; border: 4px solid #efefef">
+                                    <?=$privacyPolicy->text?>
                                 </div>
 
                                 <!--end::Section-->
@@ -365,9 +286,14 @@
                                 <div class="form-group m-form__group m-form__group--sm row">
                                     <div class="col-xl-12">
                                         <div class="m-checkbox-inline">
-                                            <label class="m-checkbox m-checkbox--solid m-checkbox--brand">
-                                                <input type="checkbox" name="accept" value="1">
-                                                Click here to indicate that you have read and agree to the terms presented in the Terms and Conditions agreement
+                                            <label class="m-checkbox m-checkbox--solid m-checkbox--success pull-left">
+                                                <input type="checkbox" name="terms_of_use" value="<?=$termsOfUse->id?>">
+                                                <?=$t->{"Eu li e concordo com os Termos de Uso"}?>
+                                                <span></span>
+                                            </label>
+                                            <label class="m-checkbox m-checkbox--solid m-checkbox--success pull-right">
+                                                <input type="checkbox" name="privacy_policy" value="<?=$privacyPolicy->id?>">
+                                                <?=$t->{"Eu li e concordo com a Política de Privacidade"}?>
                                                 <span></span>
                                             </label>
                                         </div>
@@ -391,20 +317,20 @@
                                 <a href="#" class="btn btn-secondary m-btn m-btn--custom m-btn--icon" data-wizard-action="prev">
 															<span>
 																<i class="la la-arrow-left"></i>&nbsp;&nbsp;
-																<span>Back</span>
+																<span><?=$t->{"Voltar"}?></span>
 															</span>
                                 </a>
                             </div>
                             <div class="col-lg-4 m--align-right">
-                                <a href="#" class="btn btn-primary m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
+                                <a href="#" class="btn btn-info m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
 															<span>
 																<i class="la la-check"></i>&nbsp;&nbsp;
-																<span>Submit</span>
+																<span><?=$t->{"Concluir cadastro"}?></span>
 															</span>
                                 </a>
                                 <a href="#" class="btn btn-warning m-btn m-btn--custom m-btn--icon" data-wizard-action="next">
 															<span>
-																<span>Save & Continue</span>&nbsp;&nbsp;
+																<span><?=$t->{"Salvar & Continuar"}?></span>&nbsp;&nbsp;
 																<i class="la la-arrow-right"></i>
 															</span>
                                 </a>
@@ -458,22 +384,29 @@ var WizardDemo = function () {
 
             //== Validation rules
             rules: {
-                //=== Client Information(step 1)
-                //== Client details
-                name: {
-                    required: false
+                //=== Informações pessoais(step 1)
+                //== Dados pessoais
+                fullname: {
+                    required: true
                 },
-                email: {
-                    required: true,
-                    email: true
+                nickname: {
+                    required: true
                 },
+
+                //== Contato
                 phone: {
-                    required: false,
+                    required: true,
                     phoneUS: false
                 },
 
-                //== Mailing address
-                address1: {
+                //== Dados de endereço(step 2)
+                street: {
+                    required: true
+                },
+                number: {
+                    required: true
+                },
+                neighborhood: {
                     required: true
                 },
                 city: {
@@ -482,90 +415,23 @@ var WizardDemo = function () {
                 state: {
                     required: true
                 },
-                city: {
-                    required: true
-                },
                 country: {
                     required: true
                 },
+,
 
-                //=== Client Information(step 2)
-                //== Account Details
-                account_url: {
-                    required: true,
-                    url: true
-                },
-                account_username: {
-                    required: true,
-                    minlength: 4
-                },
-                account_password: {
-                    required: true,
-                    minlength: 6
-                },
-
-                //== Client Settings
-                account_group: {
-                     required: true
-                },
-                'account_communication[]': {
+                //=== Confirmação(step 3)
+                terms_of_use: {
                     required: true
                 },
-
-                //=== Client Information(step 3)
-                //== Billing Information
-                billing_card_name: {
-                    required: true
-                },
-                billing_card_number: {
-                    required: true,
-                    creditcard: true
-                },
-                billing_card_exp_month: {
-                    required: true
-                },
-                billing_card_exp_year: {
-                    required: true
-                },
-                billing_card_cvv: {
-                    required: true,
-                    minlength: 2,
-                    maxlength: 3
-                },
-
-                //== Billing Address
-                billing_address_1: {
-                    required: true
-                },
-                billing_address_2: {
-
-                },
-                billing_city: {
-                    required: true
-                },
-                billing_state: {
-                    required: true
-                },
-                billing_zip: {
-                    required: true,
-                    number: true
-                },
-                billing_delivery: {
-                    required: true
-                },
-
-                //=== Confirmation(step 4)
-                accept: {
+                privacy_policy: {
                     required: true
                 }
             },
 
             //== Validation messages
             messages: {
-                'account_communication[]': {
-                    required: 'You must select at least one communication option'
-                },
-                accept: {
+                fullname: {
                     required: "You must accept the Terms and Conditions agreement!"
                 }
             },

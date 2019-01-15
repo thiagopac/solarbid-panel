@@ -21,6 +21,8 @@
         public $mail_notification;
         public $activated;
         public $last_seen;
+        public $privacy_police_id;
+        public $terms_of_use_id;
 
         protected static $table = "user";
 
@@ -40,6 +42,8 @@
                 $this->mail_notification = json_decode($array['mail_notification']);
                 $this->activated = $array['activated'];
                 $this->last_seen = $array['last_seen'];
+                $this->privacy_police_id = $array['privacy_police_id'];
+                $this->terms_of_use_id = $array['terms_of_use_id'];
             }
         }
 
