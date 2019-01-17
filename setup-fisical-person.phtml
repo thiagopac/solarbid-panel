@@ -8,15 +8,6 @@
     $termsOfUse = TermsOfUse::find("language = '$user->language' ORDER BY created_at DESC LIMIT 1");
     $privacyPolicy = PrivacyPolicy::find("language = '$user->language' ORDER BY created_at DESC LIMIT 1");
 
-    ### PAGE STRUCTURE SESSION VARS
-    $_SESSION['top-menu-admin'] = $user->role_id == 1 ? true : false;
-    $_SESSION['top-quick-search'] = false;
-    $_SESSION['top-notifications'] = false;
-    $_SESSION['top-quick-actions'] = false;
-    $_SESSION['top-profile'] = false;
-    $_SESSION['top-quick-sidebar'] = false;
-    $_SESSION['menu-left'] = false;
-
     $t = new Translate();
 
 ?>
@@ -123,6 +114,8 @@
 
             <form class="m-form m-form--label-align-left- m-form--state-" id="m_form">
 
+                <input type="hidden" name="userId" value="<?=$user->id?>">
+
                 <!--begin: Form Body -->
                 <div class="m-portlet__body">
 
@@ -148,6 +141,13 @@
                                             <span class="m-form__help"><?=$t->{"Primeiro nome, sobrenome, nome composto ou apelido"}?></span>
                                         </div>
                                     </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"CPF"}?>: *</label>
+                                        <div class="col-xl-9 col-lg-9">
+                                            <input type="text" id="social_security" name="social_security" class="form-control m-input" placeholder="<?=$t->{"Ex: 111.222.333-44"}?>" value="">
+                                            <span class="m-form__help"><?=$t->{"Digite apenas números, o formato será aplicado automaticamente"}?></span>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
@@ -163,9 +163,9 @@
                                         <div class="col-xl-9 col-lg-9">
                                             <div class="input-group">
                                                 <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                                                <input type="text" name="phone" class="form-control m-input" placeholder="<?=$t->{"(××)×××××-××××"}?>" value="">
+                                                <input type="text" id="phone" name="phone" class="form-control m-input" placeholder="<?=$t->{"(××)×××××-××××"}?>" value="">
                                             </div>
-                                            <span class="m-form__help"><?=$t->{"Coloque o seu telefone no formato válido para o Brasil (××)×××××-××××"}?></span>
+                                            <span class="m-form__help"><?=$t->{"Coloque o número de seu telefone. O formato será aplicado automaticamente"}?></span>
                                         </div>
                                     </div>
 
@@ -245,8 +245,7 @@
                                             <label class="form-control-label"><?=$t->{"País"}?>: *</label>
                                             <select name="country" class="form-control m-input">
                                                 <option value=""><?=$t->{"Selecione..."}?></option>
-                                                <option value="BRA">Brasil</option>
-                                                <!-- 3 DIGITS COUNTRY CODES: https://www.worldatlas.com/aatlas/ctycodes.htm -->
+                                                <option value="Brasil">Brasil</option>
                                             </select>
                                             <span class="m-form__help"><?=$t->{"País da residência"}?></span>
                                         </div>
@@ -350,130 +349,168 @@
     <!--end: Form Wizard-->
 </div>
 <script>
-var WizardForm = function () {
-    //== Base elements
-    var wizardEl = $('#m_wizard');
-    var formEl = $('#m_form');
-    var validator;
-    var wizard;
+    $(document).ready(function(){
+        $("#social_security").mask('000.000.000-00', {reverse: false});
+        $("#phone").mask('(00)00000-0000', {reverse: false});
+    });
 
-    //== Private functions
-    var initWizard = function () {
-        //== Initialize form wizard
-        wizard = new mWizard('m_wizard', {
-            startStep: 1
-        });
 
-        //== Validation before going to next page
-        wizard.on('beforeNext', function(wizard) {
-            if (validator.form() !== true) {
-                wizard.stop();  // don't go to the next step
-            }
-        })
+    var WizardForm = function () {
+        //== Base elements
+        var wizardEl = $('#m_wizard');
+        var formEl = $('#m_form');
+        var validator;
+        var wizard;
 
-        //== Change event
-        wizard.on('change', function(wizard) {
-            mUtil.scrollTop();
-        });
-    }
+        //== Private functions
+        var initWizard = function () {
+            //== Initialize form wizard
+            wizard = new mWizard('m_wizard', {
+                startStep: 1
+            });
 
-    var initValidation = function() {
-        validator = formEl.validate({
-            //== Validate only visible fields
-            ignore: ":hidden",
+            //== Validation before going to next page
+            wizard.on('beforeNext', function(wizard) {
+                if (validator.form() !== true) {
+                    wizard.stop();  // don't go to the next step
+                }
+            })
 
-            //== Validation rules
-            rules: {
-                fullname: { required: true },
-                nickname: { required: true },
-                phone: { required: true,  phoneUS: false },
-                street: { required: true },
-                number: { required: true },
-                neighborhood: { required: true },
-                city: { required: true },
-                state: { required: true },
-                country: { required: true },
-                terms_of_use: { required: true },
-                privacy_policy: { required: true }
-            },
-
-            //== Validation messages
-            messages: {
-                fullname: { required: '<?=$t->{"Insira seu nome completo"}?>'},
-                nickname: { required: '<?=$t->{"Insira o termo como prefere ser chamado"}?>'},
-                phone: { required: '<?=$t->{"Coloque o seu telefone celular no formato (××)×××××-××××"}?>'},
-                street: { required: '<?=$t->{"Insira o nome da sua rua"}?>'},
-                number: { required: '<?=$t->{"Coloque o número da residência"}?>'},
-                neighborhood: { required: '<?=$t->{"Insira o nome do bairro ou região da residência"}?>'},
-                city: { required: '<?=$t->{"Insira o nome da cidade da residência"}?>'},
-                state: { required: '<?=$t->{"Escolha o estado"}?>'},
-                country: { required: '<?=$t->{"Marque o país"}?>'},
-                terms_of_use: { required: '<?=$t->{"É necessário concordar com os Termos de Uso para continuar"}?>'},
-                privacy_policy: { required: '<?=$t->{"É necessário concordar com a Política de Privacidade para continuar"}?>'}
-            },
-
-            //== Display error
-            invalidHandler: function(event, validator) {
+            //== Change event
+            wizard.on('change', function(wizard) {
                 mUtil.scrollTop();
-
-                swal({
-                    "title": '',
-                    "text": '<?=$t->{"Existem alguns erros no formulário. Por favor, corrija-os para continuar."}?>',
-                    "type": 'error',
-                    "confirmButtonClass": 'btn btn-secondary m-btn m-btn--wide'
-                });
-            },
-
-            //== Submit valid form
-            submitHandler: function (form) {
-
-            }
-        });
-    }
-
-    var initSubmit = function() {
-        var btn = formEl.find('[data-wizard-action="submit"]');
-
-        btn.on('click', function(e) {
-            e.preventDefault();
-
-            if (validator.form()) {
-                //== See: src\js\framework\base\app.js
-                mApp.progress(btn);
-                //mApp.block(formEl);
-
-                //== See: http://malsup.com/jquery/form/#ajaxSubmit
-                formEl.ajaxSubmit({
-                    success: function() {
-                        mApp.unprogress(btn);
-                        //mApp.unblock(formEl);
-
-                        swal({
-                            "title": '',
-                            "text": '<?=$t->{"Seu cadastro foi concluído com sucesso."}?>',
-                            "type": 'success',
-                            "confirmButtonClass": 'btn btn-secondary m-btn m-btn--wide'
-                        });
-                    }
-                });
-            }
-        });
-    }
-
-    return {
-        // public functions
-        init: function() {
-            wizardEl = $('#m_wizard');
-            formEl = $('#m_form');
-
-            initWizard();
-            initValidation();
-            initSubmit();
+            });
         }
-    };
-}();
 
-jQuery(document).ready(function() {
-    WizardForm.init();
-});
+        var initValidation = function() {
+            validator = formEl.validate({
+                //== Validate only visible fields
+                ignore: ":hidden",
+
+                //== Validation rules
+                rules: {
+                    fullname: { required: true },
+                    nickname: { required: true },
+                    social_security: { required: true },
+                    phone: { required: true,  phoneUS: false },
+                    street: { required: true },
+                    number: { required: true },
+                    neighborhood: { required: true },
+                    city: { required: true },
+                    state: { required: true },
+                    country: { required: true },
+                    terms_of_use: { required: true },
+                    privacy_policy: { required: true }
+                },
+
+                //== Validation messages
+                messages: {
+                    fullname: { required: '<?=$t->{"Insira seu nome completo"}?>'},
+                    nickname: { required: '<?=$t->{"Insira o termo como prefere ser chamado"}?>'},
+                    social_security: { required: '<?=$t->{"Insira o seu CPF. Digite somente os números"}?>'},
+                    phone: { required: '<?=$t->{"Coloque o seu telefone celular no formato (××)×××××-××××"}?>'},
+                    street: { required: '<?=$t->{"Insira o nome da sua rua"}?>'},
+                    number: { required: '<?=$t->{"Coloque o número da residência"}?>'},
+                    neighborhood: { required: '<?=$t->{"Insira o nome do bairro ou região da residência"}?>'},
+                    city: { required: '<?=$t->{"Insira o nome da cidade da residência"}?>'},
+                    state: { required: '<?=$t->{"Escolha o estado"}?>'},
+                    country: { required: '<?=$t->{"Marque o país"}?>'},
+                    terms_of_use: { required: '<?=$t->{"É necessário concordar com os Termos de Uso para continuar"}?>'},
+                    privacy_policy: { required: '<?=$t->{"É necessário concordar com a Política de Privacidade para continuar"}?>'}
+                },
+
+                //== Display error
+                invalidHandler: function(event, validator) {
+                    mUtil.scrollTop();
+
+                    swal({
+                        "title": '',
+                        "text": '<?=$t->{"Existem alguns erros no formulário. Por favor, corrija-os para continuar."}?>',
+                        "type": 'error',
+                        "confirmButtonClass": 'btn btn-secondary m-btn m-btn--wide'
+                    });
+                },
+
+                //== Submit valid form
+                submitHandler: function (form) {
+
+                }
+            });
+        }
+
+        var showMessage = function(type, message) {
+
+            swal({
+                "title": '',
+                "text": message,
+                "type": type,
+                "confirmButtonClass": 'btn btn-secondary m-btn m-btn--wide'
+            });
+        }
+
+        var initSubmit = function() {
+            var btn = formEl.find('[data-wizard-action="submit"]');
+
+            btn.on('click', function(e) {
+                e.preventDefault();
+
+                if (validator.form()) {
+                    //== See: src\js\framework\base\app.js
+                    mApp.progress(btn);
+                    //mApp.block(formEl);
+
+                    //== See: http://malsup.com/jquery/form/#ajaxSubmit
+                    formEl.ajaxSubmit({
+                        url: './actions/setup-fisical-person.php',
+                        type: 'POST',
+                        contentType: "application/x-www-form-urlencoded",
+                        data: formEl.serialize(),
+                        success: function(response) {
+
+                            mApp.unprogress(btn);
+                            //mApp.unblock(formEl);
+
+                            console.log(response);
+
+                            if (response.status == 1) {
+                                showMessage('success', '<?=$t->{"Seu cadastro foi concluído com sucesso."}?>');
+
+                                setTimeout(function() {
+                                    if (response.route != null) {
+                                        location.href = response.route;
+                                    }
+                                }, 2000);
+
+                            }else{
+                                showMessage('error', '<?=$t->{"Houve um problema ao efetuar o seu cadastro. Tente novamente mais tarde."}?>');
+
+                                setTimeout(function() {
+                                    if (response.route != null) {
+                                        location.href = response.route;
+                                    }
+                                }, 2000);
+                            }
+
+                        }
+                    });
+                }
+            });
+        }
+
+        return {
+            // public functions
+            init: function() {
+                wizardEl = $('#m_wizard');
+                formEl = $('#m_form');
+
+                initWizard();
+                initValidation();
+                initSubmit();
+            }
+        };
+    }();
+
+    jQuery(document).ready(function() {
+        WizardForm.init();
+    });
 </script>

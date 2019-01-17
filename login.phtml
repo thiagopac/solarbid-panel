@@ -147,11 +147,11 @@
                                     <h5 style="padding: 10px"><?= $t->{'Tipo de cadastro'}; ?></h5>
                                     <div class="m-radio-inline">
                                         <label class="m-radio">
-                                            <input type="radio" name="registry" value="1"> <?= $t->{'Pessoa Física'}; ?>
+                                            <input type="radio" name="registry" id="registry_fisical_person" value="1"> <?= $t->{'Pessoa Física'}; ?>
                                             <span></span>
                                         </label>
                                         <label class="m-radio">
-                                            <input type="radio" name="registry" value="2"> <?= $t->{'Pessoa Jurídica'}; ?>
+                                            <input type="radio" name="registry" id="registry_legal_person" value="2"> <?= $t->{'Pessoa Jurídica'}; ?>
                                             <span></span>
                                         </label>
                                     </div>
@@ -179,7 +179,7 @@
                                                 <label class="m-option">
 																<span class="m-option__control">
 																	<span class="m-radio m-radio--state-success">
-																		<input type="radio" name="role" value="customer">
+																		<input type="radio" name="role" value="customer" id="role_customer">
 																		<span></span>
 																	</span>
 																</span>
@@ -199,7 +199,7 @@
                                                 <label class="m-option">
 																<span class="m-option__control">
 																	<span class="m-radio m-radio--state-danger">
-																		<input type="radio" name="role" value="provider">
+																		<input type="radio" name="role" value="provider" id="role_provider">
 																		<span></span>
 																	</span>
 																</span>
@@ -333,16 +333,27 @@
 	<!-- end::Body -->
 </html>
 <script>
+
+    $('#m_login input[name=registry]').click(function() {
+        if ($('#registry_fisical_person').is(':checked')){
+            console.log("tava checado");
+            $('#role_provider').prop("disabled", true);
+            $('#role_provider').prop("checked", false);
+
+        }else{
+            console.log("não tava checado");
+            $('#role_provider').prop("disabled", false);
+        }
+    });
+
+
 //== Class Definition
 var SnippetLogin = function() {
 
     var login = $('#m_login');
 
     var showMsg = function(form, type, msg) {
-        var alert = $('<div class="m-alert m-alert--outline alert alert-' + type + ' alert-dismissible" role="alert">\
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>\
-        <span></span>\
-    </div>');
+        var alert = $('<div class="m-alert m-alert--outline alert alert-' + type + ' alert-dismissible" role="alert">\ <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>\ <span></span>\ </div>');
 
         form.find('.alert').remove();
         alert.prependTo(form);
@@ -446,14 +457,22 @@ var SnippetLogin = function() {
                             //reset button to original state
                             btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
 
-                            location.href = "./router?page=dashboard";
+                            if (response.route != null) {
+                                location.href = response.route;
+                            }
 
                         }, 2000);
 
                     } else {
                         setTimeout(function() {
+
                             btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
                             showMsg(form, 'danger', response.description);
+
+                            if (response.route != null) {
+                                location.href = response.route;
+                            }
+
                         }, 2000);
                     }
                 }
@@ -534,12 +553,22 @@ var SnippetLogin = function() {
                             signInForm.clearForm();
                             signInForm.validate().resetForm();
 
+                            if (response.route != null) {
+                                location.href = response.route;
+                            }
+
                         }, 3000);
 
                     } else {
                         setTimeout(function() {
+
                             btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
                             showMsg(form, response.type, response.description);
+
+                            if (response.route != null) {
+                                location.href = response.route;
+                            }
+
                         }, 2000);
                     }
 
@@ -587,7 +616,6 @@ var SnippetLogin = function() {
                         form.clearForm();
                         form.validate().resetForm();
 
-
                         setTimeout(function() {
 
                             //reset button to original state
@@ -599,12 +627,22 @@ var SnippetLogin = function() {
                             signInForm.clearForm();
                             signInForm.validate().resetForm();
 
+                            if (response.route != null) {
+                                location.href = response.route;
+                            }
+
                         }, 2000);
 
                     } else {
                         setTimeout(function() {
+
                             btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
                             showMsg(form, 'danger', response.description);
+
+                            if (response.route != null) {
+                                location.href = response.route;
+                            }
+
                         }, 2000);
                     }
 
@@ -650,9 +688,19 @@ var UserAccountValidation = function() {
                 if (response.status == 1) {
                     //deu certo
                     toastr[response.type](response.description);
+
+                    if (response.route != null) {
+                        location.href = response.route;
+                    }
+
                 } else {
                     //deu errado
                     toastr[response.type](response.description);
+
+                    if (response.route != null) {
+                        location.href = response.route;
+                    }
+
                 }
 
             }

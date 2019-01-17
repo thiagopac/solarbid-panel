@@ -6,7 +6,13 @@ class FisicalPerson {
 	public $fullname;
 	public $nickname;
 	public $social_security;
-	public $national_card;
+	public $phone;
+	public $street;
+	public $number;
+	public $neighborhood;
+	public $city;
+	public $state;
+	public $country;
 	public $user_id;
 
 	protected static $table = "fisical_person";
@@ -18,7 +24,13 @@ class FisicalPerson {
 			$this->fullname = $array['fullname'];
 			$this->nickname = $array['nickname'];
 			$this->social_security = $array['social_security'];
-			$this->national_card = $array['national_card'];
+			$this->phone = $array['phone'];
+			$this->phone = $array['street'];
+			$this->phone = $array['number'];
+			$this->phone = $array['neighborhood'];
+			$this->phone = $array['city'];
+			$this->phone = $array['state'];
+			$this->phone = $array['country'];
 			$this->user_id = $array['user_id'];
 		}
   }

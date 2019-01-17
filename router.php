@@ -22,6 +22,11 @@
 
     switch ($page) {
 
+        case "login":
+            session_destroy();
+            header("Location: ./login");
+            break;
+
         case "logout":
             LogUser::addUserLog($user->id, $t->{"Fez logout na plataforma"});
             session_destroy();

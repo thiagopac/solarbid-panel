@@ -303,4 +303,8 @@
 		echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 	}
 
+	function fnLeaveOnlyNumbers($string){
+		return preg_replace("/[^0-9]/", "", $string);
+	}
+
 ?>

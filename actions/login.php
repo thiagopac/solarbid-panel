@@ -17,8 +17,6 @@
 
     $t = new Translate();
 
-//    var_dump(Audit::find("id = 1"));
-
 	//se estiver verificando a nova conta
     if(isset($_POST['account-activate']) && !empty($_POST['account-activate'])) {
 
@@ -40,6 +38,7 @@
 
     }
 
+    //se estiver fazendo login
 	if ($type == "sign-in"){
 
         ### INPUTS
@@ -68,7 +67,7 @@
                     $_SESSION['LEGAL_PERSON'] = serialize($legalPerson);
                 }
 
-                $content = array("last_seen" => date("Y-m-d H:i:s") , "id" => $user->id);
+                $content = array("last_seen" => date("Y-m-d H:i:s"), "id" => $user->id);
                 User::save($content);
 
                 $inserted = Audit::insertAudit($user->id, "Efetuou login");
@@ -78,12 +77,13 @@
 
                 Mail::sendMailUserLoggedIn($user, $audit);
 
-                $response = new Response(["status" => "1", "type" => "success", "title" => $t->{"Sucesso"}, "description" => $t->{"Login efetuado com sucesso"}]);
+                $response = new Response(["status" => "1", "type" => "success", "route" => "./router?page=dashboard", "title" => $t->{"Sucesso"}, "description" => $t->{"Login efetuado com sucesso"}]);
             }
         }
 
         echo json_encode($response, JSON_NUMERIC_CHECK);
 
+    //se estiver se cadastrando
 	}else if($type == "sign-up"){
 
         ### INPUTS
@@ -93,9 +93,8 @@
         $strEmail = strtolower(addslashes($_POST['email']));
         $role = ($_POST['role']);
 
-        //TODO: alterar para combos com países e idiomas possíveis
-        $languageId = 1;
-        $countryId = 1;
+        //TODO: alterar para idiomas possíveis
+        $language = "pt_BR";
 
         $hpassword = password_hash($strPassword, PASSWORD_DEFAULT);
 
@@ -111,7 +110,7 @@
                 break;
         }
 
-        $content = array("username" => $strUsername, "password" => $hpassword, "email" => $strEmail, "country_id" => $countryId, "language_id" => $languageId, "role_id" => $roleId, "registry_type_id" => $registry);
+        $content = array("username" => $strUsername, "password" => $hpassword, "email" => $strEmail, "language_id" => $languageId, "role_id" => $roleId, "registry_type_id" => $registry);
 
 
         //checar se username já não está em uso
@@ -123,7 +122,7 @@
 
             if ($registered != null){
 
-                Audit::insertAudit($registered->id,  "Se cadastrou");
+                Audit::insertAudit($registered->id,"Se cadastrou");
                 Mail::sendMailActivateAccountCreation($registered);
                 LogUser::addUserLog($user->id, $t->{"Se cadastrou na plataforma"});
 
@@ -143,7 +142,7 @@
 
         echo json_encode($response, JSON_NUMERIC_CHECK);
 
-
+    //se estiver esquecido a senha
 	}else if($type == "forgot-password"){
 
 

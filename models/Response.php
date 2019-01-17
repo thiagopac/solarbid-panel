@@ -6,6 +6,7 @@ class Response {
     public $type;
     public $title;
     public $description;
+    public $route;
 
     public function __construct(array $array = []){
         if (!empty($array)) {
@@ -13,6 +14,7 @@ class Response {
             $this->type = $array['type'];
             $this->title = $array['title'];
             $this->description = $array['description'];
+            $this->route = $array['route'];
         }
     }
 

@@ -2,28 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95aa136e-b204-4329-8dc7-8e7c087e05d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/BaseClass.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/PrivacyPolicy.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/TermsOfUse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jquery.mask.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/login/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/login/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/reset-password/reset-password.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/reset-password/reset-password.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/reset-password.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/setup-fisical-person/setup-fisical-person.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/setup-fisical-person/setup-fisical-person.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/setup-fisical-person.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/setup-legal-person/setup-legal-person.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/setup-legal-person/setup-legal-person.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/setup-legal-person.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/top-quick-sidebar-settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actions/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actions/reset-password.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/reset-password.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actions/setup-fisical-person.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/setup-fisical-person.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actions/top-quick-sidebar-settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/top-quick-sidebar-settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/body/header.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/header.phtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/DB_Schema.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/DB_Schema.mwb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/DB_Schema.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/lib/DB_Schema.mwb.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/login.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mail-settings.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/mail-settings.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/main.phtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/FisicalPerson.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/FisicalPerson.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Response.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Response.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reset-password.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/reset-password.phtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router.php" beforeDir="false" afterPath="$PROJECT_DIR$/router.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/setup-fisical-person.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/setup-fisical-person.phtml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,26 +29,27 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="869">
+              <caret line="956" lean-forward="true" selection-start-line="956" selection-end-line="956" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>::save</find>
-      <find>session</find>
-      <find>showMsg</find>
-      <find>$content</find>
-      <find>User Notifications</find>
-      <find>flaticon-alarm</find>
-      <find>events</find>
-      <find>width</find>
-      <find>stack__item</find>
-      <find>&lt;a href=&quot;snippets/pages/user/login-1.html&quot; class=&quot;btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder&quot;&gt;Logout&lt;/a&gt;</find>
-      <find>content</find>
-      <find>$sequence</find>
-      <find>sequence</find>
-      <find>imageSeq</find>
-      <find>m-menu__link-icon flaticon-suitcase</find>
-      <find>inner.html</find>
       <find>$name</find>
       <find>class=&quot;m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push&quot;</find>
       <find>main?</find>
@@ -67,6 +64,22 @@
       <find>account_communication</find>
       <find>form</find>
       <find>actions/</find>
+      <find>startStep</find>
+      <find>WizardDemo</find>
+      <find>status</find>
+      <find>regist</find>
+      <find>registry_fisical_person</find>
+      <find>provider</find>
+      <find>Integrad</find>
+      <find>submitHandler</find>
+      <find>$registered</find>
+      <find>secur</find>
+      <find>location.href</find>
+      <find>reset</find>
+      <find>$response</find>
+      <find>country</find>
+      <find>phone</find>
+      <find>brasil</find>
     </findStrings>
     <replaceStrings>
       <replace>internationalization/&quot;.$this-&gt;lang.&quot;.json</replace>
@@ -82,17 +95,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/models/BaseClass.php" />
-        <option value="$PROJECT_DIR$/models/TermsOfUse.php" />
-        <option value="$PROJECT_DIR$/models/User.php" />
-        <option value="$PROJECT_DIR$/main.phtml" />
-        <option value="$PROJECT_DIR$/models/PrivacyPolice.php" />
-        <option value="$PROJECT_DIR$/models/PrivacyPolicy.php" />
-        <option value="$PROJECT_DIR$/setup-fisical-person.phtml" />
-        <option value="$PROJECT_DIR$/mail-settings.phtml" />
+        <option value="$PROJECT_DIR$/models/FisicalPerson.php" />
+        <option value="$PROJECT_DIR$/models/Response.php" />
+        <option value="$PROJECT_DIR$/actions/login.php" />
         <option value="$PROJECT_DIR$/login.phtml" />
         <option value="$PROJECT_DIR$/reset-password.phtml" />
-        <option value="$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml" />
+        <option value="$PROJECT_DIR$/router.php" />
+        <option value="$PROJECT_DIR$/actions/reset-password.php" />
+        <option value="$PROJECT_DIR$/actions/top-quick-sidebar-settings.php" />
+        <option value="$PROJECT_DIR$/actions/setup-fisical-person.php" />
+        <option value="$PROJECT_DIR$/setup-fisical-person.phtml" />
+        <option value="$PROJECT_DIR$/db.sql" />
       </list>
     </option>
   </component>
@@ -157,7 +170,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -184,6 +197,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21033014" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -216,68 +230,74 @@
     <option name="LAST_COMMIT_MESSAGE" value="evolução" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mail-settings.phtml">
+    <entry file="file://$PROJECT_DIR$/setup-legal-person.phtml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="203" lean-forward="true" selection-start-line="203" selection-end-line="203" />
+        <state relative-caret-position="265">
+          <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actions/setup-fisical-person/setup-fisical-person.js">
+    <entry file="file://$PROJECT_DIR$/actions/setup-legal-person.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/actions/setup-legal-person/setup-legal-person.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup-fisical-person.phtml">
+    <entry file="file://$PROJECT_DIR$/actions/top-quick-sidebar-settings.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="310" column="43" lean-forward="true" selection-start-line="310" selection-start-column="43" selection-end-line="310" selection-end-column="43" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#form#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#form#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#form#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#form#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="1" column="58" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actions/top-quick-sidebar-settings/top-quick-sidebar-settings.js">
+    <entry file="file://$PROJECT_DIR$/actions/reset-password.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="40" lean-forward="true" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+        <state relative-caret-position="30">
+          <caret line="2" column="58" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="58" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/actions/login.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reset-password.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="112" column="76" selection-start-line="112" selection-start-column="76" selection-end-line="112" selection-end-column="76" />
+        <state relative-caret-position="273">
+          <caret line="47" column="50" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actions/setup-fisical-person.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup-fisical-person.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="490" column="41" selection-start-line="490" selection-start-column="41" selection-end-line="490" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/login.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1614">
-          <caret line="235" column="32" lean-forward="true" selection-start-line="235" selection-start-column="32" selection-end-line="235" selection-end-column="32" />
+        <state relative-caret-position="157">
+          <caret line="607" column="15" lean-forward="true" selection-start-line="607" selection-start-column="15" selection-end-line="607" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/body/top-quick-sidebar-settings.phtml">
+    <entry file="file://$PROJECT_DIR$/reset-password.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="59" column="32" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
+        <state relative-caret-position="446">
+          <caret line="290" column="63" lean-forward="true" selection-start-line="290" selection-start-column="63" selection-end-line="290" selection-end-column="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actions/setup-fisical-person.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/actions/setup-legal-person.php">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/db.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="869">
+          <caret line="956" lean-forward="true" selection-start-line="956" selection-end-line="956" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
