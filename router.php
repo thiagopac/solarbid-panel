@@ -11,13 +11,13 @@
     require_once "$root/panel/internationalization/Translate.php";
     require_once "$root/panel/models/LogUser.php";
     require_once "$root/panel/models/LegalPerson.php";
-    require_once "$root/panel/models/FisicalPerson.php";
+    require_once "$root/panel/models/NaturalPerson.php";
 
     $t = new Translate();
 
     ### USER SESSION
     $user = unserialize($_SESSION['USER']);
-    $fisicalPerson = unserialize($_SESSION['FISICAL_PERSON']);
+    $naturalPerson = unserialize($_SESSION['NATURAL_PERSON']);
     $legalPerson = unserialize($_SESSION['LEGAL_PERSON']);
 
     switch ($page) {
@@ -35,30 +35,41 @@
 
         case "dashboard":
 
-            $fisicalPersonHasEmptyProperty = false;
+            $naturalPersonHasEmptyProperty = false;
             $legalPersonHasEmptyProperty = false;
 
-            //check if Fisical Person has an empty property to redirect user to setup page
+            //check if Natural Person has an empty property to redirect user to setup page
             if ($user->registry_type_id == 1){
-                foreach ($fisicalPerson as $key => $value) {
-                    if ($value == null){
-                        $fisicalPersonHasEmptyProperty = true;
+
+                if ($naturalPerson != null) {
+                    foreach ($naturalPerson as $key => $value) {
+                        if ($value == null){
+                            $naturalPersonHasEmptyProperty = true;
+                        }
                     }
+                }else{
+                    $naturalPersonHasEmptyProperty = true;
                 }
             }
 
             //check if Legal Person has an empty property to redirect user to setup page
             if ($user->registry_type_id == 2){
-                foreach ($legalPerson as $key => $value) {
-                    if ($value == null){
-                        $legalPersonHasEmptyProperty = true;
+
+                if ($legalPerson != null) {
+                    foreach ($legalPerson as $key => $value) {
+                        if ($value == null){
+                            $legalPersonHasEmptyProperty = true;
+                        }
                     }
+                }else{
+                    $legalPersonHasEmptyProperty = true;
                 }
+
             }
 
-            if ($user->registry_type_id == 1 && $fisicalPersonHasEmptyProperty == true){ //fisical person
+            if ($user->registry_type_id == 1 && $naturalPersonHasEmptyProperty == true){ //natural person
 
-                //open setup-fisical-person
+                //open setup-natural-person
 
                 ### PAGE STRUCTURE SESSION VARS
                 $_SESSION['top-menu-admin'] = false;
@@ -69,7 +80,7 @@
                 $_SESSION['top-quick-sidebar'] = false;
                 $_SESSION['menu-left'] = false;
 
-                header("Location: ./main?page=setup-fisical-person");
+                header("Location: ./main?page=setup-natural-person");
                 break;
 
             }else if ($user->registry_type_id == 2 && $legalPersonHasEmptyProperty == true){ //legal person
@@ -104,7 +115,7 @@
             header("Location: ./main?page=dashboard");
             break;
 
-        case "setup_fisical_person":
+        case "setup_natural_person":
             ### PAGE STRUCTURE SESSION VARS
             $_SESSION['top-menu-admin'] = false;
             $_SESSION['top-quick-search'] = false;

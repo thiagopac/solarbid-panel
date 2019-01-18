@@ -147,7 +147,7 @@
                                     <h5 style="padding: 10px"><?= $t->{'Tipo de cadastro'}; ?></h5>
                                     <div class="m-radio-inline">
                                         <label class="m-radio">
-                                            <input type="radio" name="registry" id="registry_fisical_person" value="1"> <?= $t->{'Pessoa Física'}; ?>
+                                            <input type="radio" name="registry" id="registry_natural_person" value="1"> <?= $t->{'Pessoa Física'}; ?>
                                             <span></span>
                                         </label>
                                         <label class="m-radio">
@@ -335,7 +335,7 @@
 <script>
 
     $('#m_login input[name=registry]').click(function() {
-        if ($('#registry_fisical_person').is(':checked')){
+        if ($('#registry_natural_person').is(':checked')){
             console.log("tava checado");
             $('#role_provider').prop("disabled", true);
             $('#role_provider').prop("checked", false);

@@ -10,12 +10,12 @@
     $user = unserialize($_SESSION['USER']);
     $refreshedUser = User::getUserById($user->id);
 
-    $fisicalPerson = unserialize($_SESSION['FISICAL_PERSON']);
+    $naturalPerson = unserialize($_SESSION['NATURAL_PERSON']);
     $legalPerson = unserialize($_SESSION['LEGAL_PERSON']);
 
     $display = new Display();
 
-    $display->profileName = $fisicalPerson != null ? $fisicalPerson->alias : $legalPerson->trading_name;
+    $display->profileName = $naturalPerson != null ? $naturalPerson->alias : $legalPerson->trading_name;
     $display->profileEmail = $refreshedUser->email;
 
 ?>

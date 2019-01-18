@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18/01/2019 às 17:40
+-- Tempo de geração: 18/01/2019 às 19:41
 -- Versão do servidor: 5.6.37
 -- Versão do PHP: 7.1.8
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `audit` (
   `action_desc` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Fazendo dump de dados para tabela `audit`
@@ -82,7 +82,20 @@ INSERT INTO `audit` (`id`, `ip`, `action_desc`, `created_at`, `user_id`) VALUES
 (6, '::1', 'Efetuou login', '2019-01-18 17:34:41', 3),
 (7, '::1', 'Efetuou login', '2019-01-18 17:34:55', 2),
 (8, '::1', 'Efetuou login', '2019-01-18 17:35:25', 3),
-(9, '::1', 'Efetuou login', '2019-01-18 17:36:19', 1);
+(9, '::1', 'Efetuou login', '2019-01-18 17:36:19', 1),
+(10, '::1', 'Efetuou login', '2019-01-18 18:01:33', 3),
+(11, '::1', 'Efetuou login', '2019-01-18 18:32:33', 1),
+(12, '::1', 'Efetuou login', '2019-01-18 19:26:23', 1),
+(13, '::1', 'Efetuou login', '2019-01-18 19:27:33', 1),
+(14, '::1', 'Efetuou login', '2019-01-18 19:28:23', 1),
+(15, '::1', 'Efetuou login', '2019-01-18 19:30:29', 1),
+(16, '::1', 'Efetuou login', '2019-01-18 19:31:31', 1),
+(17, '::1', 'Efetuou login', '2019-01-18 19:32:28', 1),
+(18, '::1', 'Efetuou login', '2019-01-18 19:33:07', 1),
+(19, '::1', 'Efetuou login', '2019-01-18 19:36:23', 1),
+(20, '::1', 'Concluiu o cadastro da conta', '2019-01-18 19:37:17', 1),
+(21, '::1', 'Efetuou login', '2019-01-18 19:37:31', 2),
+(22, '::1', 'Concluiu o cadastro da conta', '2019-01-18 19:38:16', 2);
 
 -- --------------------------------------------------------
 
@@ -159,35 +172,6 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `user_id` int(11) NOT NULL,
   `dummy` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `fisical_person`
---
-
-CREATE TABLE IF NOT EXISTS `fisical_person` (
-  `id` int(11) NOT NULL,
-  `fullname` varchar(255) NOT NULL,
-  `alias` varchar(45) NOT NULL,
-  `social_security` varchar(45) NOT NULL,
-  `phone` varchar(45) NOT NULL,
-  `street` varchar(45) NOT NULL,
-  `number` varchar(45) NOT NULL,
-  `neighborhood` varchar(45) NOT NULL,
-  `city` varchar(100) NOT NULL,
-  `state` varchar(2) NOT NULL,
-  `country` varchar(100) NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Fazendo dump de dados para tabela `fisical_person`
---
-
-INSERT INTO `fisical_person` (`id`, `fullname`, `alias`, `social_security`, `phone`, `street`, `number`, `neighborhood`, `city`, `state`, `country`, `user_id`) VALUES
-(1, 'Thiago Pires Alves de Castro', 'Thiago', '06956141698', '(31)98888-6463', 'Rua Alberto de Oliveira', '427', 'Santa Mônica', 'Belo Horizonte', 'MG', 'Brasil', 1),
-(2, 'Cliente Exemplo', 'Cliente', '12345678900', '(31)99999-9999', 'Rua do Cliente', '100', 'Bairro do Cliente', 'Belo Horizonte', 'MG', 'Brasil', 2);
 
 -- --------------------------------------------------------
 
@@ -287,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `log_user` (
   `description` varchar(1000) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 --
 -- Fazendo dump de dados para tabela `log_user`
@@ -308,7 +292,60 @@ INSERT INTO `log_user` (`id`, `description`, `created_at`, `user_id`) VALUES
 (12, 'Fez logout na plataforma', '2019-01-18 17:35:21', 2),
 (13, 'Efetuou login na plataforma', '2019-01-18 17:35:25', 3),
 (14, 'Fez logout na plataforma', '2019-01-18 17:36:14', 3),
-(15, 'Efetuou login na plataforma', '2019-01-18 17:36:19', 1);
+(15, 'Efetuou login na plataforma', '2019-01-18 17:36:19', 1),
+(16, 'Fez logout na plataforma', '2019-01-18 18:01:23', 1),
+(17, 'Efetuou login na plataforma', '2019-01-18 18:01:33', 3),
+(18, 'Fez logout na plataforma', '2019-01-18 18:32:26', 3),
+(19, 'Efetuou login na plataforma', '2019-01-18 18:32:33', 1),
+(20, 'Fez logout na plataforma', '2019-01-18 19:26:03', 1),
+(21, 'Efetuou login na plataforma', '2019-01-18 19:26:23', 1),
+(22, 'Fez logout na plataforma', '2019-01-18 19:27:26', 1),
+(23, 'Efetuou login na plataforma', '2019-01-18 19:27:33', 1),
+(24, 'Fez logout na plataforma', '2019-01-18 19:28:17', 1),
+(25, 'Efetuou login na plataforma', '2019-01-18 19:28:23', 1),
+(26, 'Fez logout na plataforma', '2019-01-18 19:29:15', 1),
+(27, 'Efetuou login na plataforma', '2019-01-18 19:30:29', 1),
+(28, 'Fez logout na plataforma', '2019-01-18 19:31:12', 1),
+(29, 'Efetuou login na plataforma', '2019-01-18 19:31:31', 1),
+(30, 'Fez logout na plataforma', '2019-01-18 19:32:23', 1),
+(31, 'Efetuou login na plataforma', '2019-01-18 19:32:28', 1),
+(32, 'Fez logout na plataforma', '2019-01-18 19:32:34', 1),
+(33, 'Efetuou login na plataforma', '2019-01-18 19:33:07', 1),
+(34, 'Fez logout na plataforma', '2019-01-18 19:33:12', 1),
+(35, 'Efetuou login na plataforma', '2019-01-18 19:36:23', 1),
+(36, 'Concluiu o cadastro da conta', '2019-01-18 19:37:17', 1),
+(37, 'Fez logout na plataforma', '2019-01-18 19:37:25', 1),
+(38, 'Efetuou login na plataforma', '2019-01-18 19:37:31', 2),
+(39, 'Concluiu o cadastro da conta', '2019-01-18 19:38:16', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `natural_person`
+--
+
+CREATE TABLE IF NOT EXISTS `natural_person` (
+  `id` int(11) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `alias` varchar(45) NOT NULL,
+  `social_security` varchar(45) NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  `street` varchar(45) NOT NULL,
+  `number` varchar(45) NOT NULL,
+  `neighborhood` varchar(45) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `state` varchar(2) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `natural_person`
+--
+
+INSERT INTO `natural_person` (`id`, `fullname`, `alias`, `social_security`, `phone`, `street`, `number`, `neighborhood`, `city`, `state`, `country`, `user_id`) VALUES
+(1, 'Thiago Pires Alves de Castro', 'Thiago', '06956141698', '(31)98888-6463', 'Rua Alberto de Oliveira', '427', 'Santa Mônica', 'Belo Horizonte', 'MG', 'Brasil', 1),
+(2, 'Cliente Exemplo', 'Cliente', '12345678900', '(31)99999-9999', 'Rua do Cliente', '100', 'Bairro do Cliente', 'Belo Horizonte', 'MG', 'Brasil', 2);
 
 -- --------------------------------------------------------
 
@@ -372,7 +409,7 @@ CREATE TABLE IF NOT EXISTS `registry_type` (
 --
 
 INSERT INTO `registry_type` (`id`, `description`) VALUES
-(1, 'fisical_person'),
+(1, 'natural_person'),
 (2, 'legal_person');
 
 -- --------------------------------------------------------
@@ -444,9 +481,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `created_at`, `updated_at`, `role_id`, `language`, `registry_type_id`, `mail_notification`, `activated`, `last_seen`, `privacy_policy_id`, `terms_of_use_id`) VALUES
-(1, 'thiago', '$2y$10$Ojpb8dZJNNpePUGp1nxbpu5JyDbI2JNTGFz7ynXTfpB68dVaNuSrm', 'thiagopac@gmail.com', '2018-11-29 17:35:20', '2019-01-18 17:36:19', 1, 'pt_BR', 1, '[{"name":"loggedIn","state":false},{"name":"passwordChanged","state":true}]', 1, '2019-01-18 17:36:19', 2, 2),
-(2, 'cliente', '$2y$10$Z7LiFGwms5bxVZWllxgR2er56XcM4EGiz4kycK7XcGLtZ97eMjO4O', 'txttthiago@gmail.com', '2018-12-03 19:15:59', '2019-01-18 17:34:55', 2, 'pt_BR', 1, '[{"name":"loggedIn","state":false},{"name":"passwordChanged","state":true}]', 1, '2019-01-18 17:34:55', 1, 1),
-(3, 'empresa', '$2y$10$EvhRtf02r1JWtDVp4QxyOeRdyvrVbKt4z6rgVbbsdgNIZ71XNdsvG', 'zenit@ownergy.com.br', '2018-12-03 19:28:31', '2019-01-18 17:35:25', 3, 'pt_BR', 2, '[{"name":"loggedIn","state":false},{"name":"passwordChanged","state":true}]', 1, '2019-01-18 17:35:25', 2, 2),
+(1, 'thiago', '$2y$10$Ojpb8dZJNNpePUGp1nxbpu5JyDbI2JNTGFz7ynXTfpB68dVaNuSrm', 'thiagopac@gmail.com', '2018-11-29 17:35:20', '2019-01-18 19:36:23', 1, 'pt_BR', 1, '[{"name":"loggedIn","state":false},{"name":"passwordChanged","state":true}]', 1, '2019-01-18 19:36:23', 2, 2),
+(2, 'cliente', '$2y$10$Z7LiFGwms5bxVZWllxgR2er56XcM4EGiz4kycK7XcGLtZ97eMjO4O', 'txttthiago@gmail.com', '2018-12-03 19:15:59', '2019-01-18 19:38:16', 2, 'pt_BR', 1, '[{"name":"loggedIn","state":false},{"name":"passwordChanged","state":true}]', 1, '2019-01-18 19:38:16', 2, 2),
+(3, 'empresa', '$2y$10$EvhRtf02r1JWtDVp4QxyOeRdyvrVbKt4z6rgVbbsdgNIZ71XNdsvG', 'zenit@ownergy.com.br', '2018-12-03 19:28:31', '2019-01-18 18:01:33', 3, 'pt_BR', 2, '[{"name":"loggedIn","state":false},{"name":"passwordChanged","state":true}]', 1, '2019-01-18 18:01:33', 2, 2),
 (4, 'ingred', '$2y$10$4tsZq8ecA1p4VsGoNqw.Zu.J/I4eLyRwgX4YQs1pkhSBoNCRhiolC', 'thiago.pires@ownergy.com.br', '2018-12-28 19:39:50', '2019-01-11 13:40:13', 2, 'pt_BR', 1, '[{"name":"loggedIn","state":false},{"name":"passwordChanged","state":true}]', 1, '2019-01-11 13:40:13', NULL, NULL);
 
 --
@@ -504,13 +541,6 @@ ALTER TABLE `customer`
   ADD KEY `fk_customer_user1_idx` (`user_id`);
 
 --
--- Índices de tabela `fisical_person`
---
-ALTER TABLE `fisical_person`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_fisical_person_user1_idx` (`user_id`);
-
---
 -- Índices de tabela `integrator`
 --
 ALTER TABLE `integrator`
@@ -542,6 +572,13 @@ ALTER TABLE `log_server`
 ALTER TABLE `log_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_log_user_user1_idx` (`user_id`);
+
+--
+-- Índices de tabela `natural_person`
+--
+ALTER TABLE `natural_person`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_natural_person_user1_idx` (`user_id`);
 
 --
 -- Índices de tabela `notification`
@@ -602,7 +639,7 @@ ALTER TABLE `auction`
 -- AUTO_INCREMENT de tabela `audit`
 --
 ALTER TABLE `audit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de tabela `bid`
 --
@@ -623,11 +660,6 @@ ALTER TABLE `currency`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de tabela `fisical_person`
---
-ALTER TABLE `fisical_person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de tabela `integrator`
 --
@@ -652,7 +684,12 @@ ALTER TABLE `log_server`
 -- AUTO_INCREMENT de tabela `log_user`
 --
 ALTER TABLE `log_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT de tabela `natural_person`
+--
+ALTER TABLE `natural_person`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de tabela `notification`
 --
@@ -721,12 +758,6 @@ ALTER TABLE `customer`
   ADD CONSTRAINT `fk_customer_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Restrições para tabelas `fisical_person`
---
-ALTER TABLE `fisical_person`
-  ADD CONSTRAINT `fk_fisical_person_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Restrições para tabelas `integrator`
 --
 ALTER TABLE `integrator`
@@ -743,6 +774,12 @@ ALTER TABLE `legal_person`
 --
 ALTER TABLE `log_user`
   ADD CONSTRAINT `fk_log_user_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restrições para tabelas `natural_person`
+--
+ALTER TABLE `natural_person`
+  ADD CONSTRAINT `fk_natural_person_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Restrições para tabelas `notification`

@@ -3,7 +3,7 @@
     ### USER SESSION
     $user = unserialize($_SESSION['USER']);
 
-    $fisicalPerson = FisicalPerson::find("user_id = '$user->id'");
+    $naturalPerson = NaturalPerson::find("user_id = '$user->id'");
 
     $termsOfUse = TermsOfUse::find("language = '$user->language' ORDER BY created_at DESC LIMIT 1");
     $privacyPolicy = PrivacyPolicy::find("language = '$user->language' ORDER BY created_at DESC LIMIT 1");
@@ -130,21 +130,21 @@
                                     <div class="form-group m-form__group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Nome completo"}?>: *</label>
                                         <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="fullname" class="form-control m-input" placeholder="<?=$t->{"Ex: João Andrade da Silva"}?>" value="<?=$fisicalPerson->fullname?>">
+                                            <input type="text" name="fullname" class="form-control m-input" placeholder="<?=$t->{"Ex: João Andrade da Silva"}?>" value="<?=$naturalPerson->fullname?>">
                                             <span class="m-form__help"><?=$t->{"Coloque seu nome completo, sem omitir ou abreviar nenhum nome"}?></span>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Como prefere ser chamado"}?>: *</label>
                                         <div class="col-xl-9 col-lg-9">
-                                            <input type="text" name="alias" class="form-control m-input" placeholder="<?=$t->{"Ex: João"}?>" value="<?=$fisicalPerson->alias?>">
+                                            <input type="text" name="alias" class="form-control m-input" placeholder="<?=$t->{"Ex: João"}?>" value="<?=$naturalPerson->alias?>">
                                             <span class="m-form__help"><?=$t->{"Primeiro nome, sobrenome, nome composto ou apelido"}?></span>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"CPF"}?>: *</label>
                                         <div class="col-xl-9 col-lg-9">
-                                            <input type="text" id="social_security" name="social_security" class="form-control m-input" placeholder="<?=$t->{"Ex: 111.222.333-44"}?>" value="<?=$fisicalPerson->social_security?>">
+                                            <input type="text" id="social_security" name="social_security" class="form-control m-input" placeholder="<?=$t->{"Ex: 111.222.333-44"}?>" value="<?=$naturalPerson->social_security?>">
                                             <span class="m-form__help"><?=$t->{"Digite apenas números, o formato será aplicado automaticamente"}?></span>
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
                                         <div class="col-xl-9 col-lg-9">
                                             <div class="input-group">
                                                 <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                                                <input type="text" id="phone" name="phone" class="form-control m-input" placeholder="<?=$t->{"(××)×××××-××××"}?>" value="<?=$fisicalPerson->phone?>">
+                                                <input type="text" id="phone" name="phone" class="form-control m-input" placeholder="<?=$t->{"(××)×××××-××××"}?>" value="<?=$naturalPerson->phone?>">
                                             </div>
                                             <span class="m-form__help"><?=$t->{"Coloque o número de seu telefone. O formato será aplicado automaticamente"}?></span>
                                         </div>
@@ -187,57 +187,57 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label"><?=$t->{"Rua / Avenida / Alameda / Travessa"}?>: *</label>
-                                            <input type="text" name="street" class="form-control m-input" placeholder="<?=$t->{"Ex: Rua Araguari"}?>" value="<?=$fisicalPerson->street?>">
+                                            <input type="text" name="street" class="form-control m-input" placeholder="<?=$t->{"Ex: Rua Araguari"}?>" value="<?=$naturalPerson->street?>">
                                             <span class="m-form__help"><?=$t->{"Logradouro da residência"}?></span>
                                         </div>
                                         <div class="col-lg-3 m-form__group-sub">
                                             <label class="form-control-label"><?=$t->{"Número"}?>: *</label>
-                                            <input type="text" name="number" class="form-control m-input" placeholder="<?=$t->{"Ex: 100"}?>" value="<?=$fisicalPerson->number?>">
+                                            <input type="text" name="number" class="form-control m-input" placeholder="<?=$t->{"Ex: 100"}?>" value="<?=$naturalPerson->number?>">
                                             <span class="m-form__help"><?=$t->{"Número da residência"}?></span>
                                         </div>
                                         <div class="col-lg-3 m-form__group-sub">
                                             <label class="form-control-label"><?=$t->{"Bairro / Região"}?>: *</label>
-                                            <input type="text" name="neighborhood" class="form-control m-input" placeholder="<?=$t->{"Ex: Santo Agostinho"}?>" value="<?=$fisicalPerson->neighborhood?>">
+                                            <input type="text" name="neighborhood" class="form-control m-input" placeholder="<?=$t->{"Ex: Santo Agostinho"}?>" value="<?=$naturalPerson->neighborhood?>">
                                             <span class="m-form__help"><?=$t->{"Bairro ou região da residência"}?></span>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label"><?=$t->{"Cidade"}?>: *</label>
-                                            <input type="text" name="city" class="form-control m-input" placeholder="<?=$t->{"Ex: Belo Horizonte"}?>" value="<?=$fisicalPerson->city?>">
+                                            <input type="text" name="city" class="form-control m-input" placeholder="<?=$t->{"Ex: Belo Horizonte"}?>" value="<?=$naturalPerson->city?>">
                                             <span class="m-form__help"><?=$t->{"Cidade da residência"}?></span>
                                         </div>
                                         <div class="col-lg-3 m-form__group-sub">
                                             <label class="form-control-label"><?=$t->{"Estado"}?>: *</label>
                                             <select name="state" class="form-control m-input">
                                                 <option value=""><?=$t->{"Selecione..."}?></option>
-                                                <option value="AC" <?=$fisicalPerson->state == "AC" ? 'selected' : '';?>>Acre</option>
-                                                <option value="AL" <?=$fisicalPerson->state == "AL" ? 'selected' : '';?>>Alagoas</option>
-                                                <option value="AP" <?=$fisicalPerson->state == "AP" ? 'selected' : '';?>>Amapá</option>
-                                                <option value="AM" <?=$fisicalPerson->state == "AM" ? 'selected' : '';?>>Amazonas</option>
-                                                <option value="BA" <?=$fisicalPerson->state == "BA" ? 'selected' : '';?>>Bahia</option>
-                                                <option value="CE" <?=$fisicalPerson->state == "CE" ? 'selected' : '';?>>Ceará</option>
-                                                <option value="DF" <?=$fisicalPerson->state == "DF" ? 'selected' : '';?>>Distrito Federal</option>
-                                                <option value="ES" <?=$fisicalPerson->state == "ES" ? 'selected' : '';?>>Espírito Santo</option>
-                                                <option value="GO" <?=$fisicalPerson->state == "GO" ? 'selected' : '';?>>Goiás</option>
-                                                <option value="MA" <?=$fisicalPerson->state == "MA" ? 'selected' : '';?>>Maranhão</option>
-                                                <option value="MT" <?=$fisicalPerson->state == "MT" ? 'selected' : '';?>>Mato Grosso</option>
-                                                <option value="MS" <?=$fisicalPerson->state == "MS" ? 'selected' : '';?>>Mato Grosso do Sul</option>
-                                                <option value="MG" <?=$fisicalPerson->state == "MG" ? 'selected' : '';?>>Minas Gerais</option>
-                                                <option value="PA" <?=$fisicalPerson->state == "PA" ? 'selected' : '';?>>Pará</option>
-                                                <option value="PB" <?=$fisicalPerson->state == "PB" ? 'selected' : '';?>>Paraíba</option>
-                                                <option value="PR" <?=$fisicalPerson->state == "PR" ? 'selected' : '';?>>Paraná</option>
-                                                <option value="PE" <?=$fisicalPerson->state == "PE" ? 'selected' : '';?>>Pernambuco</option>
-                                                <option value="PI" <?=$fisicalPerson->state == "PI" ? 'selected' : '';?>>Piauí</option>
-                                                <option value="RJ" <?=$fisicalPerson->state == "RJ" ? 'selected' : '';?>>Rio de Janeiro</option>
-                                                <option value="RN" <?=$fisicalPerson->state == "RN" ? 'selected' : '';?>>Rio Grande do Norte</option>
-                                                <option value="RS" <?=$fisicalPerson->state == "RS" ? 'selected' : '';?>>Rio Grande do Sul</option>
-                                                <option value="RO" <?=$fisicalPerson->state == "RO" ? 'selected' : '';?>>Rondônia</option>
-                                                <option value="RR" <?=$fisicalPerson->state == "RR" ? 'selected' : '';?>>Roraima</option>
-                                                <option value="SC" <?=$fisicalPerson->state == "SC" ? 'selected' : '';?>>Santa Catarina</option>
-                                                <option value="SP" <?=$fisicalPerson->state == "SP" ? 'selected' : '';?>>São Paulo</option>
-                                                <option value="SE" <?=$fisicalPerson->state == "SE" ? 'selected' : '';?>>Sergipe</option>
-                                                <option value="TO" <?=$fisicalPerson->state == "TO" ? 'selected' : '';?>>Tocantins</option>
+                                                <option value="AC" <?=$naturalPerson->state == "AC" ? 'selected' : '';?>>Acre</option>
+                                                <option value="AL" <?=$naturalPerson->state == "AL" ? 'selected' : '';?>>Alagoas</option>
+                                                <option value="AP" <?=$naturalPerson->state == "AP" ? 'selected' : '';?>>Amapá</option>
+                                                <option value="AM" <?=$naturalPerson->state == "AM" ? 'selected' : '';?>>Amazonas</option>
+                                                <option value="BA" <?=$naturalPerson->state == "BA" ? 'selected' : '';?>>Bahia</option>
+                                                <option value="CE" <?=$naturalPerson->state == "CE" ? 'selected' : '';?>>Ceará</option>
+                                                <option value="DF" <?=$naturalPerson->state == "DF" ? 'selected' : '';?>>Distrito Federal</option>
+                                                <option value="ES" <?=$naturalPerson->state == "ES" ? 'selected' : '';?>>Espírito Santo</option>
+                                                <option value="GO" <?=$naturalPerson->state == "GO" ? 'selected' : '';?>>Goiás</option>
+                                                <option value="MA" <?=$naturalPerson->state == "MA" ? 'selected' : '';?>>Maranhão</option>
+                                                <option value="MT" <?=$naturalPerson->state == "MT" ? 'selected' : '';?>>Mato Grosso</option>
+                                                <option value="MS" <?=$naturalPerson->state == "MS" ? 'selected' : '';?>>Mato Grosso do Sul</option>
+                                                <option value="MG" <?=$naturalPerson->state == "MG" ? 'selected' : '';?>>Minas Gerais</option>
+                                                <option value="PA" <?=$naturalPerson->state == "PA" ? 'selected' : '';?>>Pará</option>
+                                                <option value="PB" <?=$naturalPerson->state == "PB" ? 'selected' : '';?>>Paraíba</option>
+                                                <option value="PR" <?=$naturalPerson->state == "PR" ? 'selected' : '';?>>Paraná</option>
+                                                <option value="PE" <?=$naturalPerson->state == "PE" ? 'selected' : '';?>>Pernambuco</option>
+                                                <option value="PI" <?=$naturalPerson->state == "PI" ? 'selected' : '';?>>Piauí</option>
+                                                <option value="RJ" <?=$naturalPerson->state == "RJ" ? 'selected' : '';?>>Rio de Janeiro</option>
+                                                <option value="RN" <?=$naturalPerson->state == "RN" ? 'selected' : '';?>>Rio Grande do Norte</option>
+                                                <option value="RS" <?=$naturalPerson->state == "RS" ? 'selected' : '';?>>Rio Grande do Sul</option>
+                                                <option value="RO" <?=$naturalPerson->state == "RO" ? 'selected' : '';?>>Rondônia</option>
+                                                <option value="RR" <?=$naturalPerson->state == "RR" ? 'selected' : '';?>>Roraima</option>
+                                                <option value="SC" <?=$naturalPerson->state == "SC" ? 'selected' : '';?>>Santa Catarina</option>
+                                                <option value="SP" <?=$naturalPerson->state == "SP" ? 'selected' : '';?>>São Paulo</option>
+                                                <option value="SE" <?=$naturalPerson->state == "SE" ? 'selected' : '';?>>Sergipe</option>
+                                                <option value="TO" <?=$naturalPerson->state == "TO" ? 'selected' : '';?>>Tocantins</option>
                                             </select>
                                             <span class="m-form__help"><?=$t->{"Estado da residência"}?></span>
                                         </div>
@@ -245,7 +245,7 @@
                                             <label class="form-control-label"><?=$t->{"País"}?>: *</label>
                                             <select name="country" class="form-control m-input">
                                                 <option value=""><?=$t->{"Selecione..."}?></option>
-                                                <option value="Brasil" <?=$fisicalPerson->country == "Brasil" ? 'selected' : '';?>>Brasil</option>
+                                                <option value="Brasil" <?=$naturalPerson->country == "Brasil" ? 'selected' : '';?>>Brasil</option>
                                             </select>
                                             <span class="m-form__help"><?=$t->{"País da residência"}?></span>
                                         </div>
@@ -461,7 +461,7 @@
 
                     //== See: http://malsup.com/jquery/form/#ajaxSubmit
                     formEl.ajaxSubmit({
-                        url: './actions/setup-fisical-person.php',
+                        url: './actions/setup-natural-person.php',
                         type: 'POST',
                         contentType: "application/x-www-form-urlencoded",
                         data: formEl.serialize(),

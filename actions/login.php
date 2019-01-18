@@ -8,7 +8,7 @@
     require_once "$root/panel/models/LogUser.php";
     require_once "$root/panel/models/Response.php";
     require_once "$root/panel/models/Mail.php";
-    require_once "$root/panel/models/FisicalPerson.php";
+    require_once "$root/panel/models/NaturalPerson.php";
     require_once "$root/panel/models/LegalPerson.php";
 
 	if(isset($_POST['type']) && !empty($_POST['type'])) {
@@ -60,8 +60,8 @@
                 $_SESSION['USER'] = serialize($user); //$_SESSION['USER']->username;
 
                 if ($user->registry_type_id == 1){
-                    $fisicalPerson = FisicalPerson::find("user_id = '$user->id'");
-                    $_SESSION['FISICAL_PERSON'] = serialize($fisicalPerson);
+                    $naturalPerson = NaturalPerson::find("user_id = '$user->id'");
+                    $_SESSION['NATURAL_PERSON'] = serialize($NaturalPerson);
                 }else if($user->registry_type_id == 2){
                     $legalPerson = LegalPerson::find("user_id = '$user->id'");
                     $_SESSION['LEGAL_PERSON'] = serialize($legalPerson);

@@ -10,7 +10,7 @@
     require_once "$root/panel/models/Audit.php";
     require_once "$root/panel/models/LogUser.php";
     require_once "$root/panel/models/Response.php";
-    require_once "$root/panel/models/FisicalPerson.php";
+    require_once "$root/panel/models/NaturalPerson.php";
 
     $t = new Translate();
 
@@ -29,20 +29,20 @@
     $terms = addslashes($_POST['terms_of_use']);
     $privacy = addslashes($_POST['privacy_policy']);
 
-    $existing = FisicalPerson::find("user_id = '$user->id'");
+    $existing = NaturalPerson::find("user_id = '$user->id'");
 
     $contentForm = array("fullname" => $strFullname, "alias" => $strAlias, "social_security" => $strSocialSecurity, "phone" => $strPhone, "street" => $strStreet,
                      "number" => $strNumber, "neighborhood" => $strNeighborhood, "city" => $strCity, "state" => $strState, "country" => $strCountry, "user_id" => $user->id);
 
-    if ($existing) { $contentForm['id'] = $existing->id; } //se já existir o FisicalPerson para aquele usuário, adicionar o id para efetuar update
+    if ($existing) { $contentForm['id'] = $existing->id; } //se já existir o NaturalPerson para aquele usuário, adicionar o id para efetuar update
 
-    $completed = FisicalPerson::save($contentForm);
+    $completed = NaturalPerson::save($contentForm);
 
     if ($completed != null){
 
-        //após salvar, gravar o objeto FisicalPerson na sessão do usuário
-        $fisicalPerson = FisicalPerson::find("user_id = '$user->id'");
-        $_SESSION['FISICAL_PERSON'] = serialize($fisicalPerson);
+        //após salvar, gravar o objeto NaturalPerson na sessão do usuário
+        $naturalPerson = NaturalPerson::find("user_id = '$user->id'");
+        $_SESSION['NATURAL_PERSON'] = serialize($naturalPerson);
 
         //salvar na tabela de usuário os Termos de Uso e política de privacidade que o usuário concordou
         $contentAgreements = array("terms_of_use_id" => $terms, "privacy_policy_id" => $privacy, "id" => $user->id);

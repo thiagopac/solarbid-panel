@@ -1,6 +1,6 @@
 <?php
 
-class FisicalPerson {
+class NaturalPerson {
 
 	public $id;
 	public $fullname;
@@ -15,7 +15,7 @@ class FisicalPerson {
 	public $country;
 	public $user_id;
 
-	protected static $table = "fisical_person";
+	protected static $table = "natural_person";
 
 	public function __construct($array){
 
