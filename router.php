@@ -35,7 +35,30 @@
 
         case "dashboard":
 
-            if ($user->registry_type_id == 1 && $fisicalPerson->fullname == null){ //fisical person
+            $fisicalPersonHasEmptyProperty = false;
+            $legalPersonHasEmptyProperty = false;
+
+            //check if Fisical Person has an empty property to redirect user to setup page
+            if ($user->registry_type_id == 1){
+                foreach ($fisicalPerson as $key => $value) {
+                    if ($value == null){
+                        $fisicalPersonHasEmptyProperty = true;
+                    }
+                }
+            }
+
+            //check if Legal Person has an empty property to redirect user to setup page
+            if ($user->registry_type_id == 2){
+                foreach ($legalPerson as $key => $value) {
+                    if ($value == null){
+                        $legalPersonHasEmptyProperty = true;
+                    }
+                }
+            }
+
+            if ($user->registry_type_id == 1 && $fisicalPersonHasEmptyProperty == true){ //fisical person
+
+                //open setup-fisical-person
 
                 ### PAGE STRUCTURE SESSION VARS
                 $_SESSION['top-menu-admin'] = false;
@@ -48,7 +71,10 @@
 
                 header("Location: ./main?page=setup-fisical-person");
                 break;
-            }else if ($user->registry_type_id == 2 && $legalPerson->company_name == null){ //legal person
+
+            }else if ($user->registry_type_id == 2 && $legalPersonHasEmptyProperty == true){ //legal person
+
+                //open setup-legal-person
 
                 ### PAGE STRUCTURE SESSION VARS
                 $_SESSION['top-menu-admin'] = false;
@@ -62,6 +88,9 @@
                 header("Location: ./main?page=setup-legal-person");
                 break;
             }
+
+
+            //open dashboard
 
             ### PAGE STRUCTURE SESSION VARS
             $_SESSION['top-menu-admin'] = $user->role_id == 1 ? true : false;

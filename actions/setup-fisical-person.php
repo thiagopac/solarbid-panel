@@ -17,7 +17,7 @@
     $user = unserialize($_SESSION['USER']);
 
     $strFullname = addslashes($_POST['fullname']);
-    $strNickname = addslashes($_POST['nickname']);
+    $strAlias = addslashes($_POST['alias']);
     $strSocialSecurity = fnLeaveOnlyNumbers(addslashes($_POST['social_security']));
     $strPhone = addslashes($_POST['phone']);
     $strStreet = addslashes($_POST['street']);
@@ -31,10 +31,10 @@
 
     $existing = FisicalPerson::find("user_id = '$user->id'");
 
-    $contentForm = array("fullname" => $strFullname, "nickname" => $strNickname, "social_security" => $strSocialSecurity, "phone" => $strPhone, "street" => $strStreet,
+    $contentForm = array("fullname" => $strFullname, "alias" => $strAlias, "social_security" => $strSocialSecurity, "phone" => $strPhone, "street" => $strStreet,
                      "number" => $strNumber, "neighborhood" => $strNeighborhood, "city" => $strCity, "state" => $strState, "country" => $strCountry, "user_id" => $user->id);
 
-    if ($existing) { $contentForm['id'] = $existing->id; } //se já existir o FisicalPerson para aquela pessoa, adicionar o id para efetuar update
+    if ($existing) { $contentForm['id'] = $existing->id; } //se já existir o FisicalPerson para aquele usuário, adicionar o id para efetuar update
 
     $completed = FisicalPerson::save($contentForm);
 

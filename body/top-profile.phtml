@@ -3,11 +3,20 @@
     $root = realpath($_SERVER["DOCUMENT_ROOT"]);
     require_once "$root/panel/internationalization/Translate.php";
     require_once "$root/panel/models/User.php";
+    require_once "$root/panel/models/Display.php";
 
     $t = new Translate();
 
     $user = unserialize($_SESSION['USER']);
     $refreshedUser = User::getUserById($user->id);
+
+    $fisicalPerson = unserialize($_SESSION['FISICAL_PERSON']);
+    $legalPerson = unserialize($_SESSION['LEGAL_PERSON']);
+
+    $display = new Display();
+
+    $display->profileName = $fisicalPerson != null ? $fisicalPerson->alias : $legalPerson->trading_name;
+    $display->profileEmail = $refreshedUser->email;
 
 ?>
 <li class="m-nav__item m-topbar__user-profile  m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
@@ -32,10 +41,10 @@
                     </div>
                     <div class="m-card-user__details">
 						<span class="m-card-user__name m--font-weight-500">
-							<?=$refreshedUser->username?>
+							<?=$display->profileName?>
 						</span>
                         <a href="" class="m-card-user__email m--font-weight-300 m-link">
-                            <?=$refreshedUser->email?>
+                            <?=$display->profileEmail?>
                         </a>
                     </div>
                 </div>

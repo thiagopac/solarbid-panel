@@ -4,7 +4,7 @@ class FisicalPerson {
 
 	public $id;
 	public $fullname;
-	public $nickname;
+	public $alias;
 	public $social_security;
 	public $phone;
 	public $street;
@@ -22,15 +22,15 @@ class FisicalPerson {
 		if (!empty($array)) {
 			$this->id = $array['id'];
 			$this->fullname = $array['fullname'];
-			$this->nickname = $array['nickname'];
+			$this->alias = $array['alias'];
 			$this->social_security = $array['social_security'];
 			$this->phone = $array['phone'];
-			$this->phone = $array['street'];
-			$this->phone = $array['number'];
-			$this->phone = $array['neighborhood'];
-			$this->phone = $array['city'];
-			$this->phone = $array['state'];
-			$this->phone = $array['country'];
+			$this->street = $array['street'];
+			$this->number = $array['number'];
+			$this->neighborhood = $array['neighborhood'];
+			$this->city = $array['city'];
+			$this->state = $array['state'];
+			$this->country = $array['country'];
 			$this->user_id = $array['user_id'];
 		}
   }

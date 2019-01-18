@@ -2,17 +2,546 @@
 
     ### USER SESSION
     $user = unserialize($_SESSION['USER']);
-    $fisicalPerson = unserialize($_SESSION['FISICAL_PERSON']);
-    $legalPerson = unserialize($_SESSION['LEGAL_PERSON']);
 
-    ### PAGE STRUCTURE SESSION VARS
-    $_SESSION['top-menu-admin'] = $user->role_id == 1 ? true : false;
-    $_SESSION['top-quick-search'] = false;
-    $_SESSION['top-notifications'] = false;
-    $_SESSION['top-quick-actions'] = false;
-    $_SESSION['top-profile'] = false;
-    $_SESSION['top-quick-sidebar'] = false;
-    $_SESSION['menu-left'] = false;
+    $legalPerson = LegalPerson::find("user_id = '$user->id'");
+
+    $termsOfUse = TermsOfUse::find("language = '$user->language' ORDER BY created_at DESC LIMIT 1");
+    $privacyPolicy = PrivacyPolicy::find("language = '$user->language' ORDER BY created_at DESC LIMIT 1");
+
+    $t = new Translate();
 
 ?>
-<p>Legal person</p>
+<div class="m-portlet m-portlet--full-height col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+    <!--begin: Portlet Head-->
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">
+                    <?=$t->{"Cadastro de pessoa jurídica"}?>
+                    <small><?=$t->{"Siga os passos abaixo"}?></small>
+                </h3>
+            </div>
+        </div>
+        <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+                <li class="m-portlet__nav-item">
+                    <!--<a href="#" data-toggle="m-tooltip" class="m-portlet__nav-link m-portlet__nav-link--icon" data-direction="left" data-width="auto" title="Get help with filling up this form">
+                        <i class="flaticon-info m--icon-font-size-lg3"></i>
+                    </a>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--end: Portlet Head-->
+
+    <!--begin: Form Wizard-->
+    <div class="m-wizard m-wizard--2 m-wizard--success" id="m_wizard">
+
+        <!--begin: Message container -->
+        <div class="m-portlet__padding-x">
+
+            <!-- Here you can put a message or alert -->
+        </div>
+
+        <!--end: Message container -->
+
+        <!--begin: Form Wizard Head -->
+        <div class="m-wizard__head m-portlet__padding-x">
+
+            <!--begin: Form Wizard Progress -->
+            <div class="m-wizard__progress">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+
+            <!--end: Form Wizard Progress -->
+
+            <!--begin: Form Wizard Nav -->
+            <div class="m-wizard__nav">
+                <div class="m-wizard__steps">
+                    <div class="m-wizard__step m-wizard__step--current" m-wizard-target="m_wizard_form_step_1">
+                        <a href="#" class="m-wizard__step-number">
+                            <span><i class="fa  flaticon-user"></i></span>
+                        </a>
+                        <div class="m-wizard__step-info">
+                            <div class="m-wizard__step-title">
+                                1. <?=$t->{"Informações da empresa"}?>
+                            </div>
+                            <div class="m-wizard__step-desc">
+                                <?=$t->{"Dados da empresa e <br>do responsável"}?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_2">
+                        <a href="#" class="m-wizard__step-number">
+                            <span><i class="fa  flaticon-placeholder"></i></span>
+                        </a>
+                        <div class="m-wizard__step-info">
+                            <div class="m-wizard__step-title">
+                                2. <?=$t->{"Dados de endereço"}?>
+                            </div>
+                            <div class="m-wizard__step-desc">
+                                <?=$t->{"Localização <br>da empresa"}?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_3">
+                        <a href="#" class="m-wizard__step-number">
+                            <span><i class="fa  flaticon-layers"></i></span>
+                        </a>
+                        <div class="m-wizard__step-info">
+                            <div class="m-wizard__step-title">
+                                3. <?=$t->{"Confirmação"}?>
+                            </div>
+                            <div class="m-wizard__step-desc">
+                                <?=$t->{"Termos de uso <br>e confirmação"}?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--end: Form Wizard Nav -->
+        </div>
+
+        <!--end: Form Wizard Head -->
+
+        <!--begin: Form Wizard Form-->
+        <div class="m-wizard__form">
+
+            <form class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+
+                <input type="hidden" name="userId" value="<?=$user->id?>">
+
+                <!--begin: Form Body -->
+                <div class="m-portlet__body">
+
+                    <!--begin: Form Wizard Step 1-->
+                    <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
+                        <div class="row">
+                            <div class="col-xl-8 offset-xl-2">
+                                <div class="m-form__section m-form__section--first">
+                                    <div class="m-form__heading">
+                                        <h3 class="m-form__heading-title"><?=$t->{"Dados da empresa"}?></h3>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Nome fantasia"}?>: *</label>
+                                        <div class="col-xl-9 col-lg-9">
+                                            <input type="text" name="trading_name" class="form-control m-input" placeholder="<?=$t->{"Nome fantasia"}?>" value="<?=$legalPerson->trading_name?>">
+                                            <span class="m-form__help"><?=$t->{"Informe o nome fantasia da empresa"}?></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Razão social"}?>: *</label>
+                                        <div class="col-xl-9 col-lg-9">
+                                            <input type="text" name="company_name" class="form-control m-input" placeholder="<?=$t->{"Razão social"}?>" value="<?=$legalPerson->company_name?>">
+                                            <span class="m-form__help"><?=$t->{"Razão social da empresa"}?></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"CNPJ"}?>: *</label>
+                                        <div class="col-xl-9 col-lg-9">
+                                            <input type="text" id="registered_number" name="registered_number" class="form-control m-input" placeholder="<?=$t->{"Ex: 11.222.333/0000-99"}?>" value="<?=$legalPerson->registered_number?>">
+                                            <span class="m-form__help"><?=$t->{"Digite apenas números, o formato será aplicado automaticamente"}?></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Telefone comercial"}?>: *</label>
+                                        <div class="col-xl-9 col-lg-9">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
+                                                <input type="text" id="phone" name="phone" class="form-control m-input" placeholder="<?=$t->{"(××)××××××××"}?>" value="<?=$legalPerson->phone?>">
+                                            </div>
+                                            <span class="m-form__help"><?=$t->{"Digite apenas números, o formato será aplicado automaticamente"}?></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                <div class="m-form__section">
+                                    <div class="m-form__heading">
+                                        <h3 class="m-form__heading-title">
+                                            <?=$t->{"Dados do responsável"}?>
+                                            <!--                                            <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="Some help text goes here"></i>-->
+                                        </h3>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Nome completo"}?>: *</label>
+                                        <div class="col-xl-9 col-lg-9">
+                                            <input type="text" name="contact_fullname" class="form-control m-input" placeholder="<?=$t->{"Ex: João Andrade da Silva"}?>" value="<?=$legalPerson->contact_fullname?>">
+                                            <span class="m-form__help"><?=$t->{"Informe o nome completo do responsável pelo cadastro da empresa"}?></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"E-mail"}?>: *</label>
+                                        <div class="col-xl-9 col-lg-9">
+                                            <input type="text" name="contact_email" class="form-control m-input" placeholder="<?=$t->{"Ex: joao@empresa.com.br"}?>" value="<?=$legalPerson->contact_email?>">
+                                            <span class="m-form__help"><?=$t->{"Informe o e-mail do responsável pelo cadastro da empresa"}?></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Telefone celular"}?>: *</label>
+                                        <div class="col-xl-9 col-lg-9">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
+                                                <input type="text" id="contact_phone" name="contact_phone" class="form-control m-input" placeholder="<?=$t->{"(××)×××××-××××"}?>" value="<?=$legalPerson->contact_phone?>">
+                                            </div>
+                                            <span class="m-form__help"><?=$t->{"Informe o número do celular do responsável pela empresa. O formato será aplicado automaticamente"}?></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--end: Form Wizard Step 1-->
+
+                    <!--begin: Form Wizard Step 2-->
+                    <div class="m-wizard__form-step" id="m_wizard_form_step_2">
+                        <div class="row">
+                            <div class="col-xl-8 offset-xl-2">
+                                <div class="m-form__section m-form__section--first">
+                                    <div class="m-form__heading">
+                                        <h3 class="m-form__heading-title"><?=$t->{"Endereço"}?></h3>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Rua / Avenida / Alameda / Travessa"}?>: *</label>
+                                            <input type="text" name="street" class="form-control m-input" placeholder="<?=$t->{"Ex: Rua Araguari"}?>" value="<?=$legalPerson->street?>">
+                                            <span class="m-form__help"><?=$t->{"Logradouro da empresa"}?></span>
+                                        </div>
+                                        <div class="col-lg-3 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Número"}?>: *</label>
+                                            <input type="text" name="number" class="form-control m-input" placeholder="<?=$t->{"Ex: 100"}?>" value="<?=$legalPerson->number?>">
+                                            <span class="m-form__help"><?=$t->{"Número da empresa"}?></span>
+                                        </div>
+                                        <div class="col-lg-3 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Bairro / Região"}?>: *</label>
+                                            <input type="text" name="neighborhood" class="form-control m-input" placeholder="<?=$t->{"Ex: Santo Agostinho"}?>" value="<?=$legalPerson->neighborhood?>">
+                                            <span class="m-form__help"><?=$t->{"Bairro ou região da empresa"}?></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Cidade"}?>: *</label>
+                                            <input type="text" name="city" class="form-control m-input" placeholder="<?=$t->{"Ex: Belo Horizonte"}?>" value="<?=$legalPerson->city?>">
+                                            <span class="m-form__help"><?=$t->{"Cidade da empresa"}?></span>
+                                        </div>
+                                        <div class="col-lg-3 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"Estado"}?>: *</label>
+                                            <select name="state" class="form-control m-input">
+                                                <option value=""><?=$t->{"Selecione..."}?></option>
+                                                <option value="AC" <?=$legalPerson->state == "AC" ? 'selected' : '';?>>Acre</option>
+                                                <option value="AL" <?=$legalPerson->state == "AL" ? 'selected' : '';?>>Alagoas</option>
+                                                <option value="AP" <?=$legalPerson->state == "AP" ? 'selected' : '';?>>Amapá</option>
+                                                <option value="AM" <?=$legalPerson->state == "AM" ? 'selected' : '';?>>Amazonas</option>
+                                                <option value="BA" <?=$legalPerson->state == "BA" ? 'selected' : '';?>>Bahia</option>
+                                                <option value="CE" <?=$legalPerson->state == "CE" ? 'selected' : '';?>>Ceará</option>
+                                                <option value="DF" <?=$legalPerson->state == "DF" ? 'selected' : '';?>>Distrito Federal</option>
+                                                <option value="ES" <?=$legalPerson->state == "ES" ? 'selected' : '';?>>Espírito Santo</option>
+                                                <option value="GO" <?=$legalPerson->state == "GO" ? 'selected' : '';?>>Goiás</option>
+                                                <option value="MA" <?=$legalPerson->state == "MA" ? 'selected' : '';?>>Maranhão</option>
+                                                <option value="MT" <?=$legalPerson->state == "MT" ? 'selected' : '';?>>Mato Grosso</option>
+                                                <option value="MS" <?=$legalPerson->state == "MS" ? 'selected' : '';?>>Mato Grosso do Sul</option>
+                                                <option value="MG" <?=$legalPerson->state == "MG" ? 'selected' : '';?>>Minas Gerais</option>
+                                                <option value="PA" <?=$legalPerson->state == "PA" ? 'selected' : '';?>>Pará</option>
+                                                <option value="PB" <?=$legalPerson->state == "PB" ? 'selected' : '';?>>Paraíba</option>
+                                                <option value="PR" <?=$legalPerson->state == "PR" ? 'selected' : '';?>>Paraná</option>
+                                                <option value="PE" <?=$legalPerson->state == "PE" ? 'selected' : '';?>>Pernambuco</option>
+                                                <option value="PI" <?=$legalPerson->state == "PI" ? 'selected' : '';?>>Piauí</option>
+                                                <option value="RJ" <?=$legalPerson->state == "RJ" ? 'selected' : '';?>>Rio de Janeiro</option>
+                                                <option value="RN" <?=$legalPerson->state == "RN" ? 'selected' : '';?>>Rio Grande do Norte</option>
+                                                <option value="RS" <?=$legalPerson->state == "RS" ? 'selected' : '';?>>Rio Grande do Sul</option>
+                                                <option value="RO" <?=$legalPerson->state == "RO" ? 'selected' : '';?>>Rondônia</option>
+                                                <option value="RR" <?=$legalPerson->state == "RR" ? 'selected' : '';?>>Roraima</option>
+                                                <option value="SC" <?=$legalPerson->state == "SC" ? 'selected' : '';?>>Santa Catarina</option>
+                                                <option value="SP" <?=$legalPerson->state == "SP" ? 'selected' : '';?>>São Paulo</option>
+                                                <option value="SE" <?=$legalPerson->state == "SE" ? 'selected' : '';?>>Sergipe</option>
+                                                <option value="TO" <?=$legalPerson->state == "TO" ? 'selected' : '';?>>Tocantins</option>
+                                            </select>
+                                            <span class="m-form__help"><?=$t->{"Estado da empresa"}?></span>
+                                        </div>
+                                        <div class="col-lg-3 m-form__group-sub">
+                                            <label class="form-control-label"><?=$t->{"País"}?>: *</label>
+                                            <select name="country" class="form-control m-input">
+                                                <option value=""><?=$t->{"Selecione..."}?></option>
+                                                <option value="Brasil" <?=$legalPerson->country == "Brasil" ? 'selected' : '';?>>Brasil</option>
+                                            </select>
+                                            <span class="m-form__help"><?=$t->{"País da empresa"}?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end: Form Wizard Step 2-->
+
+                    <!--begin: Form Wizard Step 3-->
+                    <div class="m-wizard__form-step" id="m_wizard_form_step_3">
+                        <div class="row">
+                            <div class="col-xl-8 offset-xl-2">
+                                <!--begin::Section-->
+
+                                <div class="m-form__heading" style="text-align: center">
+                                    <h3 class="m-form__heading-title"><?=$t->{"Termos de Uso"}?></h3>
+                                </div>
+
+                                <div class="m-scrollable m-scroller ps ps--active-y" data-scrollbar-shown="true" data-scrollable="true" data-height="300" style="overflow:hidden; height: 300px; padding: 20px; margin: 10px 0 30px 0; border: 4px solid #efefef">
+                                    <?=$termsOfUse->text?>
+                                </div>
+
+                                <div class="m-form__heading" style="text-align: center">
+                                    <h3 class="m-form__heading-title"><?=$t->{"Política de Privacidade"}?></h3>
+                                </div>
+
+                                <div class="m-scrollable m-scroller ps ps--active-y" data-scrollbar-shown="true" data-scrollable="true" data-height="300" style="overflow:hidden; height: 300px; padding: 20px; margin: 10px 0 30px 0; border: 4px solid #efefef">
+                                    <?=$privacyPolicy->text?>
+                                </div>
+
+                                <!--end::Section-->
+
+                                <!--end::Section-->
+                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                <div class="form-group m-form__group m-form__group--sm row">
+                                    <div class="col-xl-12">
+                                        <div class="m-checkbox-inline">
+                                            <label class="m-checkbox m-checkbox--solid m-checkbox--success pull-left">
+                                                <input type="checkbox" name="terms_of_use" value="<?=$termsOfUse->id?>">
+                                                <?=$t->{"Eu li e concordo com os Termos de Uso"}?>
+                                                <span></span>
+                                            </label>
+                                            <label class="m-checkbox m-checkbox--solid m-checkbox--success pull-right">
+                                                <input type="checkbox" name="privacy_policy" value="<?=$privacyPolicy->id?>">
+                                                <?=$t->{"Eu li e concordo com a Política de Privacidade"}?>
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--end: Form Wizard Step 3-->
+                </div>
+
+                <!--end: Form Body -->
+
+                <!--begin: Form Actions -->
+                <div class="m-portlet__foot m-portlet__foot--fit m--margin-top-40">
+                    <div class="m-form__actions">
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4 m--align-left">
+                                <a href="#" class="btn btn-secondary m-btn m-btn--custom m-btn--icon" data-wizard-action="prev">
+															<span>
+																<i class="la la-arrow-left"></i>&nbsp;&nbsp;
+																<span><?=$t->{"Voltar"}?></span>
+															</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 m--align-right">
+                                <a href="#" class="btn btn-info m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
+															<span>
+																<i class="la la-check"></i>&nbsp;&nbsp;
+																<span><?=$t->{"Concluir cadastro"}?></span>
+															</span>
+                                </a>
+                                <a href="#" class="btn btn-warning m-btn m-btn--custom m-btn--icon" data-wizard-action="next">
+															<span>
+																<span><?=$t->{"Salvar & Continuar"}?></span>&nbsp;&nbsp;
+																<i class="la la-arrow-right"></i>
+															</span>
+                                </a>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end: Form Actions -->
+            </form>
+        </div>
+
+        <!--end: Form Wizard Form-->
+    </div>
+
+    <!--end: Form Wizard-->
+</div>
+<script>
+    $(document).ready(function(){
+        $("#registered_number").mask('00.000.000/0000-00', {reverse: false});
+        $("#phone").mask('(00)000000000', {reverse: false});
+        $("#contact_phone").mask('(00)00000-0000', {reverse: false});
+    });
+
+
+    var WizardForm = function () {
+        //== Base elements
+        var wizardEl = $('#m_wizard');
+        var formEl = $('#m_form');
+        var validator;
+        var wizard;
+
+        //== Private functions
+        var initWizard = function () {
+            //== Initialize form wizard
+            wizard = new mWizard('m_wizard', {
+                startStep: 1
+            });
+
+            //== Validation before going to next page
+            wizard.on('beforeNext', function(wizard) {
+                if (validator.form() !== true) {
+                    wizard.stop();  // don't go to the next step
+                }
+            })
+
+            //== Change event
+            wizard.on('change', function(wizard) {
+                mUtil.scrollTop();
+            });
+        }
+
+        var initValidation = function() {
+            validator = formEl.validate({
+                //== Validate only visible fields
+                ignore: ":hidden",
+
+                //== Validation rules
+                rules: {
+                    trading_name: { required: true },
+                    company_name: { required: true },
+                    registered_number: { required: true },
+                    phone: { required: true,  phoneUS: false },
+                    contact_fullname: { required: true },
+                    contact_email: { required: true },
+                    contact_phone: { required: true, phoneUS: false },
+                    street: { required: true },
+                    number: { required: true },
+                    neighborhood: { required: true },
+                    city: { required: true },
+                    state: { required: true },
+                    country: { required: true },
+                    terms_of_use: { required: true },
+                    privacy_policy: { required: true }
+                },
+
+                //== Validation messages
+                messages: {
+                    trading_name: { required: '<?=$t->{"Insira o nome fantasia da empresa"}?>'},
+                    company_name: { required: '<?=$t->{"Insira a razão social da empresa"}?>'},
+                    registered_number: { required: '<?=$t->{"Insira o CNPJ. Digite somente os números"}?>'},
+                    phone: { required: '<?=$t->{"Coloque o telefone da empresa. O número pode ser fixo ou celular"}?>'},
+                    contact_fullname: { required: '<?=$t->{"Insira o nome completo do responsável pelo cadastro da empresa"}?>'},
+                    contact_email: { required: '<?=$t->{"Insira o e-mail do responsável pelo cadastro da empresa"}?>'},
+                    contact_phone: { required: '<?=$t->{"Insira o telefone celular do responsável pelo cadastro da empresa"}?>'},
+                    street: { required: '<?=$t->{"Insira o nome da rua"}?>'},
+                    number: { required: '<?=$t->{"Coloque o número do endereço"}?>'},
+                    neighborhood: { required: '<?=$t->{"Insira o nome do bairro ou região"}?>'},
+                    city: { required: '<?=$t->{"Insira o nome da cidade"}?>'},
+                    state: { required: '<?=$t->{"Escolha o estado"}?>'},
+                    country: { required: '<?=$t->{"Marque o país"}?>'},
+                    terms_of_use: { required: '<?=$t->{"É necessário concordar com os Termos de Uso para continuar"}?>'},
+                    privacy_policy: { required: '<?=$t->{"É necessário concordar com a Política de Privacidade para continuar"}?>'}
+                },
+
+                //== Display error
+                invalidHandler: function(event, validator) {
+                    mUtil.scrollTop();
+
+                    swal({
+                        "title": '',
+                        "text": '<?=$t->{"Existem alguns erros no formulário. Por favor, corrija-os para continuar."}?>',
+                        "type": 'error',
+                        "confirmButtonClass": 'btn btn-secondary m-btn m-btn--wide'
+                    });
+                },
+
+                //== Submit valid form
+                submitHandler: function (form) {
+
+                }
+            });
+        }
+
+        var showMessage = function(type, message) {
+
+            swal({
+                "title": '',
+                "text": message,
+                "type": type,
+                "confirmButtonClass": 'btn btn-secondary m-btn m-btn--wide'
+            });
+        }
+
+        var initSubmit = function() {
+            var btn = formEl.find('[data-wizard-action="submit"]');
+
+            btn.on('click', function(e) {
+                e.preventDefault();
+
+                if (validator.form()) {
+                    //== See: src\js\framework\base\app.js
+                    mApp.progress(btn);
+                    //mApp.block(formEl);
+
+                    //== See: http://malsup.com/jquery/form/#ajaxSubmit
+                    formEl.ajaxSubmit({
+                        url: './actions/setup-legal-person.php',
+                        type: 'POST',
+                        contentType: "application/x-www-form-urlencoded",
+                        data: formEl.serialize(),
+                        success: function(response) {
+
+                            mApp.unprogress(btn);
+                            //mApp.unblock(formEl);
+
+                            console.log(response);
+
+                            if (response.status == 1) {
+                                showMessage('success', '<?=$t->{"Seu cadastro foi concluído com sucesso."}?>');
+
+                                setTimeout(function() {
+                                    if (response.route != null) {
+                                        location.href = response.route;
+                                    }
+                                }, 2000);
+
+                            }else{
+                                showMessage('error', '<?=$t->{"Houve um problema ao efetuar o seu cadastro. Tente novamente mais tarde."}?>');
+
+                                setTimeout(function() {
+                                    if (response.route != null) {
+                                        location.href = response.route;
+                                    }
+                                }, 2000);
+                            }
+
+                        }
+                    });
+                }
+            });
+        }
+
+        return {
+            // public functions
+            init: function() {
+                wizardEl = $('#m_wizard');
+                formEl = $('#m_form');
+
+                initWizard();
+                initValidation();
+                initSubmit();
+            }
+        };
+    }();
+
+    jQuery(document).ready(function() {
+        WizardForm.init();
+    });
+</script>

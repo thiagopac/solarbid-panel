@@ -3,8 +3,19 @@
 class LegalPerson {
 
 	public $id;
+	public $trading_name;
 	public $company_name;
 	public $registered_number;
+	public $phone;
+	public $street;
+	public $number;
+	public $neighborhood;
+	public $city;
+	public $state;
+	public $country;
+	public $contact_fullname;
+	public $contact_email;
+	public $contact_phone;
 	public $user_id;
 
 	protected static $table = "legal_person";
@@ -13,8 +24,19 @@ class LegalPerson {
 
 		if (!empty($array)) {
 			$this->id = $array['id'];
+			$this->trading_name = $array['trading_name'];
 			$this->company_name = $array['company_name'];
 			$this->registered_number = $array['registered_number'];
+			$this->phone = $array['phone'];
+			$this->street = $array['street'];
+			$this->number = $array['number'];
+			$this->neighborhood = $array['neighborhood'];
+			$this->city = $array['city'];
+			$this->state = $array['state'];
+			$this->country = $array['country'];
+			$this->contact_fullname = $array['contact_fullname'];
+			$this->contact_email = $array['contact_email'];
+			$this->contact_phone = $array['contact_phone'];
 			$this->user_id = $array['user_id'];
 		}
   }
