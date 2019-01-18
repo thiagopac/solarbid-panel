@@ -100,7 +100,6 @@
                 break;
             }
 
-
             //open dashboard
 
             ### PAGE STRUCTURE SESSION VARS
@@ -115,15 +114,15 @@
             header("Location: ./main?page=dashboard");
             break;
 
-        case "setup_natural_person":
+        case "profile-natural-person":
             ### PAGE STRUCTURE SESSION VARS
-            $_SESSION['top-menu-admin'] = false;
+            $_SESSION['top-menu-admin'] = $user->role_id == 1 ? true : false;
             $_SESSION['top-quick-search'] = false;
-            $_SESSION['top-notifications'] = false;
-            $_SESSION['top-quick-actions'] = false;
-            $_SESSION['top-profile'] = false;
-            $_SESSION['top-quick-sidebar'] = false;
-            $_SESSION['menu-left'] = false;
+            $_SESSION['top-notifications'] = true;
+            $_SESSION['top-quick-actions'] = true;
+            $_SESSION['top-profile'] = true;
+            $_SESSION['top-quick-sidebar'] = true;
+            $_SESSION['menu-left'] = true;
             header("Location: ./main?page=$page");
             break;
 

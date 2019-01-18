@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95aa136e-b204-4329-8dc7-8e7c087e05d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/profile-natural-person.phtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/setup-fisical-person.php" beforeDir="false" afterPath="$PROJECT_DIR$/actions/setup-natural-person.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/body/top-profile.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/body/top-profile.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/DB_Schema.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/DB_Schema.mwb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/DB_Schema.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/lib/DB_Schema.mwb.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/login.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/main.phtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/FisicalPerson.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/NaturalPerson.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router.php" beforeDir="false" afterPath="$PROJECT_DIR$/router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup-fisical-person.phtml" beforeDir="false" afterPath="$PROJECT_DIR$/setup-natural-person.phtml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,20 +15,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/router.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="63" column="22" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+            <state relative-caret-position="635">
+              <caret line="129" column="43" lean-forward="true" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/db.sql">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/profile-natural-person.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="869">
-              <caret line="801" lean-forward="true" selection-start-line="801" selection-end-line="801" />
+            <state relative-caret-position="310">
+              <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+              <folding>
+                <element signature="e#22822#22828#0#HTML" expanded="true" />
+                <element signature="e#22828#22834#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/body/top-profile.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1282">
+              <caret line="88" column="65" lean-forward="true" selection-start-line="88" selection-start-column="65" selection-end-line="88" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -54,8 +59,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>actions/</find>
-      <find>startStep</find>
       <find>WizardDemo</find>
       <find>status</find>
       <find>regist</find>
@@ -84,6 +87,8 @@
       <find>profile</find>
       <find>fisical</find>
       <find>$page</find>
+      <find>mark</find>
+      <find>meu per</find>
     </findStrings>
     <replaceStrings>
       <replace>internationalization/&quot;.$this-&gt;lang.&quot;.json</replace>
@@ -101,7 +106,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/utils.js" />
         <option value="$PROJECT_DIR$/body/header.phtml" />
         <option value="$PROJECT_DIR$/login.phtml" />
         <option value="$PROJECT_DIR$/main.phtml" />
@@ -109,9 +113,10 @@
         <option value="$PROJECT_DIR$/models/FisicalPerson.php" />
         <option value="$PROJECT_DIR$/actions/setup-fisical-person.php" />
         <option value="$PROJECT_DIR$/setup-fisical-person.phtml" />
+        <option value="$PROJECT_DIR$/db.sql" />
+        <option value="$PROJECT_DIR$/profile-natural-person.phtml" />
         <option value="$PROJECT_DIR$/body/top-profile.phtml" />
         <option value="$PROJECT_DIR$/router.php" />
-        <option value="$PROJECT_DIR$/db.sql" />
       </list>
     </option>
   </component>
@@ -180,11 +185,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/js" />
       <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$/actions" />
       <recent name="$PROJECT_DIR$/actions/setup-fisical-person" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/js" />
@@ -238,20 +243,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="evolução" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="135" column="1" selection-start-line="135" selection-start-column="1" selection-end-line="135" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/vendors/tether/dist/js/tether.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="431" column="40" selection-start-line="431" selection-start-column="40" selection-end-line="431" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup-legal-person.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="446">
@@ -273,13 +264,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/body/top-profile.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/NaturalPerson.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-522" />
@@ -295,17 +279,38 @@
     <entry file="file://$PROJECT_DIR$/login.phtml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/router.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="63" column="22" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="869">
           <caret line="801" lean-forward="true" selection-start-line="801" selection-end-line="801" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/body/page-drop-menu.phtml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profile-natural-person.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+          <folding>
+            <element signature="e#22822#22828#0#HTML" expanded="true" />
+            <element signature="e#22828#22834#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/body/top-profile.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1282">
+          <caret line="88" column="65" lean-forward="true" selection-start-line="88" selection-start-column="65" selection-end-line="88" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="635">
+          <caret line="129" column="43" lean-forward="true" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
         </state>
       </provider>
     </entry>
