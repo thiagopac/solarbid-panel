@@ -1,6 +1,7 @@
 <?php
     ### VALIDATE SESSION
     session_start();
+    if($_SESSION == null) { header("Location: ./login"); }
 
     ### INCLUDE
     $root = realpath($_SERVER["DOCUMENT_ROOT"]);
