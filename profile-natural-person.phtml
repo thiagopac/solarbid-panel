@@ -1,20 +1,20 @@
 <?php
-### INCLUDE
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "$root/panel/internationalization/Translate.php";
-require_once "$root/panel/models/User.php";
-require_once "$root/panel/models/Display.php";
+    ### INCLUDE
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+    require_once "$root/panel/internationalization/Translate.php";
+    require_once "$root/panel/models/User.php";
+    require_once "$root/panel/models/Display.php";
 
-$t = new Translate();
+    $t = new Translate();
 
-$user = unserialize($_SESSION['USER']);
-$refreshedUser = User::getUserById($user->id);
+    $user = unserialize($_SESSION['USER']);
+    $refreshedUser = User::getUserById($user->id);
 
-$naturalPerson = unserialize($_SESSION['NATURAL_PERSON']);
-$display = new Display();
+    $naturalPerson = unserialize($_SESSION['NATURAL_PERSON']);
+    $display = new Display();
 
-$display->profileName = $naturalPerson->alias;
-$display->profileEmail = $refreshedUser->email;
+    $display->profileName = $naturalPerson->alias;
+    $display->profileEmail = $refreshedUser->email;
 
 ?>
 <!-- BEGIN: Page -->
@@ -127,11 +127,11 @@ $display->profileEmail = $refreshedUser->email;
                             <div class="m-widget1__item">
                                 <div class="row m-row--no-padding align-items-center">
                                     <div class="col">
-                                        <h3 class="m-widget1__title">Member Profit</h3>
-                                        <span class="m-widget1__desc">Awerage Weekly Profit</span>
+                                        <h3 class="m-widget1__title">Potência instalada</h3>
+                                        <span class="m-widget1__desc">Informado pela empresa</span>
                                     </div>
                                     <div class="col m--align-right">
-                                        <span class="m-widget1__number m--font-brand">+$17,800</span>
+                                        <span class="m-widget1__number m--font-brand">1300 kWp</span>
                                     </div>
                                 </div>
                             </div>
@@ -179,73 +179,12 @@ $display->profileEmail = $refreshedUser->email;
                                 </li>
                             </ul>
                         </div>
-                        <div class="m-portlet__head-tools">
-                            <ul class="m-portlet__nav">
-                                <li class="m-portlet__nav-item m-portlet__nav-item--last">
-                                    <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
-                                        <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-                                            <i class="la la-gear"></i>
-                                        </a>
-                                        <div class="m-dropdown__wrapper">
-                                            <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                                            <div class="m-dropdown__inner">
-                                                <div class="m-dropdown__body">
-                                                    <div class="m-dropdown__content">
-                                                        <ul class="m-nav">
-                                                            <li class="m-nav__section m-nav__section--first">
-                                                                <span class="m-nav__section-text">Quick Actions</span>
-                                                            </li>
-                                                            <li class="m-nav__item">
-                                                                <a href="" class="m-nav__link">
-                                                                    <i class="m-nav__link-icon flaticon-share"></i>
-                                                                    <span class="m-nav__link-text">Create Post</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="m-nav__item">
-                                                                <a href="" class="m-nav__link">
-                                                                    <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                                                    <span class="m-nav__link-text">Send Messages</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="m-nav__item">
-                                                                <a href="" class="m-nav__link">
-                                                                    <i class="m-nav__link-icon flaticon-multimedia-2"></i>
-                                                                    <span class="m-nav__link-text">Upload File</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="m-nav__section">
-                                                                <span class="m-nav__section-text">Useful Links</span>
-                                                            </li>
-                                                            <li class="m-nav__item">
-                                                                <a href="" class="m-nav__link">
-                                                                    <i class="m-nav__link-icon flaticon-info"></i>
-                                                                    <span class="m-nav__link-text">FAQ</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="m-nav__item">
-                                                                <a href="" class="m-nav__link">
-                                                                    <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                                                    <span class="m-nav__link-text">Support</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="m-nav__separator m-nav__separator--fit m--hide">
-                                                            </li>
-                                                            <li class="m-nav__item m--hide">
-                                                                <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">Submit</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="m_user_profile_tab_1">
-                            <form class="m-form m-form--fit m-form--label-align-right">
+                            <form class="m-form m-form--fit m-form--label-align-right" id="profile_form_tab1">
+                                <input type="hidden" name="id" value="<?=$naturalPerson->id?>">
+                                <input type="hidden" name="user_id" value="<?=$naturalPerson->user_id?>">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Nome completo"}?>: *</label>
@@ -282,7 +221,7 @@ $display->profileEmail = $refreshedUser->email;
                                             <div class="col-2">
                                             </div>
                                             <div class="col-7">
-                                                <a href="#" class="btn btn-info m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
+                                                <a href="#" class="btn btn-info m-btn m-btn--custom m-btn--icon" data-tab1-action="submit">
 															<span>
 																<i class="fa fa-check fa-1x"></i>
 																<span><?=$t->{"Salvar"}?></span>
@@ -295,6 +234,102 @@ $display->profileEmail = $refreshedUser->email;
                             </form>
                         </div>
                         <div class="tab-pane " id="m_user_profile_tab_2">
+                            <form class="m-form m-form--fit m-form--label-align-right" id="profile_form_tab2">
+                                <input type="hidden" name="id" value="<?=$naturalPerson->id?>">
+                                <input type="hidden" name="user_id" value="<?=$naturalPerson->user_id?>">
+                                <div class="m-portlet__body">
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Rua / Avenida / Alameda / Travessa"}?>: *</label>
+                                        <div class="col-xl-4 col-lg-4">
+                                            <input type="text" name="street" class="form-control m-input" placeholder="<?=$t->{"Ex: Rua Araguari"}?>" value="<?=$naturalPerson->street?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Número"}?>: *</label>
+                                        <div class="col-xl-3 col-lg-3">
+                                            <input type="text" name="number" class="form-control m-input" placeholder="<?=$t->{"Ex: 100"}?>" value="<?=$naturalPerson->number?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Bairro / Região"}?>: *</label>
+                                        <div class="col-xl-3 col-lg-3">
+                                            <input type="text" name="neighborhood" class="form-control m-input" placeholder="<?=$t->{"Ex: Santo Agostinho"}?>" value="<?=$naturalPerson->neighborhood?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Cidade"}?>: *</label>
+                                        <div class="col-xl-3 col-lg-3">
+                                            <div class="input-group">
+                                                <input type="text" name="city" class="form-control m-input" placeholder="<?=$t->{"Ex: Belo Horizonte"}?>" value="<?=$naturalPerson->city?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"Estado"}?>: *</label>
+                                        <div class="col-xl-3 col-lg-3">
+                                            <div class="input-group">
+                                                <select name="state" class="form-control m-input">
+                                                    <option value=""><?=$t->{"Selecione..."}?></option>
+                                                    <option value="AC" <?=$naturalPerson->state == "AC" ? 'selected' : '';?>>Acre</option>
+                                                    <option value="AL" <?=$naturalPerson->state == "AL" ? 'selected' : '';?>>Alagoas</option>
+                                                    <option value="AP" <?=$naturalPerson->state == "AP" ? 'selected' : '';?>>Amapá</option>
+                                                    <option value="AM" <?=$naturalPerson->state == "AM" ? 'selected' : '';?>>Amazonas</option>
+                                                    <option value="BA" <?=$naturalPerson->state == "BA" ? 'selected' : '';?>>Bahia</option>
+                                                    <option value="CE" <?=$naturalPerson->state == "CE" ? 'selected' : '';?>>Ceará</option>
+                                                    <option value="DF" <?=$naturalPerson->state == "DF" ? 'selected' : '';?>>Distrito Federal</option>
+                                                    <option value="ES" <?=$naturalPerson->state == "ES" ? 'selected' : '';?>>Espírito Santo</option>
+                                                    <option value="GO" <?=$naturalPerson->state == "GO" ? 'selected' : '';?>>Goiás</option>
+                                                    <option value="MA" <?=$naturalPerson->state == "MA" ? 'selected' : '';?>>Maranhão</option>
+                                                    <option value="MT" <?=$naturalPerson->state == "MT" ? 'selected' : '';?>>Mato Grosso</option>
+                                                    <option value="MS" <?=$naturalPerson->state == "MS" ? 'selected' : '';?>>Mato Grosso do Sul</option>
+                                                    <option value="MG" <?=$naturalPerson->state == "MG" ? 'selected' : '';?>>Minas Gerais</option>
+                                                    <option value="PA" <?=$naturalPerson->state == "PA" ? 'selected' : '';?>>Pará</option>
+                                                    <option value="PB" <?=$naturalPerson->state == "PB" ? 'selected' : '';?>>Paraíba</option>
+                                                    <option value="PR" <?=$naturalPerson->state == "PR" ? 'selected' : '';?>>Paraná</option>
+                                                    <option value="PE" <?=$naturalPerson->state == "PE" ? 'selected' : '';?>>Pernambuco</option>
+                                                    <option value="PI" <?=$naturalPerson->state == "PI" ? 'selected' : '';?>>Piauí</option>
+                                                    <option value="RJ" <?=$naturalPerson->state == "RJ" ? 'selected' : '';?>>Rio de Janeiro</option>
+                                                    <option value="RN" <?=$naturalPerson->state == "RN" ? 'selected' : '';?>>Rio Grande do Norte</option>
+                                                    <option value="RS" <?=$naturalPerson->state == "RS" ? 'selected' : '';?>>Rio Grande do Sul</option>
+                                                    <option value="RO" <?=$naturalPerson->state == "RO" ? 'selected' : '';?>>Rondônia</option>
+                                                    <option value="RR" <?=$naturalPerson->state == "RR" ? 'selected' : '';?>>Roraima</option>
+                                                    <option value="SC" <?=$naturalPerson->state == "SC" ? 'selected' : '';?>>Santa Catarina</option>
+                                                    <option value="SP" <?=$naturalPerson->state == "SP" ? 'selected' : '';?>>São Paulo</option>
+                                                    <option value="SE" <?=$naturalPerson->state == "SE" ? 'selected' : '';?>>Sergipe</option>
+                                                    <option value="TO" <?=$naturalPerson->state == "TO" ? 'selected' : '';?>>Tocantins</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"><?=$t->{"País"}?>: *</label>
+                                        <div class="col-xl-3 col-lg-3">
+                                            <div class="input-group">
+                                                <select name="country" class="form-control m-input">
+                                                    <option value=""><?=$t->{"Selecione..."}?></option>
+                                                    <option value="Brasil" <?=$naturalPerson->country == "Brasil" ? 'selected' : '';?>>Brasil</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-portlet__foot m-portlet__foot--fit">
+                                    <div class="m-form__actions">
+                                        <div class="row">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-7">
+                                                <a href="#" class="btn btn-info m-btn m-btn--custom m-btn--icon" data-tab2-action="submit">
+															<span>
+																<i class="fa fa-check fa-1x"></i>
+																<span><?=$t->{"Salvar"}?></span>
+															</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -306,9 +341,239 @@ $display->profileEmail = $refreshedUser->email;
 </div>
 <!-- END: Page -->
 <script>
-    $(document).ready(function(){
+
+    jQuery(document).ready(function() {
 
         $('.profile').initial();
+        $("#social_security").mask('000.000.000-00', {reverse: false});
+        $("#phone").mask('(00)00000-0000', {reverse: false});
 
+        Form1.init();
+        Form2.init();
     });
+
+    var Form1 = function () {
+        //== Base elements
+        var formTab1 = $('#profile_form_tab1');
+        var validator;
+
+        var initValidation = function() {
+            validator = formTab1.validate({
+                //== Validate only visible fields
+                ignore: ":hidden",
+
+                //== Validation rules
+                rules: {
+                    fullname: { required: true },
+                    alias: { required: true },
+                    social_security: { required: true },
+                    phone: { required: true,  phoneUS: false }
+                },
+
+                //== Validation messages
+                messages: {
+                    fullname: { required: '<?=$t->{"Insira seu nome completo"}?>'},
+                    alias: { required: '<?=$t->{"Insira o termo como prefere ser chamado"}?>'},
+                    social_security: { required: '<?=$t->{"Insira o seu CPF. Digite somente os números"}?>'},
+                    phone: { required: '<?=$t->{"Coloque o seu telefone celular no formato (××)×××××-××××"}?>'}
+                },
+
+                //== Submit valid form
+                submitHandler: function (form) {
+
+                }
+            });
+        }
+
+        var showMsg = function(type, msg) {
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000"
+            };
+            toastr[type](msg);
+        }
+
+        var initSubmit = function() {
+            var btn = formTab1.find('[data-tab1-action="submit"]');
+
+            btn.on('click', function(e) {
+                e.preventDefault();
+
+                if (validator.form()) {
+                    //== See: src\js\framework\base\app.js
+                    mApp.progress(btn);
+                    //mApp.block(formTab1);
+
+                    //== See: http://malsup.com/jquery/form/#ajaxSubmit
+                    formTab1.ajaxSubmit({
+                        url: './actions/profile-natural-person.php',
+                        type: 'POST',
+                        contentType: "application/x-www-form-urlencoded",
+                        data: formTab1.serialize(),
+                        success: function(response) {
+
+                            mApp.unprogress(btn);
+                            //mApp.unblock(formTab1);
+
+                            console.log(response);
+
+                            if (response.status == 1) {
+                                showMsg('success', '<?=$t->{"Dados alterados com sucesso."}?>');
+
+                                setTimeout(function() {
+                                    if (response.route != null) {
+                                        location.href = response.route;
+                                    }
+                                }, 2000);
+
+                            }else{
+                                showMsg('error', '<?=$t->{"Houve um problema ao salvar os seus dados. Tente novamente mais tarde."}?>');
+
+                                setTimeout(function() {
+                                    if (response.route != null) {
+                                        location.href = response.route;
+                                    }
+                                }, 2000);
+                            }
+
+                        }
+                    });
+                }
+            });
+        }
+
+        return {
+            // public functions
+            init: function() {
+                formTab1 = $('#profile_form_tab1');
+
+                initValidation();
+                initSubmit();
+            }
+        };
+    }();
+
+    var Form2 = function () {
+        //== Base elements
+        var formTab1 = $('#profile_form_tab2');
+        var validator;
+
+        var initValidation = function() {
+            validator = formTab2.validate({
+                //== Validate only visible fields
+                ignore: ":hidden",
+
+                //== Validation rules
+                rules: {
+                    street: { required: true },
+                    number: { required: true },
+                    neighborhood: { required: true },
+                    city: { required: true },
+                    state: { required: true },
+                    country: { required: true }
+                },
+
+                //== Validation messages
+                messages: {
+                    street: { required: '<?=$t->{"Insira o nome da sua rua"}?>'},
+                    number: { required: '<?=$t->{"Coloque o número da residência"}?>'},
+                    neighborhood: { required: '<?=$t->{"Insira o nome do bairro ou região da residência"}?>'},
+                    city: { required: '<?=$t->{"Insira o nome da cidade da residência"}?>'},
+                    state: { required: '<?=$t->{"Escolha o estado"}?>'},
+                    country: { required: '<?=$t->{"Marque o país"}?>'}
+                },
+
+                //== Submit valid form
+                submitHandler: function (form) {
+
+                }
+            });
+        }
+
+        var showMsg = function(type, msg) {
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000"
+            };
+            toastr[type](msg);
+        }
+
+        var initSubmit = function() {
+            var btn = formTab1.find('[data-tab2-action="submit"]');
+
+            btn.on('click', function(e) {
+                e.preventDefault();
+
+                if (validator.form()) {
+                    //== See: src\js\framework\base\app.js
+                    mApp.progress(btn);
+                    //mApp.block(formTab1);
+
+                    //== See: http://malsup.com/jquery/form/#ajaxSubmit
+                    formTab2.ajaxSubmit({
+                        url: './actions/profile-natural-person.php',
+                        type: 'POST',
+                        contentType: "application/x-www-form-urlencoded",
+                        data: formTab2.serialize(),
+                        success: function(response) {
+
+                            mApp.unprogress(btn);
+                            //mApp.unblock(formTab1);
+
+                            console.log(response);
+
+                            if (response.status == 1) {
+                                showMsg('success', '<?=$t->{"Dados alterados com sucesso."}?>');
+
+                                setTimeout(function() {
+                                    if (response.route != null) {
+                                        location.href = response.route;
+                                    }
+                                }, 2000);
+
+                            }else{
+                                showMsg('error', '<?=$t->{"Houve um problema ao salvar os seus dados. Tente novamente mais tarde."}?>');
+
+                                setTimeout(function() {
+                                    if (response.route != null) {
+                                        location.href = response.route;
+                                    }
+                                }, 2000);
+                            }
+
+                        }
+                    });
+                }
+            });
+        }
+
+        return {
+            // public functions
+            init: function() {
+                formTab2 = $('#profile_form_tab2');
+
+                initValidation();
+                initSubmit();
+            }
+        };
+    }();
+
 </script>

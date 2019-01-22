@@ -112,7 +112,7 @@
         <!--begin: Form Wizard Form-->
         <div class="m-wizard__form">
 
-            <form class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+            <form class="m-form m-form--label-align-left- m-form--state-" id="setup_form">
 
                 <input type="hidden" name="userId" value="<?=$user->id?>">
 
@@ -350,15 +350,14 @@
 </div>
 <script>
     $(document).ready(function(){
-        $("#social_security").mask('000.000.000-00', {reverse: false});
-        $("#phone").mask('(00)00000-0000', {reverse: false});
+
     });
 
 
     var WizardForm = function () {
         //== Base elements
         var wizardEl = $('#m_wizard');
-        var formEl = $('#m_form');
+        var formEl = $('#setup_form');
         var validator;
         var wizard;
 
@@ -501,7 +500,7 @@
             // public functions
             init: function() {
                 wizardEl = $('#m_wizard');
-                formEl = $('#m_form');
+                formEl = $('#setup_form');
 
                 initWizard();
                 initValidation();
@@ -511,6 +510,10 @@
     }();
 
     jQuery(document).ready(function() {
+
+        $("#social_security").mask('000.000.000-00', {reverse: false});
+        $("#phone").mask('(00)00000-0000', {reverse: false});
+
         WizardForm.init();
     });
 </script>
